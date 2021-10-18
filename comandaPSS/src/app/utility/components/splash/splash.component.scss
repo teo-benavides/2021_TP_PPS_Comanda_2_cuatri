@@ -1,0 +1,96 @@
+.splashCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#custom-overlay {
+  --background: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100000;
+  width: 100%;
+}
+
+.flb {
+  animation: colorchange 10s ease-out infinite;
+  height: 100%;
+  width: 100%;
+}
+
+#custom-overlay img {
+  --background: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: auto;
+  -webkit-animation: rotate-center 0.6s ease-in-out both;
+  animation: rotate-center 0.6s ease-in-out both;
+  animation-delay: 1s;
+}
+
+#custom-overlay h1 {
+  --background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 2000ms linear both;
+  animation-delay: 2s;
+  padding-top: 3em;
+}
+
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes colorchange {
+  0% {
+    background-position: 0% 99%;
+  }
+  50% {
+    background-position: 100% 1%;
+  }
+  100% {
+    background-position: 10% 90%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  25% {
+    opacity: 25%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  75% {
+    opacity: 75%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
