@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="primary" [class]="cssClass">
+    <ion-menu-button
+      slot="start"
+      menu="first"
+      *ngIf="type === 'menu'"
+    ></ion-menu-button>
+    <ion-buttons slot="start" *ngIf="type === 'back'">
+      <ion-button (click)="goto()" expand="block" fill="clear" shape="round">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
