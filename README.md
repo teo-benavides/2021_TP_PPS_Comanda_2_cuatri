@@ -1,6 +1,6 @@
-# La Comanda - Team Null
+# Proyecto Grupal PPS - Team Null
 
-**Integrantes** 👨🏻‍💻👨🏻‍💻:
-Teo Benavides - Alpha
-Carlos Castro - Beta
-Bogdan Krylov - Gamma
+## Integrantes:  
++ Teo Benavides - Alpha
++ Carlos Castro - Beta
++ Bogdan Krylov - Gamma
