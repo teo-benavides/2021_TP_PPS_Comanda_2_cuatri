@@ -9,13 +9,6 @@ const routes: Routes = [
       import('./pages/sesion/sesion.module').then((m) => m.SesionPageModule),
   },
   {
-    path: 'registro',
-    loadChildren: () =>
-      import('./pages/registro/registro.module').then(
-        (m) => m.RegistroPageModule
-      ),
-  },
-  {
     path: '',
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainPageModule),

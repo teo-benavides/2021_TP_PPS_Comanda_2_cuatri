@@ -42,10 +42,10 @@ export class SystemService {
     private base64: Base64
   ) {}
 
-  loadAudioAssets() {
+  async loadAudioAssets() {
     try {
       for (let i = 0; i < audio.length; i++) {
-        this.audio.preloadSimple(audio[i].name, audio[i].path);
+        await this.audio.preloadSimple(audio[i].name, audio[i].path);
       }
     } catch (error) {
       console.log('SystemServices - loadAudioAssets: ' + error);

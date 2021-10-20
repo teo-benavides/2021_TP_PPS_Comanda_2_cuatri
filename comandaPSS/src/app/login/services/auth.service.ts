@@ -44,6 +44,8 @@ export class AuthService {
     try {
       var loading = await this.system.presentLoading('Iniciando sesión');
       loading.present();
+
+      await this.storage.create();
       if (this.network.type === this.network.Connection.NONE)
         throw new Error('No internet');
       const { user } = await this.auth.signInWithEmailAndPassword(
@@ -55,7 +57,7 @@ export class AuthService {
         await this.db.collection<User>('Usuarios').doc(user.uid).ref.get()
       ).data();
 
-      if (!userInfo.isConfirm) {
+      if (userInfo.estado !== 'confirmado') {
         await this.auth.signOut();
         this.system.presentToast('Cuenta no validada');
         return;
