@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       presentingElement: await this.modalController.getTop(),
       backdropDismiss: false,
       componentProps: {
-        type: 'dueño',
+        type: 'cliente',
       },
     });
     return await modal.present();
