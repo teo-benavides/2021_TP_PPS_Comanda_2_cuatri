@@ -3,12 +3,11 @@ export interface User {
   nombre: string;
   apellido: string;
   correo: string;
-  clave: string;
   dni: string;
   cuil?: string;
   perfil: perfil;
   foto: string | '';
-  isConfirm: boolean;
+  estado: estado;
 }
 
 export type perfil =
@@ -20,3 +19,5 @@ export type perfil =
   | 'bartender'
   | 'cliente'
   | 'anonimo';
+
+export type estado = 'pendiente' | 'confirmado' | 'rechazado';

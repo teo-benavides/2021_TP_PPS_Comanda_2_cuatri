@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+import { User } from '../../login/models/user.model';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-main',
@@ -6,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
+  constructor(private storage: Storage, private nav: NavController) {}
 
-  constructor() { }
+  async ngOnInit() {
+    await this.storage.create();
+    const user: User = await this.storage.get('user');
 
-  ngOnInit() {
+    switch (user.perfil) {
+      case 'dueño':
+      case 'supervisor':
+        this.nav.navigateForward('/admin');
+        break;
+      default:
+        break;
+    }
   }
-
 }

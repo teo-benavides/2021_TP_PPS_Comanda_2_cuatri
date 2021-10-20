@@ -3,7 +3,7 @@
     <div class="conteiner">
       <ion-header>
         <ion-toolbar color="primary">
-          <ion-title>Crear nuevo {{ type }}</ion-title>
+          <ion-title>Crear nuevo {{ formUsuario.value["perfil"] }}</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="cancelar()">
               <ion-icon name="close-outline"></ion-icon>
@@ -16,7 +16,7 @@
           <img [src]="foto !== '' ? foto : 'assets/user.png'" />
         </ion-avatar>
 
-        <ion-item *ngIf="isConfirm">
+        <ion-item *ngIf="estado === 'confirmado'">
           <ion-label position="floating">Perfil</ion-label>
           <ion-select
             formControlName="perfil"

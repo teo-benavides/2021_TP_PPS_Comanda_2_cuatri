@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { SystemService } from '../../../utility/services/system.service';
 import { dniQR } from '../../../utility/config/QR.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { perfil, User } from '../../../login/models/user.model';
+import { perfil, User, estado } from '../../../login/models/user.model';
 import { AltaUsuariosService } from '../../services/altaUsuarios.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { AltaUsuariosService } from '../../services/altaUsuarios.service';
 export class AltaUsuarioComponent implements OnInit {
   @Input() type: perfil = 'cliente';
   formUsuario: FormGroup;
-  isConfirm: boolean = false;
+  estado: estado = 'pendiente';
   foto: string = '';
   constructor(
     private modalController: ModalController,
@@ -24,7 +24,10 @@ export class AltaUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isConfirm = this.type === 'dueño' || this.type === 'supervisor';
+    this.estado =
+      this.type === 'dueño' || this.type === 'supervisor'
+        ? 'confirmado'
+        : 'pendiente';
 
     this.createForm(this.type);
 
@@ -47,12 +50,28 @@ export class AltaUsuarioComponent implements OnInit {
     console.log(dniArr, dniArr[1], dniArr[2].split(' ')[1], dniArr[4]);
   }
 
+  /**
+   * getFoto
+   *
+   * llama al metodo getPicture el cual va a sacar una foto,
+   * este va a devolver un objecto que contiene:
+   *
+   *  img: string  => url local para mostrar en la app;
+   *  file: string => path del archivo que se guardo en el dispositivo
+   */
+
   async getFoto() {
     const { img, file } = await this.system.getPicture();
 
     this.foto = img;
     this.formUsuario.get('foto').setValue(file);
   }
+
+  /**
+   *  Cambia los input del formulario dependiendo del perfil que se le pase por parametro
+   *
+   * @param perfil
+   */
 
   createForm(perfil: perfil | any) {
     console.log(perfil);
@@ -112,18 +131,49 @@ export class AltaUsuarioComponent implements OnInit {
     console.log(this.formUsuario.value);
   }
 
+  /**
+   *  En caso de que el perfil seleccionado sea anonimo iniciaria sesion automaticamente,
+   *   caso contrario se enviara los datos del formulario al metodo createUser
+   */
+
   submit() {
     if (this.formUsuario.value['perfil'] === 'anonimo')
       return this.alta.loginAnonimo(
         this.formUsuario.value['nombre'],
         this.foto
       );
+    let newUser: User = null;
+    if (this.formUsuario.value['perfil'] === 'cliente') {
+      const { nombre, apellido, correo, dni, perfil, foto } =
+        this.formUsuario.value;
 
-    const newUser: User = this.formUsuario.value;
+      newUser = {
+        nombre,
+        apellido,
+        correo,
+        dni,
+        perfil,
+        foto,
+        estado: this.estado,
+      };
+    } else {
+      const { nombre, apellido, correo, dni, cuil, perfil, foto } =
+        this.formUsuario.value;
 
-    console.log(this.formUsuario.value);
+      newUser = {
+        nombre,
+        apellido,
+        correo,
+        dni,
+        cuil,
+        perfil,
+        foto,
+        estado: this.estado,
+      };
+    }
 
-    newUser.isConfirm = this.isConfirm;
-    this.alta.createUser(newUser);
+    const { clave } = this.formUsuario.value;
+
+    this.alta.createUser(newUser, clave);
   }
 }

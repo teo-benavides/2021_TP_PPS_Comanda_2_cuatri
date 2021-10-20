@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ModalController, NavController } from '@ionic/angular';
-import { AltaUsuarioComponent } from '../../../altas/components/alta-usuario/alta-usuario.component';
+import { AltaUsuarioComponent } from '../../../altas/modals/alta-usuario/alta-usuario.component';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       presentingElement: await this.modalController.getTop(),
       backdropDismiss: false,
       componentProps: {
-        type: 'cliente',
+        type: 'dueño',
       },
     });
     return await modal.present();

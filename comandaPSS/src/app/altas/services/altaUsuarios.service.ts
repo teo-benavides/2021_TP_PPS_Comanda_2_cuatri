@@ -24,7 +24,7 @@ export class AltaUsuariosService {
     private file: AngularFireStorage
   ) {}
 
-  async createUser(newUser: User) {
+  async createUser(newUser: User, clave: string) {
     try {
       var loading = await this.system.presentLoading('Creado usuario');
       loading.present();
@@ -34,7 +34,7 @@ export class AltaUsuariosService {
         user: { uid },
       } = await this.register.createUserWithEmailAndPassword(
         newUser.correo,
-        newUser.clave
+        clave
       );
 
       newUser.uid = uid;
