@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -14,12 +15,16 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class SessionGuard implements CanActivate {
-  constructor(private storage: Storage, private nav: NavController) {}
+  constructor(
+    private storage: Storage,
+    private nav: NavController,
+    private auth: AuthService
+  ) {}
   async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
-    if (await this.storage.get('user')) {
+    if (await this.auth.isLog()) {
       return true;
     }
     this.nav.navigateRoot('/sesion');

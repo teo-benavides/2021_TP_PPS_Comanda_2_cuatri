@@ -36,10 +36,6 @@ export class AuthService {
     private system: SystemService
   ) {}
 
-  async init() {
-    // if (await this.storage.get('uid')) this.nav.navigateForward('/main');
-  }
-
   async login(correo: string, clave: string) {
     try {
       var loading = await this.system.presentLoading('Iniciando sesión');
@@ -80,5 +76,12 @@ export class AuthService {
     await this.auth.signOut();
     await this.storage.remove('user');
     this.nav.navigateRoot('/sesion');
+  }
+
+  async isLog() {
+    await this.storage.create();
+    const user: User = await this.storage.get('user');
+
+    return user !== null;
   }
 }
