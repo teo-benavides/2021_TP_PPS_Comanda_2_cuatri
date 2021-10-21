@@ -1,0 +1,70 @@
+<ion-content class="ion-padding">
+  <div class="centerFlex">
+    <div class="conteiner">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Crear nueva mesa</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelar()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <form [formGroup]="formMesa" (ngSubmit)="onSubmit()">
+        <ion-avatar (click)="getFoto()">
+          <img [src]="fotoUrl !== '' ? fotoUrl : 'assets/missing.png'" />
+        </ion-avatar>
+
+        <ion-item>
+          <ion-label position="floating">Numero de mesa</ion-label>
+          <ion-input
+            required
+            formControlName="numeroMesa"
+            type="number"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Cantidad de comensales</ion-label>
+          <ion-input
+            required
+            formControlName="cantidadComensales"
+            type="number"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Perfil</ion-label>
+          <ion-select formControlName="tipo" placeholder="Seleccione tipo">
+            <ion-select-option value="estandar">Estandar</ion-select-option>
+            <ion-select-option value="discapacitado"
+              >Movilidad reducida</ion-select-option
+            >
+            <ion-select-option value="vip">VIP</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button
+          color="primary"
+          type="submit"
+          expand="block"
+          fill="clear"
+          shape="round"
+          [disabled]="formMesa.invalid"
+        >
+          Crear
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>
+
+<!--  -->
+<ngx-qrcode
+  style="position: absolute; top: -1000%; left: 0"
+  id="qr"
+  *ngIf="mesaId !== ''"
+  [elementType]="elementType"
+  [value]="mesaId"
+  cssClass="aclass"
+  [errorCorrectionLevel]="correctionLevel"
+>
+</ngx-qrcode>
