@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { SystemService } from '../../../utility/services/system.service';
 import { dniQR } from '../../../utility/config/QR.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { perfil, User, estado } from '../../../login/models/user.model';
+import { perfil, User, estado } from '../../../models/user.model';
 import { AltaUsuariosService } from '../../services/altaUsuarios.service';
 
 @Component({
@@ -61,10 +61,12 @@ export class AltaUsuarioComponent implements OnInit {
    */
 
   async getFoto() {
-    const { img, file } = await this.system.getPicture();
+    const foto = await this.system.getPicture();
 
-    this.foto = img;
-    this.formUsuario.get('foto').setValue(file);
+    if (foto.img && foto.file) {
+      this.foto = foto.img;
+      this.formUsuario.get('foto').setValue(foto.file);
+    }
   }
 
   /**
@@ -136,7 +138,7 @@ export class AltaUsuarioComponent implements OnInit {
    *   caso contrario se enviara los datos del formulario al metodo createUser
    */
 
-  submit() {
+  async onSubmit() {
     if (this.formUsuario.value['perfil'] === 'anonimo')
       return this.alta.loginAnonimo(
         this.formUsuario.value['nombre'],
@@ -174,6 +176,7 @@ export class AltaUsuarioComponent implements OnInit {
 
     const { clave } = this.formUsuario.value;
 
-    this.alta.createUser(newUser, clave);
+    const complete = await this.alta.createUser(newUser, clave);
+    if (complete) this.cancelar();
   }
 }
