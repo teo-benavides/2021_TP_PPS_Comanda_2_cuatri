@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { User } from '../../login/models/user.model';
+import { User } from '../../models/user.model';
 import { NavController } from '@ionic/angular';
 
 @Component({
