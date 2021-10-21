@@ -5,7 +5,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { NavController, ToastController } from '@ionic/angular';
 import { SystemService } from '../../utility/services/system.service';
 import { Storage } from '@ionic/storage-angular';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 import { Base64 } from '@ionic-native/base64/ngx';
 
 /*

@@ -64,7 +64,9 @@ export class SystemService {
     toast.present();
   }
 
-  async presentToastError(code: string) {
+  //TODO: Crear enum de errores, modifiicar metodo presentToastError
+
+  async presentToastError(code: string = '') {
     let message = '';
 
     switch (code) {
@@ -132,13 +134,19 @@ export class SystemService {
       targetHeight: 340,
       targetWidth: 420,
     };
+    let foto = {
+      file: '',
+      img: '',
+    };
     try {
-      const file = await this.camera.getPicture(options);
+      foto.file = await this.camera.getPicture(options);
 
-      const img = window.Ionic.WebView.convertFileSrc(file);
-
-      return { img, file };
-    } catch (error) {}
+      foto.img = window.Ionic.WebView.convertFileSrc(foto.file);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      return foto;
+    }
   }
 
   async getQr(type?: any) {
