@@ -54,7 +54,12 @@ export class UsuarioService {
       flag = true;
     } catch (error) {
       console.log(error);
-      this.system.presentToastError(ERROR.CREARUSUARIO);
+      const msg =
+        error['code'] === 'auth/email-already-in-use'
+          ? ERROR.EMAILREPETIDO
+          : ERROR.CREARUSUARIO;
+
+      this.system.presentToastError(msg);
     } finally {
       loading.dismiss();
       return flag;

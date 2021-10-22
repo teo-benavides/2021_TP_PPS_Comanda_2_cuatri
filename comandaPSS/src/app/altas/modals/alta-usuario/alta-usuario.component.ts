@@ -43,11 +43,19 @@ export class AltaUsuarioComponent implements OnInit {
 
     const dniArr = dni.text.split('@');
 
-    this.formUsuario.get('nombre').setValue(dniArr[1]);
-    this.formUsuario.get('apellido').setValue(dniArr[2].split(' ')[0]);
+    this.formUsuario.get('nombre').setValue(this.formatNombre(dniArr[1]));
+    this.formUsuario
+      .get('apellido')
+      .setValue(this.formatNombre(dniArr[2].split(' ')[0]));
     this.formUsuario.get('dni').setValue(dniArr[4]);
 
     console.log(dniArr, dniArr[1], dniArr[2].split(' ')[1], dniArr[4]);
+  }
+
+  formatNombre(palabra: string) {
+    let str = palabra.toLowerCase();
+
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   /**
@@ -77,7 +85,7 @@ export class AltaUsuarioComponent implements OnInit {
 
   createForm(perfil: perfil | any) {
     console.log(perfil);
-
+    this.foto = '';
     switch (perfil) {
       case 'dueño':
       case 'supervisor':
