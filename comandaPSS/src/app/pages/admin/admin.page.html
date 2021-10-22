@@ -1,25 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>admin</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-button
-    (click)="presentModalAltaUsuarios()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Crear usuario
-  </ion-button>
-
-  <ion-button
-    (click)="presentModalAltaMesa()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Click me
-  </ion-button>
-</ion-content>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="confirmar">
+      <ion-icon name="flash"></ion-icon>
+      <ion-label>Usuarios a confirmar</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="altas">
+      <ion-icon name="apps"></ion-icon>
+      <ion-label>Altas</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

@@ -66,46 +66,7 @@ export class SystemService {
 
   //TODO: Crear enum de errores, modifiicar metodo presentToastError
 
-  async presentToastError(code: string = '') {
-    let message = '';
-
-    switch (code) {
-      case 'auth/email-already-exists':
-        message = 'Ya existe usuario registrado con ese email';
-        break;
-      case 'auth/internal-error':
-        message = 'Error al conectarse al servidor';
-        break;
-      case 'auth/user-not-found':
-        message = 'No existe usuario';
-        break;
-      case 'auth/invalid-email':
-        message = 'El correo son invalidos';
-        break;
-      case 'auth/invalid-password':
-        message = 'La contraseña son invalidos';
-        break;
-      case 'auth/wrong-password':
-        message = 'Contraseña incorrecta';
-        break;
-      case 'no internet':
-        message = 'El dispositivo no tiene conexion a internet';
-        break;
-      case 'Camara':
-        message = 'Error camara';
-        break;
-      case 'Camara - no autorizda':
-        message =
-          'Se requiere autorizacion del usuario para utilizar la camara';
-        break;
-      case 'QR - invalido':
-        message = 'QR invalido';
-        break;
-      default:
-        message = 'Error inesperado';
-        break;
-    }
-
+  async presentToastError(message: string = '') {
     const toast = await this.toastController.create({
       message,
       duration: 2000,

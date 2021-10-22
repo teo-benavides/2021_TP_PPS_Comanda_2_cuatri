@@ -3,7 +3,7 @@ import { AuthService } from '../../../login/services/auth.service';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-side-menu',
+  selector: 'utility-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
 })

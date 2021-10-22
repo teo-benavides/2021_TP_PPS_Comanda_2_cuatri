@@ -5,7 +5,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { NavController, ToastController } from '@ionic/angular';
 import { SystemService } from '../../utility/services/system.service';
 import { Storage } from '@ionic/storage-angular';
-import { User } from '../../models/user.model';
+import { User } from 'src/app/models/interfaces/user.model';
 import { Base64 } from '@ionic-native/base64/ngx';
 
 /*
@@ -55,7 +55,10 @@ export class AuthService {
 
       if (userInfo.estado !== 'confirmado') {
         await this.auth.signOut();
-        this.system.presentToast('Cuenta no validada');
+
+        const msgEstado =
+          userInfo.estado === 'pendiente' ? 'no fue validada' : 'fue rechazada';
+        this.system.presentToast(`La cuenta ${msgEstado}`);
         return;
       }
 
@@ -66,7 +69,7 @@ export class AuthService {
       this.nav.navigateForward('/');
     } catch (error) {
       const err = error === 'No internet' ? 'No internet' : error['code'];
-      this.system.presentToastError(err);
+      this.errorLogin(err);
     } finally {
       loading.dismiss();
     }
@@ -83,5 +86,48 @@ export class AuthService {
     const user: User = await this.storage.get('user');
 
     return user !== null;
+  }
+
+  async errorLogin(code: string = '') {
+    let message = '';
+
+    switch (code) {
+      case 'auth/email-already-exists':
+        message = 'Ya existe usuario registrado con ese email';
+        break;
+      case 'auth/internal-error':
+        message = 'Error al conectarse al servidor';
+        break;
+      case 'auth/user-not-found':
+        message = 'No existe usuario';
+        break;
+      case 'auth/invalid-email':
+        message = 'El correo son invalidos';
+        break;
+      case 'auth/invalid-password':
+        message = 'La contraseña son invalidos';
+        break;
+      case 'auth/wrong-password':
+        message = 'Contraseña incorrecta';
+        break;
+      case 'no internet':
+        message = 'El dispositivo no tiene conexion a internet';
+        break;
+      case 'Camara':
+        message = 'Error camara';
+        break;
+      case 'Camara - no autorizda':
+        message =
+          'Se requiere autorizacion del usuario para utilizar la camara';
+        break;
+      case 'QR - invalido':
+        message = 'QR invalido';
+        break;
+      default:
+        message = 'Error inesperado';
+        break;
+    }
+
+    this.system.presentToastError(message);
   }
 }

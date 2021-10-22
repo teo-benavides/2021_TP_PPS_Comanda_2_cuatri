@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { SystemService } from '../utility/services/system.service';
+import { User, estado } from '../models/interfaces/user.model';
+import { Observable } from 'rxjs';
+import { ErrorStrings } from '../models/enums/errorStrings';
 import { Network } from '@ionic-native/network/ngx';
-import { NavController } from '@ionic/angular';
-import { SystemService } from 'src/app/utility/services/system.service';
-import { perfil, User } from '../../models/user.model';
-import { Storage } from '@ionic/storage-angular';
-import { Base64 } from '@ionic-native/base64/ngx';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AltaUsuariosService {
+export class UsuarioService {
   constructor(
-    private register: AngularFireAuth,
     private db: AngularFirestore,
-    private nav: NavController,
     private system: SystemService,
+    private register: AngularFireAuth,
+
     private network: Network,
-    private storage: Storage,
+
     private file: AngularFireStorage
   ) {}
 
@@ -27,7 +26,7 @@ export class AltaUsuariosService {
     let flag = false;
 
     try {
-      var loading = await this.system.presentLoading('Creado usuario');
+      var loading = await this.system.presentLoading('Creando usuario');
       loading.present();
       if (this.network.type === this.network.Connection.NONE)
         throw new Error('No internet');
@@ -55,8 +54,12 @@ export class AltaUsuariosService {
       flag = true;
     } catch (error) {
       console.log(error);
-      const err = error === 'No internet' ? 'No internet' : error['code'];
-      this.system.presentToastError(err);
+      const msg =
+        error['code'] === 'auth/email-already-in-use'
+          ? ErrorStrings.EmailRepetido
+          : ErrorStrings.CrearUsuario;
+
+      this.system.presentToastError(msg);
     } finally {
       loading.dismiss();
       return flag;
@@ -64,8 +67,28 @@ export class AltaUsuariosService {
   }
 
   async loginAnonimo(nombre: string, foto: string = '') {
-    await this.storage.set('user', { nombre, foto });
+    console.log('TODO');
+    // await this.storage.set('user', { nombre, foto });
 
-    this.nav.navigateForward('/');
+    // this.nav.navigateForward('/');
+  }
+
+  async cambiarEstadoUsuario(uid: string, estado: estado): Promise<boolean> {
+    let flag = false;
+
+    try {
+      await this.db.collection('Usuarios').doc(uid).update({ estado });
+      flag = true;
+    } catch (error) {}
+
+    return flag;
+  }
+
+  getUsuarioAConfirmar(): Observable<User[]> {
+    return this.db
+      .collection<User>('Usuarios', (ref) =>
+        ref.where('perfil', '==', 'cliente').where('estado', '==', 'pendiente')
+      )
+      .valueChanges();
   }
 }
