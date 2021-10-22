@@ -1,6 +1,6 @@
 # Proyecto Grupal PPS - Team Null
 
-## Integrantes:
+## Integrantes:  
++ Teo Benavides - Alpha
++ Carlos Castro - Beta
 
-- Teo Benavides - Alpha
-- Carlos Castro - Beta
