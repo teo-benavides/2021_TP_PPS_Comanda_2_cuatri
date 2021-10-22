@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SystemService } from '../utility/services/system.service';
 import { User, estado } from '../models/interfaces/user.model';
 import { Observable } from 'rxjs';
-import { ERROR } from '../models/enums/error';
+import { ErrorStrings } from '../models/enums/errorStrings';
 import { Network } from '@ionic-native/network/ngx';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -56,8 +56,8 @@ export class UsuarioService {
       console.log(error);
       const msg =
         error['code'] === 'auth/email-already-in-use'
-          ? ERROR.EMAILREPETIDO
-          : ERROR.CREARUSUARIO;
+          ? ErrorStrings.EmailRepetido
+          : ErrorStrings.CrearUsuario;
 
       this.system.presentToastError(msg);
     } finally {
