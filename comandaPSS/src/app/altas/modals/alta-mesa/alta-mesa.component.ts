@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { SystemService } from 'src/app/utility/services/system.service';
 import { MesasService } from '../../services/mesas.service';
-import { Mesa } from '../../../models/mesas.model';
+import { Mesa } from '../../../models/interfaces/mesas.model';
 import {
   NgxQrcodeElementTypes,
   NgxQrcodeErrorCorrectionLevels,

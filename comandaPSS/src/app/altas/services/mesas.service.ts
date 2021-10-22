@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { SystemService } from 'src/app/utility/services/system.service';
-import { Mesa } from '../../models/mesas.model';
+import { Mesa } from '../../models/interfaces/mesas.model';
+import { ERROR } from '../../models/enums/error';
 
 // TODO: Agregarle tipados de retorno a los metodos
 
@@ -67,7 +68,7 @@ export class MesasService {
     } catch (error) {
       console.log(error);
 
-      this.system.presentToastError();
+      this.system.presentToastError(ERROR.CREARMESA);
     } finally {
       loading.dismiss();
       return flag;
