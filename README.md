@@ -7,25 +7,25 @@
 ## Asignaciones:  
 
 ### Alfa:
-| [x] |           Nombre de tarea |
+| :heavy_check_mark: |           Nombre de tarea |
 |----:|--------------------------:|
-| [ ] | Confirmar pedido          |
-| [ ] | Pantallas mozo            |
-| [ ] | Pantallas cocinero        |
-| [ ] | Pantallas bartender       |
-| [ ] | Varias push notifications |
-| [ ] | QR de mesa                |
-| [ ] | Realizar pedidos          |
+| | Confirmar pedido          |
+| | Pantallas mozo            |
+| | Pantallas cocinero        |
+| | Pantallas bartender       |
+| | Varias push notifications |
+| | QR de mesa                |
+| | Realizar pedidos          |
 
 ### Beta: 
-| [x] |                                Nombre de tarea |
-|----:|-----------------------------------------------:|
-| [ ] | Base QRs                                       |
-| [ ] | Base push notifications                        |
-| [ ] | Ingreso al local (incluye QR ingreso al local) |
-| [ ] | Pantallas metre                                |
-| [x] | Pantallas dueño/supervisor                     |
-| [x] | Alta dueño/supervisor                          |
-| [x] | Alta empleado                                  |
-| [x] | Alta mesas                                     |
-| [x] | Alta clientes                                  |
+| :heavy_check_mark: |                                Nombre de tarea |
+|-------------------:|-----------------------------------------------:|
+|                    | Base QRs                                       |
+|                    | Base push notifications                        |
+|                    | Ingreso al local (incluye QR ingreso al local) |
+|                    | Pantallas metre                                |
+| :heavy_check_mark: | Pantallas dueño/supervisor                     |
+| :heavy_check_mark: | Alta dueño/supervisor                          |
+| :heavy_check_mark: | Alta empleado                                  |
+| :heavy_check_mark: | Alta mesas                                     |
+| :heavy_check_mark: | Alta clientes                                  |
