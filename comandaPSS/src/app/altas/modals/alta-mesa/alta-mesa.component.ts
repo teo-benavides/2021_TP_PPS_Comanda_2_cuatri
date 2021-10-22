@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { SystemService } from 'src/app/utility/services/system.service';
 import { MesasService } from '../../../services/mesas.service';
 import { Mesa } from '../../../models/interfaces/mesas.model';
+import { ERROR } from '../../../models/enums/error';
 import {
   NgxQrcodeElementTypes,
   NgxQrcodeErrorCorrectionLevels,
@@ -69,7 +70,7 @@ export class AltaMesaComponent implements OnInit {
       if (await this.mesa.crearMesa(nuevaMesa, mesaIdBase64.split(',')[1]))
         this.cancelar();
     } else {
-      this.system.presentToast('Ya existe mesa con ese numero');
+      this.system.presentToastError(ERROR.NUMEROMESAREPETIDO);
     }
   }
 }
