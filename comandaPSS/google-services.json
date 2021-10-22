@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "102797775066",
+    "project_id": "comanda-pps-96600",
+    "storage_bucket": "comanda-pps-96600.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102797775066:android:295afa625a6285b48bd5e3",
+        "android_client_info": {
+          "package_name": "comanda.pps.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102797775066-ddrppsr5b7g9s0ks2ebd09s1btvvs4mc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARHok0qf6kAx9yT16RzOBQydTB_JzX2cE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102797775066-ddrppsr5b7g9s0ks2ebd09s1btvvs4mc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

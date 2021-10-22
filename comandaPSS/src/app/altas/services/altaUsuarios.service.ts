@@ -4,10 +4,11 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Network } from '@ionic-native/network/ngx';
 import { NavController } from '@ionic/angular';
 import { SystemService } from 'src/app/utility/services/system.service';
-import { perfil, User } from '../../models/user.model';
+import { perfil, User } from 'src/app/models/interfaces/user.model';
 import { Storage } from '@ionic/storage-angular';
 import { Base64 } from '@ionic-native/base64/ngx';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ERROR } from '../../models/enums/error';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class AltaUsuariosService {
     let flag = false;
 
     try {
-      var loading = await this.system.presentLoading('Creado usuario');
+      var loading = await this.system.presentLoading('Creando usuario');
       loading.present();
       if (this.network.type === this.network.Connection.NONE)
         throw new Error('No internet');
@@ -55,8 +56,7 @@ export class AltaUsuariosService {
       flag = true;
     } catch (error) {
       console.log(error);
-      const err = error === 'No internet' ? 'No internet' : error['code'];
-      this.system.presentToastError(err);
+      this.system.presentToastError(ERROR.CREARUSUARIO);
     } finally {
       loading.dismiss();
       return flag;

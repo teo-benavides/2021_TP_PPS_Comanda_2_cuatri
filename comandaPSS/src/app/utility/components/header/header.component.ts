@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-header',
+  selector: 'utility-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })

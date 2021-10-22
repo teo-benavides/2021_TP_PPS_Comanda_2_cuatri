@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { SystemService } from '../../../utility/services/system.service';
 import { dniQR } from '../../../utility/config/QR.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { perfil, User, estado } from '../../../models/user.model';
+import { perfil, User, estado } from 'src/app/models/interfaces/user.model';
 import { AltaUsuariosService } from '../../services/altaUsuarios.service';
 
 @Component({

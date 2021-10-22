@@ -29,7 +29,6 @@
             <ion-select-option value="metre">metre</ion-select-option>
             <ion-select-option value="mozo">mozo</ion-select-option>
             <ion-select-option value="cocinero">cocinero</ion-select-option>
-            <ion-select-option value="cliente">cliente</ion-select-option>
           </ion-select>
         </ion-item>
 
@@ -83,7 +82,11 @@
 
           <ion-item *ngIf="formUsuario.value['clave'] !== undefined">
             <ion-label position="floating">Clave </ion-label>
-            <ion-input required formControlName="clave" type="text"></ion-input>
+            <ion-input
+              required
+              formControlName="clave"
+              type="password"
+            ></ion-input>
           </ion-item>
         </div>
 
