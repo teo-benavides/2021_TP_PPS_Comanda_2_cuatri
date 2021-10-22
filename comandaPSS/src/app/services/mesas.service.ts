@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { SystemService } from 'src/app/utility/services/system.service';
 import { Mesa } from '../models/interfaces/mesas.model';
-import { ERROR } from '../models/enums/error';
+import { ErrorStrings } from '../models/enums/errorStrings';
 
 // TODO: Agregarle tipados de retorno a los metodos
 
@@ -67,7 +67,7 @@ export class MesasService {
     } catch (error) {
       console.log(error);
 
-      this.system.presentToastError(ERROR.CREARMESA);
+      this.system.presentToastError(ErrorStrings.CrearMesa);
     } finally {
       loading.dismiss();
       return flag;
