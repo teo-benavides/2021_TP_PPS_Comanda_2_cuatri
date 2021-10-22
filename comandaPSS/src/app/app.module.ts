@@ -23,7 +23,10 @@ import { AltasModule } from './altas/altas.module';
     LoginModule,
     AltasModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Storage,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { SystemService } from 'src/app/utility/services/system.service';
-import { Mesa } from '../../models/interfaces/mesas.model';
-import { ERROR } from '../../models/enums/error';
+import { Mesa } from '../models/interfaces/mesas.model';
+import { ERROR } from '../models/enums/error';
 
 // TODO: Agregarle tipados de retorno a los metodos
 
@@ -19,12 +19,11 @@ export class MesasService {
 
   async mesaExiste(numeroMesa: number) {
     const data = await this.db
-      .collection<Mesa>('Mesas', (ref) =>
-        ref.where('numeroMesa', '==', numeroMesa)
-      )
-      .ref.get();
-    console.log(data);
-    return !data.empty;
+      .collection<Mesa>('Mesas')
+      .ref.where('numeroMesa', '==', numeroMesa)
+      .get();
+
+    return data.empty;
   }
 
   async getUltimaMesa() {
