@@ -4,7 +4,6 @@ import { SystemService } from '../utility/services/system.service';
 import { User, estado } from '../models/interfaces/user.model';
 import { Observable } from 'rxjs';
 import { ERROR } from '../models/enums/error';
-import { NavController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -17,9 +16,9 @@ export class UsuarioService {
     private db: AngularFirestore,
     private system: SystemService,
     private register: AngularFireAuth,
-    private nav: NavController,
+
     private network: Network,
-    private storage: Storage,
+
     private file: AngularFireStorage
   ) {}
 

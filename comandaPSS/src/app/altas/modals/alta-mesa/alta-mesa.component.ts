@@ -58,7 +58,7 @@ export class AltaMesaComponent implements OnInit {
       this.formMesa.value['numeroMesa']
     );
 
-    if (!existe) {
+    if (existe) {
       const canvas = document.querySelector('canvas') as HTMLCanvasElement;
       const mesaIdBase64 = canvas.toDataURL('image/jpeg').toString();
 

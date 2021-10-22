@@ -4,7 +4,7 @@ import { SystemService } from '../../../utility/services/system.service';
 import { dniQR } from '../../../utility/config/QR.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { perfil, User, estado } from 'src/app/models/interfaces/user.model';
-import { AltaUsuariosService } from '../../services/altaUsuarios.service';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-alta-usuario',
@@ -19,7 +19,7 @@ export class AltaUsuarioComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private system: SystemService,
-    private alta: AltaUsuariosService,
+    private alta: UsuarioService,
     private fb: FormBuilder
   ) {}
 
