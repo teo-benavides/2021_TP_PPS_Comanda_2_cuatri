@@ -10,6 +10,7 @@
 | :heavy_check_mark: |           Nombre de tarea |
 |----:|--------------------------:|
 | | Confirmar pedido          |
+| | Alta de producto          |
 | | Pantallas mozo            |
 | | Pantallas cocinero        |
 | | Pantallas bartender       |
