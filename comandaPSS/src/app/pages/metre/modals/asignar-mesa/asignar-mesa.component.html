@@ -1,0 +1,35 @@
+<ion-content class="ion-padding">
+  <div class="centerFlex">
+    <div class="conteiner">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Mesas disponibles</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelar()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <div id="body">
+        <ion-list>
+          <div id="empty" *ngIf="mesas.length == 0">
+            <h5>No hay mesas disponible</h5>
+          </div>
+          <div class="list" *ngIf="mesas.length > 0">
+            <ion-item *ngFor="let item of mesas" (click)="asignar(item.mesaId)">
+              <ion-avatar slot="start">
+                <img [src]="item.foto" />
+              </ion-avatar>
+              <ion-label>
+                <h2>Numero de mesa: {{ item.numeroMesa }}</h2>
+                <h3>Capacidad de comensales:{{ item.cantidadComensales }}</h3>
+                <h3>Tipo:{{ item.tipo }}</h3>
+              </ion-label>
+            </ion-item>
+          </div>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+</ion-content>
