@@ -165,6 +165,7 @@ export class AltaUsuarioComponent implements OnInit {
         perfil,
         foto,
         estado: this.estado,
+        estadoIngreso: 'no ingreso',
       };
     } else {
       const { nombre, apellido, correo, dni, cuil, perfil, foto } =

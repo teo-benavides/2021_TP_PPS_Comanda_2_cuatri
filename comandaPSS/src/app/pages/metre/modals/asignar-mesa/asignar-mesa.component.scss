@@ -12,26 +12,29 @@ ion-content {
 
 .container {
   width: 100%;
-  height: auto;
+  height: 75%;
   background-color: var(--ion-color-light);
   border-radius: 10px;
   ion-toolbar {
     border-radius: 10px 10px 0px 0px;
   }
-  form {
+  #body {
+    height: 88%;
     padding: 10px;
-    #dni {
-      margin: auto;
-      cursor: pointer;
-      color: var(--ion-color-primary-shade);
-    }
-    ion-avatar {
-      margin: 5px auto;
-      width: 120px;
-      height: 120px;
-    }
     ion-item {
       margin: 20px 0px;
+    }
+    .list {
+      height: 100%;
+      overflow-y: auto;
+      ion-item {
+        margin: 5px;
+      }
+    }
+    ion-list {
+      height: 95%;
+      background: var(--ion-color-primary);
+      border-radius: 5px;
     }
   }
 }
@@ -40,11 +43,10 @@ ion-content {
   height: 270px;
   overflow-y: auto;
 }
-ngx-qrcode {
-  .aclass {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -9999;
-  }
+
+#empty {
+  display: flex;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
 }

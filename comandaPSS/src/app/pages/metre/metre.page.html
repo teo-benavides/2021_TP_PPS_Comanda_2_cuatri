@@ -1,0 +1,26 @@
+<utility-header title="Lista de espera" type="menu"></utility-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Seleccione cliente</ion-label>
+      <ion-button id="add" (click)="agregarCliente()"
+        ><ion-icon name="add-outline"></ion-icon
+      ></ion-button>
+    </ion-list-header>
+    <div id="empty" *ngIf="usuarios.length == 0">
+      <h5>No hay clientes en espera</h5>
+    </div>
+    <div class="list" *ngIf="usuarios.length > 0">
+      <ion-item *ngFor="let item of usuarios" (click)="asignar(item.uid)">
+        <ion-avatar slot="start">
+          <img [src]="item.foto" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ item.nombre }} {{ item.apellido }}</h2>
+          <h3>{{ item.correo }}</h3>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
