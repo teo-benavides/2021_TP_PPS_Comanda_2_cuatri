@@ -14,12 +14,12 @@ export class MetrePage implements OnInit {
   usuarios: User[] = [];
 
   constructor(
-    public usuario: UsuarioService,
+    public UsuarioService: UsuarioService,
     private modalController: ModalController
   ) {}
 
   ngOnInit() {
-    this.usuario.getUsuariosEnEspera().subscribe((data) => {
+    this.UsuarioService.getUsuariosEnEspera().subscribe((data) => {
       console.log(data);
       this.usuarios = data;
     });
