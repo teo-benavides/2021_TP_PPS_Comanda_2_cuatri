@@ -7,6 +7,8 @@ import { ErrorStrings } from '../models/enums/errorStrings';
 import { Network } from '@ionic-native/network/ngx';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,7 @@ export class UsuarioService {
     private db: AngularFirestore,
     private system: SystemService,
     private register: AngularFireAuth,
-
+    private http: HttpClient,
     private network: Network,
 
     private file: AngularFireStorage
@@ -73,13 +75,27 @@ export class UsuarioService {
     // this.nav.navigateForward('/');
   }
 
-  async cambiarEstadoUsuario(uid: string, estado: estado): Promise<boolean> {
+  async cambiarEstadoUsuario(
+    uid: string,
+    email: string,
+    estado: estado
+  ): Promise<boolean> {
     let flag = false;
 
     try {
       await this.db.collection('Usuarios').doc(uid).update({ estado });
       flag = true;
-    } catch (error) {}
+
+      const reject = (estado !== 'confirmado').toString();
+
+      await this.http
+        .get(
+          `${environment.backendUrl}sendMail?dest=${email}&subject=Estado de cuenta&reject=${reject}`
+        )
+        .toPromise();
+    } catch (error) {
+      console.log(error);
+    }
 
     return flag;
   }
