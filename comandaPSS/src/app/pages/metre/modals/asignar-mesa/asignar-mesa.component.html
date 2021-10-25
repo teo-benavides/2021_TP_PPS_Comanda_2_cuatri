@@ -1,6 +1,6 @@
 <ion-content class="ion-padding">
   <div class="centerFlex">
-    <div class="conteiner">
+    <div class="container">
       <ion-header>
         <ion-toolbar color="primary">
           <ion-title>Mesas disponibles</ion-title>
@@ -14,7 +14,7 @@
       <div id="body">
         <ion-list>
           <div id="empty" *ngIf="mesas.length == 0">
-            <h5>No hay mesas disponible</h5>
+            <h5>No hay mesas disponibles</h5>
           </div>
           <div class="list" *ngIf="mesas.length > 0">
             <ion-item *ngFor="let item of mesas" (click)="asignar(item.mesaId)">
