@@ -13,13 +13,13 @@ import { ErrorStrings } from '../models/enums/errorStrings';
 })
 export class MesasService {
   constructor(
-    private db: AngularFirestore,
-    private file: AngularFireStorage,
+    private angularFirestore: AngularFirestore,
+    private angularFireStorage: AngularFireStorage,
     private system: SystemService
   ) {}
 
   async mesaExiste(numeroMesa: number) {
-    const data = await this.db
+    const data = await this.angularFirestore
       .collection<Mesa>('Mesas')
       .ref.where('numeroMesa', '==', numeroMesa)
       .get();
@@ -28,7 +28,9 @@ export class MesasService {
   }
 
   async getUltimaMesa() {
-    const data = await this.db.collection<Mesa>('Mesas').ref.get();
+    const data = await this.angularFirestore
+      .collection<Mesa>('Mesas')
+      .ref.get();
 
     if (data.empty) return 1;
 
@@ -40,7 +42,7 @@ export class MesasService {
   }
 
   crearId(): string {
-    return this.db.createId();
+    return this.angularFirestore.createId();
   }
 
   async crearMesa(mesa: Mesa, qr: string) {
@@ -51,17 +53,20 @@ export class MesasService {
       loading.present();
 
       const b64 = await this.system.fileToBase64(mesa.foto);
-      const r = await this.file
+      const r = await this.angularFireStorage
         .ref(`/mesas/${mesa.mesaId}`)
         .putString(b64, 'base64', { contentType: 'image/png' });
 
-      await this.file
+      await this.angularFireStorage
         .ref(`/qr/${mesa.mesaId}-Numero:${mesa.numeroMesa}`)
         .putString(qr, 'base64', { contentType: 'image/jpeg' });
 
       mesa.foto = await r.ref.getDownloadURL();
 
-      await this.db.collection('Mesas').doc(mesa.mesaId).set(mesa);
+      await this.angularFirestore
+        .collection('Mesas')
+        .doc(mesa.mesaId)
+        .set(mesa);
       flag = true;
 
       this.system.presentToast('Se a creado una mesa');
@@ -76,7 +81,7 @@ export class MesasService {
   }
 
   getMesasDesocupadas(): Observable<Mesa[]> {
-    return this.db
+    return this.angularFirestore
       .collection<Mesa>('Mesas', (ref) =>
         ref.where('estado', '==', 'desocupada')
       )

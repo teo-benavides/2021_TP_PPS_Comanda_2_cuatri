@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  DocumentReference,
+} from '@angular/fire/compat/firestore';
 import { SystemService } from '../utility/services/system.service';
 import { User, estado, estadoIngreso } from '../models/interfaces/user.model';
 import { Observable } from 'rxjs';
@@ -11,18 +14,23 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Mesa } from '../models/interfaces/mesas.model';
 import { MesasService } from './mesas.service';
+import { Storage } from '@ionic/storage-angular';
+import { NavController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
   constructor(
-    private db: AngularFirestore,
+    private angularFirestore: AngularFirestore,
     private system: SystemService,
-    private register: AngularFireAuth,
+    private angularFireAuth: AngularFireAuth,
     private http: HttpClient,
     private network: Network,
-    private file: AngularFireStorage
+    private angularFireStorage: AngularFireStorage,
+    private localStorage: Storage,
+    private nav: NavController
   ) {}
 
   async createUser(newUser: User, clave: string) {
@@ -35,7 +43,7 @@ export class UsuarioService {
         throw new Error('No internet');
       const {
         user: { uid },
-      } = await this.register.createUserWithEmailAndPassword(
+      } = await this.angularFireAuth.createUserWithEmailAndPassword(
         newUser.correo,
         clave
       );
@@ -45,14 +53,17 @@ export class UsuarioService {
       if (newUser.foto !== '') {
         let b64 = await this.system.fileToBase64(newUser.foto);
 
-        const r = await this.file
+        const r = await this.angularFireStorage
           .ref(`/foto/${newUser.uid}`)
           .putString(b64, 'base64', { contentType: 'image/jpeg' });
         const url = await r.ref.getDownloadURL();
         newUser.foto = url;
       }
 
-      await this.db.collection('Usuarios').doc(newUser.uid).set(newUser);
+      await this.angularFirestore
+        .collection('Usuarios')
+        .doc(newUser.uid)
+        .set(newUser);
       this.system.presentToast('La cuenta se a creado con éxito!');
       flag = true;
     } catch (error) {
@@ -84,7 +95,10 @@ export class UsuarioService {
     let flag = false;
 
     try {
-      await this.db.collection('Usuarios').doc(uid).update({ estado });
+      await this.angularFirestore
+        .collection('Usuarios')
+        .doc(uid)
+        .update({ estado });
       flag = true;
 
       const reject = (estado !== 'confirmado').toString();
@@ -102,7 +116,7 @@ export class UsuarioService {
   }
 
   getUsuarioAConfirmar(): Observable<User[]> {
-    return this.db
+    return this.angularFirestore
       .collection<User>('Usuarios', (ref) =>
         ref.where('perfil', '==', 'cliente').where('estado', '==', 'pendiente')
       )
@@ -110,7 +124,7 @@ export class UsuarioService {
   }
 
   getUsuariosEnEspera(): Observable<User[]> {
-    return this.db
+    return this.angularFirestore
       .collection<User>('Usuarios', (ref) =>
         ref
           .where('perfil', '==', 'cliente')
@@ -122,13 +136,13 @@ export class UsuarioService {
 
   async asignarMesaUsuario(uid: string, mesaId: string): Promise<void> {
     const user = {
-      mesa: this.db.doc(`Mesas/${mesaId}`).ref,
+      mesa: this.angularFirestore.doc(`Mesas/${mesaId}`).ref,
       estadoIngreso: 'buscando',
     };
 
     try {
-      await this.db.collection('Usuarios').doc(uid).update(user);
-      await this.db
+      await this.angularFirestore.collection('Usuarios').doc(uid).update(user);
+      await this.angularFirestore
         .collection('Mesas')
         .doc(mesaId)
         .update({ estado: 'ocupada' });
@@ -138,5 +152,40 @@ export class UsuarioService {
       console.log(error);
       this.system.presentToastError(ErrorStrings.AsignarMesa);
     }
+  }
+
+  cambiarEstadoIngresoUsuario(
+    uid: string,
+    estadoIngreso: estadoIngreso
+  ): Promise<void> {
+    return this.angularFirestore
+      .collection('Usuarios')
+      .doc(uid)
+      .update({ estadoIngreso });
+  }
+
+  esperandoMesaUsuario() {
+    this.localStorage.get('user').then(async (u) => {
+      const sub = this.angularFirestore
+        .doc<User>(`Usuarios/${u.uid}`)
+        .valueChanges()
+        .pipe(map(this.parseMesa))
+        .subscribe(async (data) => {
+          const user = await data;
+          if (user.estadoIngreso === 'buscando') {
+            await this.localStorage.set('user', user);
+            this.nav.navigateBack('/cliente/buscar');
+            sub.unsubscribe();
+          }
+        });
+    });
+  }
+
+  private async parseMesa(user: any) {
+    if (user.mesa === undefined) return user as User;
+
+    user.mesa = (await user.mesa.get()).data();
+
+    return user as User;
   }
 }
