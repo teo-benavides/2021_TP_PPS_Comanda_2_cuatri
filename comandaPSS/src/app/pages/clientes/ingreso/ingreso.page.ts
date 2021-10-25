@@ -17,7 +17,7 @@ export class IngresoPage implements OnInit {
   constructor(
     private storage: Storage,
     private qr: QrService,
-    private usuario: UsuarioService,
+    private UsuarioService: UsuarioService,
     private nav: NavController,
     private system: SystemService
   ) {}
@@ -33,7 +33,7 @@ export class IngresoPage implements OnInit {
       var loading = await this.system.presentLoading('Ingresando a la lista');
       loading.present();
       if (await this.qr.ingresoQR()) {
-        await this.usuario.cambiarEstadoIngresoUsuario(
+        await this.UsuarioService.cambiarEstadoIngresoUsuario(
           this.cliente.uid,
           'espera'
         );

@@ -16,7 +16,7 @@ export class AsignarMesaComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     public mesa: MesasService,
-    private usuario: UsuarioService
+    private UsuarioService: UsuarioService
   ) {}
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class AsignarMesaComponent implements OnInit {
   }
 
   asignar(mesaId: string) {
-    this.usuario.asignarMesaUsuario(this.uid, mesaId).then(() => {
+    this.UsuarioService.asignarMesaUsuario(this.uid, mesaId).then(() => {
       this.cancelar();
     });
   }
