@@ -17,12 +17,16 @@
         <ion-item-options side="end">
           <ion-item-option
             color="success"
-            (click)="usuario.cambiarEstadoUsuario(item.uid, 'confirmado')"
+            (click)="
+              usuario.cambiarEstadoUsuario(item.uid, item.correo, 'confirmado')
+            "
             ><ion-icon name="checkmark-outline"></ion-icon
           ></ion-item-option>
           <ion-item-option
             color="danger"
-            (click)="usuario.cambiarEstadoUsuario(item.uid, 'rechazado')"
+            (click)="
+              usuario.cambiarEstadoUsuario(item.uid, item.correo, 'rechazado')
+            "
             ><ion-icon name="close-outline"></ion-icon
           ></ion-item-option>
         </ion-item-options>

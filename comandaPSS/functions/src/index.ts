@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'comandappsutn@gmail.com',
-    pass: 'utn12345',
+    pass: 'cefbf792382ef87585dfe4246d6da355',
   },
 });
 
@@ -23,13 +23,13 @@ exports.sendMail = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
     const aceptacion = `
       <h1>Hola ${req.query.dest}<h1>
-      <p>Queriamos comunicarle que su cuenta fue verificada y aceptada por nuestro establecimiento, esperamos verlo pronto en nuestro restaurant</p>
+      <p>Queriamos informarle que su cuenta fue verificada y aceptada por nuestro establecimiento, esperamos verlo pronto en nuestro restaurant</p>
       <br>
       <p>Saludos, La comanda.</p>`;
 
     const rechazo = `
       <h1>Hola ${req.query.dest}<h1>
-      <p>Queriamos comunicarle que su cuenta fue rechazada por nuestro establecimiento, esperamos que comprenda nuestra decisión</p>
+      <p>Queriamos informarle que su cuenta fue rechazada por nuestro establecimiento, esperamos que comprenda nuestra decisión</p>
       <br>
       <p>Saludos, La comanda.</p>
       `;
@@ -39,7 +39,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
     const html = req.query.reject === 'true' ? rechazo : aceptacion;
 
     const mailOptions = {
-      from: 'La Comanda <pps.the.developers@gmail.com>',
+      from: 'La Comanda <comandappsutn@gmail.com>',
       to: dest,
       subject,
       html,
