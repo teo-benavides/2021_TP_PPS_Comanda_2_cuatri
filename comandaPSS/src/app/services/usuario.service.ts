@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  DocumentReference,
+} from '@angular/fire/compat/firestore';
 import { SystemService } from '../utility/services/system.service';
 import { User, estado, estadoIngreso } from '../models/interfaces/user.model';
 import { Observable } from 'rxjs';
@@ -11,6 +14,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Mesa } from '../models/interfaces/mesas.model';
 import { MesasService } from './mesas.service';
+import { Storage } from '@ionic/storage-angular';
+import { NavController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +28,9 @@ export class UsuarioService {
     private register: AngularFireAuth,
     private http: HttpClient,
     private network: Network,
-    private file: AngularFireStorage
+    private file: AngularFireStorage,
+    private storage: Storage,
+    private nav: NavController
   ) {}
 
   async createUser(newUser: User, clave: string) {
@@ -122,7 +130,7 @@ export class UsuarioService {
 
   async asignarMesaUsuario(uid: string, mesaId: string): Promise<void> {
     const user = {
-      mesa: this.db.doc(`Mesas/${mesaId}`).ref,
+      mesa: this.db.doc(`Mesas/${mesaId}`).ref.get(),
       estadoIngreso: 'buscando',
     };
 
@@ -138,5 +146,37 @@ export class UsuarioService {
       console.log(error);
       this.system.presentToastError(ErrorStrings.AsignarMesa);
     }
+  }
+
+  cambiarEstadoIngresoUsuario(
+    uid: string,
+    estadoIngreso: estadoIngreso
+  ): Promise<void> {
+    return this.db.collection('Usuarios').doc(uid).update({ estadoIngreso });
+  }
+
+  esperandoMesaUsuario() {
+    this.storage.get('user').then(async (u) => {
+      const sub = this.db
+        .doc<User>(`Usuarios/${u.uid}`)
+        .valueChanges()
+        .pipe(map(this.getMesa))
+        .subscribe(async (data) => {
+          const user = await data;
+          if (user.estadoIngreso === 'buscando') {
+            await this.storage.set('user', user);
+            this.nav.navigateBack('/cliente/buscar');
+            sub.unsubscribe();
+          }
+        });
+    });
+  }
+
+  private async getMesa(user: any) {
+    if (user.mesa === undefined) return user as User;
+
+    user.mesa = (await user.mesa.get()).data();
+
+    return user as User;
   }
 }

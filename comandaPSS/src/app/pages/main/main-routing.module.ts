@@ -18,6 +18,43 @@ const routes: Routes = [
         loadChildren: () =>
           import('../metre/metre.module').then((m) => m.MetrePageModule),
       },
+      {
+        path: 'cliente',
+        children: [
+          {
+            path: 'ingreso',
+            loadChildren: () =>
+              import('../clientes/ingreso/ingreso.module').then(
+                (m) => m.IngresoPageModule
+              ),
+          },
+          {
+            path: 'espera',
+            loadChildren: () =>
+              import('../clientes/espera/espera.module').then(
+                (m) => m.EsperaPageModule
+              ),
+          },
+          {
+            path: 'mesa',
+            loadChildren: () =>
+              import('../clientes/mesa/mesa.module').then(
+                (m) => m.MesaPageModule
+              ),
+          },
+          {
+            path: 'buscar',
+            loadChildren: () =>
+              import('../clientes/buscar/buscar.module').then(
+                (m) => m.BuscarPageModule
+              ),
+          },
+          {
+            path: '',
+            redirectTo: 'ingreso',
+          },
+        ],
+      },
     ],
   },
 ];
