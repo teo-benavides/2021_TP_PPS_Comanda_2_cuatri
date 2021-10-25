@@ -20,6 +20,9 @@ export class MainPage implements OnInit {
       case 'supervisor':
         this.nav.navigateForward('/admin');
         break;
+      case 'metre':
+        this.nav.navigateForward('/metre');
+        break;
       default:
         break;
     }

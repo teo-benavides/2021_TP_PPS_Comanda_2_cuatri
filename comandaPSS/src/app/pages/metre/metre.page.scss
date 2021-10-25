@@ -1,0 +1,30 @@
+.list {
+  height: 100%;
+  overflow-y: auto;
+  ion-item {
+    margin: 5px;
+  }
+}
+ion-list {
+  height: 95%;
+  background: var(--ion-color-primary);
+  border-radius: 5px;
+}
+
+#empty {
+  display: flex;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
+}
+
+#add {
+  background-color: transparent;
+  ion-icon {
+    color: black;
+  }
+}
+
+ion-list-header {
+  border-bottom: 1px solid gray;
+}
