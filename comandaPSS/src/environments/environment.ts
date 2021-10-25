@@ -13,6 +13,7 @@ export const environment = {
     appId: '1:102797775066:web:5e46e2ff9f2ed4918bd5e3',
     measurementId: 'G-ZGY0CGLHHR',
   },
+  backendUrl: 'https://us-central1-comanda-pps-96600.cloudfunctions.net/',
 };
 
 /*
