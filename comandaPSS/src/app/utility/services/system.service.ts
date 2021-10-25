@@ -4,7 +4,11 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { audioPath, audio } from '../AudioPath';
 import { Vibration } from '@ionic-native/vibration/ngx';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import {
+  BarcodeScanner,
+  BarcodeScannerOptions,
+  BarcodeScanResult,
+} from '@ionic-native/barcode-scanner/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 
 declare var window: any;
@@ -110,7 +114,7 @@ export class SystemService {
     }
   }
 
-  async getQr(type?: any) {
+  async getQr(type?: BarcodeScannerOptions): Promise<BarcodeScanResult> {
     return this.barcodeScanner.scan(type);
   }
 
