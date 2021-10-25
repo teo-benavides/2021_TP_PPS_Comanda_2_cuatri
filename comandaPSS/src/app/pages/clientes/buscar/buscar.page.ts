@@ -10,10 +10,10 @@ import { User } from 'src/app/models/interfaces/user.model';
 export class BuscarPage implements OnInit {
   cliente: User = null;
 
-  constructor(private storage: Storage) {}
+  constructor(private localStorage: Storage) {}
 
   ngOnInit() {
-    this.storage.get('user').then((data) => {
+    this.localStorage.get('user').then((data) => {
       this.cliente = data;
     });
   }

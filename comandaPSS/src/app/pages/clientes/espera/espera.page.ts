@@ -7,9 +7,9 @@ import { UsuarioService } from '../../../services/usuario.service';
   styleUrls: ['./espera.page.scss'],
 })
 export class EsperaPage implements OnInit {
-  constructor(private UsuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit() {
-    this.UsuarioService.esperandoMesaUsuario();
+    this.usuarioService.esperandoMesaUsuario();
   }
 }
