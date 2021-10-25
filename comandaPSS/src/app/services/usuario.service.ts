@@ -130,7 +130,7 @@ export class UsuarioService {
 
   async asignarMesaUsuario(uid: string, mesaId: string): Promise<void> {
     const user = {
-      mesa: this.db.doc(`Mesas/${mesaId}`).ref.get(),
+      mesa: this.db.doc(`Mesas/${mesaId}`).ref,
       estadoIngreso: 'buscando',
     };
 
