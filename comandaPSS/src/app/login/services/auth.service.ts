@@ -49,9 +49,11 @@ export class AuthService {
         clave
       );
 
-      const userInfo = await (
-        await this.db.collection<User>('Usuarios').doc(user.uid).ref.get()
+      const data = await (
+        await this.db.collection<any>('Usuarios').doc(user.uid).ref.get()
       ).data();
+
+      const userInfo = await this.getMesa(data);
 
       if (userInfo.estado !== 'confirmado') {
         await this.auth.signOut();
@@ -68,6 +70,7 @@ export class AuthService {
 
       this.nav.navigateForward('/');
     } catch (error) {
+      console.log(error);
       const err = error === 'No internet' ? 'No internet' : error['code'];
       this.errorLogin(err);
     } finally {
@@ -129,5 +132,13 @@ export class AuthService {
     }
 
     this.system.presentToastError(message);
+  }
+
+  private async getMesa(user: any) {
+    if (user.mesa === undefined) return user as User;
+
+    user.mesa = (await user.mesa.get()).data();
+
+    return user as User;
   }
 }
