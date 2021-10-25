@@ -20,7 +20,7 @@ export class AsignarMesaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mesa.getMesasDesocupada().subscribe((data) => {
+    this.mesa.getMesasDesocupadas().subscribe((data) => {
       console.log(data);
       this.mesas = data;
     });

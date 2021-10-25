@@ -75,7 +75,7 @@ export class MesasService {
     }
   }
 
-  getMesasDesocupada(): Observable<Mesa[]> {
+  getMesasDesocupadas(): Observable<Mesa[]> {
     return this.db
       .collection<Mesa>('Mesas', (ref) =>
         ref.where('estado', '==', 'desocupada')
