@@ -1,3 +1,5 @@
+import { Mesa } from './mesas.model';
+
 export interface User {
   uid?: string;
   nombre: string;
@@ -8,6 +10,8 @@ export interface User {
   perfil: perfil;
   foto: string | '';
   estado: estado;
+  estadoIngreso?: estadoIngreso;
+  mesa?: Mesa;
 }
 
 export type perfil =
@@ -21,3 +25,4 @@ export type perfil =
   | 'anonimo';
 
 export type estado = 'pendiente' | 'confirmado' | 'rechazado';
+export type estadoIngreso = 'no ingreso' | 'espera' | 'buscando' | 'mesa';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SystemService } from '../utility/services/system.service';
-import { User, estado } from '../models/interfaces/user.model';
+import { User, estado, estadoIngreso } from '../models/interfaces/user.model';
 import { Observable } from 'rxjs';
 import { ErrorStrings } from '../models/enums/errorStrings';
 import { Network } from '@ionic-native/network/ngx';
@@ -9,6 +9,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Mesa } from '../models/interfaces/mesas.model';
+import { MesasService } from './mesas.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +22,6 @@ export class UsuarioService {
     private register: AngularFireAuth,
     private http: HttpClient,
     private network: Network,
-
     private file: AngularFireStorage
   ) {}
 
@@ -106,5 +107,36 @@ export class UsuarioService {
         ref.where('perfil', '==', 'cliente').where('estado', '==', 'pendiente')
       )
       .valueChanges();
+  }
+
+  getUsuariosEnEspera(): Observable<User[]> {
+    return this.db
+      .collection<User>('Usuarios', (ref) =>
+        ref
+          .where('perfil', '==', 'cliente')
+          .where('estado', '==', 'confirmado')
+          .where('estadoIngreso', '==', 'espera')
+      )
+      .valueChanges();
+  }
+
+  async asignarMesaUsuario(uid: string, mesaId: string): Promise<void> {
+    const user = {
+      mesa: this.db.doc(`Mesas/${mesaId}`).ref,
+      estadoIngreso: 'buscando',
+    };
+
+    try {
+      await this.db.collection('Usuarios').doc(uid).update(user);
+      await this.db
+        .collection('Mesas')
+        .doc(mesaId)
+        .update({ estado: 'ocupada' });
+
+      this.system.presentToast('La cuenta se a creado con éxito!');
+    } catch (error) {
+      console.log(error);
+      this.system.presentToastError(ErrorStrings.AsignarMesa);
+    }
   }
 }
