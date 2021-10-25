@@ -15,12 +15,12 @@ export class AsignarMesaComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    public mesa: MesasService,
-    private UsuarioService: UsuarioService
+    private mesasService: MesasService,
+    private usuarioService: UsuarioService
   ) {}
 
   ngOnInit() {
-    this.mesa.getMesasDesocupadas().subscribe((data) => {
+    this.mesasService.getMesasDesocupadas().subscribe((data) => {
       console.log(data);
       this.mesas = data;
     });
@@ -31,7 +31,7 @@ export class AsignarMesaComponent implements OnInit {
   }
 
   asignar(mesaId: string) {
-    this.UsuarioService.asignarMesaUsuario(this.uid, mesaId).then(() => {
+    this.usuarioService.asignarMesaUsuario(this.uid, mesaId).then(() => {
       this.cancelar();
     });
   }

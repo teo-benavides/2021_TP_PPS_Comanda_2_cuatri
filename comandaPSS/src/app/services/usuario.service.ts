@@ -23,13 +23,13 @@ import { map } from 'rxjs/operators';
 })
 export class UsuarioService {
   constructor(
-    private db: AngularFirestore,
+    private angularFirestore: AngularFirestore,
     private system: SystemService,
-    private register: AngularFireAuth,
+    private angularFireAuth: AngularFireAuth,
     private http: HttpClient,
     private network: Network,
-    private file: AngularFireStorage,
-    private storage: Storage,
+    private angularFireStorage: AngularFireStorage,
+    private localStorage: Storage,
     private nav: NavController
   ) {}
 
@@ -43,7 +43,7 @@ export class UsuarioService {
         throw new Error('No internet');
       const {
         user: { uid },
-      } = await this.register.createUserWithEmailAndPassword(
+      } = await this.angularFireAuth.createUserWithEmailAndPassword(
         newUser.correo,
         clave
       );
@@ -53,14 +53,17 @@ export class UsuarioService {
       if (newUser.foto !== '') {
         let b64 = await this.system.fileToBase64(newUser.foto);
 
-        const r = await this.file
+        const r = await this.angularFireStorage
           .ref(`/foto/${newUser.uid}`)
           .putString(b64, 'base64', { contentType: 'image/jpeg' });
         const url = await r.ref.getDownloadURL();
         newUser.foto = url;
       }
 
-      await this.db.collection('Usuarios').doc(newUser.uid).set(newUser);
+      await this.angularFirestore
+        .collection('Usuarios')
+        .doc(newUser.uid)
+        .set(newUser);
       this.system.presentToast('La cuenta se a creado con éxito!');
       flag = true;
     } catch (error) {
@@ -92,7 +95,10 @@ export class UsuarioService {
     let flag = false;
 
     try {
-      await this.db.collection('Usuarios').doc(uid).update({ estado });
+      await this.angularFirestore
+        .collection('Usuarios')
+        .doc(uid)
+        .update({ estado });
       flag = true;
 
       const reject = (estado !== 'confirmado').toString();
@@ -110,7 +116,7 @@ export class UsuarioService {
   }
 
   getUsuarioAConfirmar(): Observable<User[]> {
-    return this.db
+    return this.angularFirestore
       .collection<User>('Usuarios', (ref) =>
         ref.where('perfil', '==', 'cliente').where('estado', '==', 'pendiente')
       )
@@ -118,7 +124,7 @@ export class UsuarioService {
   }
 
   getUsuariosEnEspera(): Observable<User[]> {
-    return this.db
+    return this.angularFirestore
       .collection<User>('Usuarios', (ref) =>
         ref
           .where('perfil', '==', 'cliente')
@@ -130,13 +136,13 @@ export class UsuarioService {
 
   async asignarMesaUsuario(uid: string, mesaId: string): Promise<void> {
     const user = {
-      mesa: this.db.doc(`Mesas/${mesaId}`).ref,
+      mesa: this.angularFirestore.doc(`Mesas/${mesaId}`).ref,
       estadoIngreso: 'buscando',
     };
 
     try {
-      await this.db.collection('Usuarios').doc(uid).update(user);
-      await this.db
+      await this.angularFirestore.collection('Usuarios').doc(uid).update(user);
+      await this.angularFirestore
         .collection('Mesas')
         .doc(mesaId)
         .update({ estado: 'ocupada' });
@@ -152,19 +158,22 @@ export class UsuarioService {
     uid: string,
     estadoIngreso: estadoIngreso
   ): Promise<void> {
-    return this.db.collection('Usuarios').doc(uid).update({ estadoIngreso });
+    return this.angularFirestore
+      .collection('Usuarios')
+      .doc(uid)
+      .update({ estadoIngreso });
   }
 
   esperandoMesaUsuario() {
-    this.storage.get('user').then(async (u) => {
-      const sub = this.db
+    this.localStorage.get('user').then(async (u) => {
+      const sub = this.angularFirestore
         .doc<User>(`Usuarios/${u.uid}`)
         .valueChanges()
-        .pipe(map(this.getMesa))
+        .pipe(map(this.parseMesa))
         .subscribe(async (data) => {
           const user = await data;
           if (user.estadoIngreso === 'buscando') {
-            await this.storage.set('user', user);
+            await this.localStorage.set('user', user);
             this.nav.navigateBack('/cliente/buscar');
             sub.unsubscribe();
           }
@@ -172,7 +181,7 @@ export class UsuarioService {
     });
   }
 
-  private async getMesa(user: any) {
+  private async parseMesa(user: any) {
     if (user.mesa === undefined) return user as User;
 
     user.mesa = (await user.mesa.get()).data();
