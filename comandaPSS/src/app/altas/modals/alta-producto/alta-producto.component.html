@@ -1,0 +1,83 @@
+<ion-content class="ion-padding">
+  <div class="centerFlex">
+    <div class="container">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Crear nuevo producto</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelar()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <form [formGroup]="formProducto" (ngSubmit)="onSubmit()">
+        <ion-avatar (click)="getFoto()">
+          <img [src]="fotoUrl !== '' ? fotoUrl : 'assets/missing.png'" />
+        </ion-avatar>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input
+            required
+            formControlName="nombre"
+            type="text"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-input
+            required
+            formControlName="descripcion"
+            type="text"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha de elaboraciónz</ion-label>
+          <ion-datetime
+            name="fechaElaboracion"
+          ></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Precio</ion-label>
+          <ion-input
+            required
+            formControlName="precio"
+            type="number"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tipo</ion-label>
+          <ion-select
+            formControlName="tipo"
+            placeholder="Seleccione un tipo"
+          >
+            <ion-select-option value="comida">Comida</ion-select-option>
+            <ion-select-option value="bebida">Bebida</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button
+          color="primary"
+          type="submit"
+          expand="block"
+          fill="clear"
+          shape="round"
+          [disabled]="formProducto.invalid"
+        >
+          Crear
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>
+
+<!--  -->
+<ngx-qrcode
+  style="position: absolute; top: -1000%; left: 0"
+  id="qr"
+  *ngIf="productoId !== ''"
+  [elementType]="elementType"
+  [value]="productoId"
+  cssClass="aclass"
+  [errorCorrectionLevel]="correctionLevel"
+>
+</ngx-qrcode>
