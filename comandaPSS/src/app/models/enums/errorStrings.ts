@@ -6,4 +6,5 @@ export enum ErrorStrings {
   NumeroMesaRepetido = 'Ya existe mesa con ese numero',
   AsignarMesa = 'No se pudo asignar la mesa',
   ProductoYaExiste = 'Ya existe un producto con ese nombre',
+  EscanearIngreso = 'Codigo QR incorrecto',
 }
