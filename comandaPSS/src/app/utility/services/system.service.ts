@@ -6,6 +6,7 @@ import { audioPath, audio } from '../AudioPath';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 declare var window: any;
 
@@ -34,6 +35,7 @@ declare var window: any;
 export class SystemService {
   constructor(
     public toastController: ToastController,
+    private db: AngularFirestore,
     private loadingController: LoadingController,
     private camera: Camera,
     private audio: NativeAudio,
@@ -82,6 +84,10 @@ export class SystemService {
       animated: false,
       spinner: null,
     });
+  }
+
+  createId(): string {
+    return this.db.createId();
   }
 
   async getPicture() {
