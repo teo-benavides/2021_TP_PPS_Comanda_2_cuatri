@@ -12,9 +12,23 @@
         </ion-toolbar>
       </ion-header>
       <form [formGroup]="formProducto" (ngSubmit)="onSubmit()">
-        <ion-avatar (click)="getFoto()">
-          <img [src]="fotoUrl !== '' ? fotoUrl : 'assets/missing.png'" />
-        </ion-avatar>
+        <ion-row>
+          <ion-col size="4">
+            <ion-avatar (click)="setFoto(1)">
+              <img [src]="foto1 !== '' ? foto1 : 'assets/missing.png'" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="4">
+            <ion-avatar (click)="setFoto(2)">
+              <img [src]="foto2 !== '' ? foto2 : 'assets/missing.png'" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="4">
+            <ion-avatar (click)="setFoto(3)">
+              <img [src]="foto3 !== '' ? foto3 : 'assets/missing.png'" />
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input
@@ -32,9 +46,10 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Fecha de elaboraciónz</ion-label>
+          <ion-label position="floating">Fecha de elaboración</ion-label>
           <ion-datetime
-            name="fechaElaboracion"
+            [max]="today"
+            formControlName="fechaElaboracion"
           ></ion-datetime>
         </ion-item>
         <ion-item>
@@ -51,6 +66,7 @@
             formControlName="tipo"
             placeholder="Seleccione un tipo"
           >
+          <!-- TODO: el tipo es comida si el usuario es cocinero, y bebida si es bartender, no se puede elegir -->
             <ion-select-option value="comida">Comida</ion-select-option>
             <ion-select-option value="bebida">Bebida</ion-select-option>
           </ion-select>

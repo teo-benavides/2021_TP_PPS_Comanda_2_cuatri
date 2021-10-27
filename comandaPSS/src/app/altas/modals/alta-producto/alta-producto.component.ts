@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { IonDatetime, ModalController } from '@ionic/angular';
 import { SystemService } from 'src/app/utility/services/system.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { Producto } from 'src/app/models/interfaces/producto.model';
@@ -20,7 +20,11 @@ export class AltaProductoComponent implements OnInit {
   productoId: string = '';
   elementType = NgxQrcodeElementTypes.CANVAS;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.LOW;
-  fotoUrl: string = '';
+  // La última consigna requiere 3 fotos para las altas de productos
+  foto1: string = '';
+  foto2: string = '';
+  foto3: string = '';
+  today: string = (new Date(Date.now())).toISOString();
 
   constructor(
     private modalController: ModalController,
@@ -37,7 +41,9 @@ export class AltaProductoComponent implements OnInit {
       fechaElaboracion: ['', [Validators.required]],
       precio: ['', [Validators.required, Validators.min(1)]],
       tipo: ['comida', [Validators.required]],
-      foto: ['', [Validators.required]],
+      foto1: ['', [Validators.required]],
+      foto2: ['', [Validators.required]],
+      foto3: ['', [Validators.required]],
     });
   }
 
@@ -45,12 +51,30 @@ export class AltaProductoComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  async getFoto() {
+  async setFoto(fotoId: number) {
     const foto = await this.system.getPicture();
 
     if (foto.img && foto.file) {
-      this.fotoUrl = foto.img;
-      this.formProducto.get('foto').setValue(foto.file);
+      switch (fotoId) {
+        case 1:
+          this.foto1 = foto.img;
+          this.formProducto.get('foto1').setValue(foto.file);
+          break;
+      
+        case 2:
+          this.foto2 = foto.img;
+          this.formProducto.get('foto2').setValue(foto.file);
+          break;
+      
+        case 3:
+          this.foto3 = foto.img;
+          this.formProducto.get('foto3').setValue(foto.file);
+          break;
+      
+        default:
+          break;
+      }
+      
     }
   }
 
@@ -60,7 +84,6 @@ export class AltaProductoComponent implements OnInit {
 
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
     const productoIdBase64 = canvas.toDataURL('image/jpeg').toString();
-
     let nuevoProducto: Producto = this.formProducto.value;
     nuevoProducto.productoId = this.productoId;
 
