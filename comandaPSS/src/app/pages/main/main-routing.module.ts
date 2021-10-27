@@ -19,6 +19,11 @@ const routes: Routes = [
           import('../metre/metre.module').then((m) => m.MetrePageModule),
       },
       {
+        path: 'cocinero',
+        loadChildren: () =>
+          import('../cocinero/cocinero.module').then((m) => m.CocineroPageModule),
+      },
+      {
         path: 'cliente',
         children: [
           {
