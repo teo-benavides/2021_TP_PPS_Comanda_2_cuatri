@@ -27,6 +27,9 @@ export class MainPage implements OnInit {
       case 'cocinero':
         this.nav.navigateForward('/cocinero');
         break;
+      case 'bartender':
+        this.nav.navigateForward('/bartender');
+        break;
       case 'cliente':
       case 'anonimo':
         this.checkRouteCliente(user.estadoIngreso);

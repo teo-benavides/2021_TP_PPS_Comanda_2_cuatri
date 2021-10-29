@@ -21,7 +21,12 @@ const routes: Routes = [
       {
         path: 'cocinero',
         loadChildren: () =>
-          import('../cocinero/cocinero.module').then((m) => m.CocineroPageModule),
+          import('src/app/pages/cocinero/cocinero.module').then((m) => m.CocineroPageModule),
+      },
+      {
+        path: 'bartender',
+        loadChildren: () =>
+          import('src/app/pages/bartender/bartender.module').then((m) => m.BartenderPageModule),
       },
       {
         path: 'cliente',

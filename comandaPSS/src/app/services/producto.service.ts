@@ -26,6 +26,15 @@ export class ProductoService {
     return !data.empty;
   }
 
+  async getById(id: string) {
+    return this.db
+      .collection<Producto>("Productos")
+      .doc(id)
+      .get()
+      .toPromise()
+      .then(val => val.data());
+  }
+
   async crearProducto(producto: Producto, qr: string): Promise<void> {
     let productoExiste: boolean = await this.productoExiste(producto);
     

@@ -10,5 +10,5 @@ export interface Producto {
     tipo: TipoProducto;
   }
   
-  export type TipoProducto = 'comida' | 'bebida';
+export type TipoProducto = 'comida' | 'bebida';
   

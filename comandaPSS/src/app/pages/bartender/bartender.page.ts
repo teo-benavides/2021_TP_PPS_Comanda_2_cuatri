@@ -9,24 +9,24 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { PreparacionService } from 'src/app/services/preparacion.service';
 
 @Component({
-  selector: 'app-cocinero',
-  templateUrl: './cocinero.page.html',
-  styleUrls: ['./cocinero.page.scss'],
+  selector: 'app-bartender',
+  templateUrl: './bartender.page.html',
+  styleUrls: ['./bartender.page.scss'],
 })
-export class CocineroPage implements OnInit {
-  comidasPendientes: Preparacion[];
-  comidasPreparando: Preparacion[];
+export class BartenderPage implements OnInit {
+  bebidasPendientes: Preparacion[];
+  bebidasPreparando: Preparacion[];
 
   constructor(public productoService: ProductoService, public preparacionService: PreparacionService, public pedidoService: PedidoService, private modalController: ModalController) {}
 
   ngOnInit() {
-    this.preparacionService.getPreparaciones("pendiente", "comida")
+    this.preparacionService.getPreparaciones("pendiente", "bebida")
     .then(
-      p => p.subscribe(data => this.comidasPendientes = data)
+      p => p.subscribe(data => this.bebidasPendientes = data)
     );
-    this.preparacionService.getPreparaciones("preparando", "comida")
+    this.preparacionService.getPreparaciones("preparando", "bebida")
     .then(
-      p => p.subscribe(data => this.comidasPreparando = data)
+      p => p.subscribe(data => this.bebidasPreparando = data)
     );
   }
 
@@ -51,14 +51,14 @@ export class CocineroPage implements OnInit {
   // public async debugCrearPedido() {
   //   let p: Preparacion = {
   //     estado: "pendiente",
-  //     pedidoId: "1234567890",
-  //     preparacionId: "1234",
-  //     producto: await this.productoService.getById("p6SloIaDyiov2Exax4ba").then(val => val)
+  //     pedidoId: "09876",
+  //     preparacionId: "345345",
+  //     producto: await this.productoService.getById("MtUApEVwyCbirtYarvYO").then(val => val)
   //   };
     
   //   let pedido: Pedido = {
   //     estado: "preparando",
-  //     pedidoId: "1234567890",
+  //     pedidoId: "09876",
   //     precioTotal: 123,
   //     tiempoEstimado: 60,
   //     mesa: null,

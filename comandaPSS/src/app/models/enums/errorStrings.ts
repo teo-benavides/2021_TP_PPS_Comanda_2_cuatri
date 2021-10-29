@@ -7,4 +7,6 @@ export enum ErrorStrings {
   AsignarMesa = 'No se pudo asignar la mesa',
   ProductoYaExiste = 'Ya existe un producto con ese nombre',
   EscanearIngreso = 'Codigo QR incorrecto',
+  BadPedido = 'Error creando pedido.',
+  BadPreparacion = 'Error creando preparacion.'
 }

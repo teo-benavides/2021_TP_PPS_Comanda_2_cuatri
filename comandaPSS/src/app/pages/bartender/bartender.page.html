@@ -1,12 +1,12 @@
-<utility-header type="menu" title="Comidas a preparar"></utility-header>
+<utility-header type="menu" title="Bebidas a preparar"></utility-header>
 <ion-content>
   <ion-list-header>
-    <ion-label>COMIDAS A PREPARAR</ion-label>
+    <ion-label>BEBIDAS A PREPARAR</ion-label>
   </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!comidasPendientes"></ion-spinner>
+  <ion-spinner name="circular" *ngIf="!bebidasPendientes"></ion-spinner>
 
-  <div *ngIf="comidasPendientes">
-    <ion-list *ngFor="let preparacion of comidasPendientes">
+  <div *ngIf="bebidasPendientes">
+    <ion-list *ngFor="let preparacion of bebidasPendientes">
       <ion-item-sliding>
         <ion-item>
           <ion-avatar slot="start">
@@ -28,12 +28,12 @@
   </div>
 
   <ion-list-header>
-    <ion-label>COMIDAS PREPARANDOSE</ion-label>
+    <ion-label>BEBIDAS PREPARANDOSE</ion-label>
   </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!comidasPreparando"></ion-spinner>
+  <ion-spinner name="circular" *ngIf="!bebidasPreparando"></ion-spinner>
 
-  <div *ngIf="comidasPreparando">
-    <ion-list *ngFor="let preparacion of comidasPreparando">
+  <div *ngIf="bebidasPreparando">
+    <ion-list *ngFor="let preparacion of bebidasPreparando">
       <ion-item-sliding>
         <ion-item>
           <ion-avatar slot="start">
