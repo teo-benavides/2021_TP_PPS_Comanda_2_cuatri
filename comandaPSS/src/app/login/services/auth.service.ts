@@ -7,6 +7,7 @@ import { SystemService } from '../../utility/services/system.service';
 import { Storage } from '@ionic/storage-angular';
 import { User } from 'src/app/models/interfaces/user.model';
 import { Base64 } from '@ionic-native/base64/ngx';
+import { NotificationService } from 'src/app/services/notification.service';
 
 /*
 
@@ -33,7 +34,8 @@ export class AuthService {
     private storage: Storage,
     private network: Network,
     private nav: NavController,
-    private system: SystemService
+    private system: SystemService,
+    private notificationService: NotificationService
   ) {}
 
   async login(correo: string, clave: string) {
@@ -79,6 +81,7 @@ export class AuthService {
   }
 
   async logout() {
+    this.notificationService.endProcess();
     await this.auth.signOut();
     await this.storage.remove('user');
     this.nav.navigateRoot('/sesion');

@@ -26,6 +26,7 @@ import { map } from 'rxjs/operators';
 import { FirebaseError } from '@firebase/util';
 import { perfil } from '../models/interfaces/user.model';
 import { ErrorTest } from '../models/enums/errorTest';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,8 @@ export class UsuarioService {
     private network: Network,
     private angularFireStorage: AngularFireStorage,
     private localStorage: Storage,
-    private nav: NavController
+    private nav: NavController,
+    private notificationService: NotificationService
   ) {}
 
   async existeEmail(correo: string) {
@@ -86,6 +88,10 @@ export class UsuarioService {
         .collection('Usuarios')
         .doc(newUser.uid)
         .set(newUser);
+
+      if (newUser.estado === 'pendiente' && newUser.perfil === 'cliente')
+        await this.notificationService.registroCliente();
+
       this.system.presentToast('La cuenta se a creado con éxito!');
       flag = true;
     } catch (error) {

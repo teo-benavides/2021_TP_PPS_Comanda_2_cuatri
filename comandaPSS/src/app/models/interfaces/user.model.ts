@@ -12,6 +12,7 @@ export interface User {
   estado: estado;
   estadoIngreso?: estadoIngreso;
   mesa?: Mesa;
+  token?: string;
 }
 
 export interface Anonimo {
@@ -23,6 +24,7 @@ export interface Anonimo {
   estado: 'confirmado';
   estadoIngreso: estadoIngreso;
   mesa?: Mesa;
+  token?: string;
 }
 
 export type perfil =
