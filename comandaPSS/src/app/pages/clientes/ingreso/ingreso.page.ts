@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { User } from 'src/app/models/interfaces/user.model';
+import { Cliente, User } from 'src/app/models/interfaces/user.model';
 import { QrService } from '../../../services/qr.service';
 import { UsuarioService } from '../../../services/usuario.service';
 import { NavController } from '@ionic/angular';
 import { SystemService } from '../../../utility/services/system.service';
+import { Anonimo } from '../../../models/interfaces/user.model';
 
 @Component({
   selector: 'app-ingreso',
@@ -12,7 +13,7 @@ import { SystemService } from '../../../utility/services/system.service';
   styleUrls: ['./ingreso.page.scss'],
 })
 export class IngresoPage implements OnInit {
-  cliente: User = null;
+  cliente: Cliente = null;
 
   constructor(
     private storage: Storage,

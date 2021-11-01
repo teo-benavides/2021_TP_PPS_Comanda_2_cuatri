@@ -4,7 +4,13 @@ import {
   DocumentReference,
 } from '@angular/fire/compat/firestore';
 import { SystemService } from '../utility/services/system.service';
-import { User, estado, estadoIngreso } from '../models/interfaces/user.model';
+import {
+  User,
+  estado,
+  estadoIngreso,
+  Anonimo,
+  Cliente,
+} from '../models/interfaces/user.model';
 import { Observable } from 'rxjs';
 import { ErrorStrings } from '../models/enums/errorStrings';
 import { Network } from '@ionic-native/network/ngx';
@@ -17,6 +23,10 @@ import { MesasService } from './mesas.service';
 import { Storage } from '@ionic/storage-angular';
 import { NavController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { FirebaseError } from '@firebase/util';
+import { perfil } from '../models/interfaces/user.model';
+import { ErrorTest } from '../models/enums/errorTest';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,8 +40,19 @@ export class UsuarioService {
     private network: Network,
     private angularFireStorage: AngularFireStorage,
     private localStorage: Storage,
-    private nav: NavController
+    private nav: NavController,
+    private notificationService: NotificationService
   ) {}
+
+  async existeEmail(correo: string) {
+    const { empty } = await this.angularFirestore
+      .collection('Usuarios')
+      .ref.where('correo', '==', correo)
+      .limit(1)
+      .get();
+
+    return !empty;
+  }
 
   async createUser(newUser: User, clave: string) {
     let flag = false;
@@ -41,6 +62,9 @@ export class UsuarioService {
       loading.present();
       if (this.network.type === this.network.Connection.NONE)
         throw new Error('No internet');
+      if (await this.existeEmail(newUser.correo))
+        throw new FirebaseError('auth/email-already-in-use', '');
+
       const {
         user: { uid },
       } = await this.angularFireAuth.createUserWithEmailAndPassword(
@@ -64,6 +88,10 @@ export class UsuarioService {
         .collection('Usuarios')
         .doc(newUser.uid)
         .set(newUser);
+
+      if (newUser.estado === 'pendiente' && newUser.perfil === 'cliente')
+        await this.notificationService.registroCliente();
+
       this.system.presentToast('La cuenta se a creado con éxito!');
       flag = true;
     } catch (error) {
@@ -80,11 +108,47 @@ export class UsuarioService {
     }
   }
 
-  async loginAnonimo(nombre: string, foto: string = '') {
-    console.log('TODO');
-    // await this.storage.set('user', { nombre, foto });
+  async loginAnonimo(anonimo: Anonimo) {
+    const data = await this.angularFirestore
+      .collection<any>('Usuarios')
+      .ref.where('correo', '==', anonimo.correo)
+      .limit(1)
+      .get();
 
-    // this.nav.navigateForward('/');
+    if (!data.empty) {
+      // throw ErrorStrings.EmailRepetido;
+      //Para testing
+
+      console.log(data.docs[0].data());
+
+      let user = data.docs[0].data();
+
+      if (user.perfil !== 'anonimo') throw ErrorTest.IngresoAnonimo;
+
+      user = this.parseMesa(user);
+
+      await this.localStorage.set('user', user);
+      return;
+    }
+
+    anonimo.uid = this.system.createId();
+
+    if (anonimo.foto !== '') {
+      let b64 = await this.system.fileToBase64(anonimo.foto);
+
+      const r = await this.angularFireStorage
+        .ref(`/foto/${anonimo.uid}`)
+        .putString(b64, 'base64', { contentType: 'image/jpeg' });
+      const url = await r.ref.getDownloadURL();
+      anonimo.foto = url;
+    }
+
+    await this.angularFirestore
+      .collection('Usuarios')
+      .doc(anonimo.uid)
+      .set(anonimo);
+
+    await this.localStorage.set('user', anonimo);
   }
 
   async cambiarEstadoUsuario(
@@ -123,11 +187,11 @@ export class UsuarioService {
       .valueChanges();
   }
 
-  getUsuariosEnEspera(): Observable<User[]> {
+  getUsuariosEnEspera(): Observable<Cliente[]> {
     return this.angularFirestore
-      .collection<User>('Usuarios', (ref) =>
+      .collection<Cliente>('Usuarios', (ref) =>
         ref
-          .where('perfil', '==', 'cliente')
+          .where('perfil', 'in', ['cliente', 'anonimo'])
           .where('estado', '==', 'confirmado')
           .where('estadoIngreso', '==', 'espera')
       )
@@ -167,7 +231,7 @@ export class UsuarioService {
   esperandoMesaUsuario() {
     this.localStorage.get('user').then(async (u) => {
       const sub = this.angularFirestore
-        .doc<User>(`Usuarios/${u.uid}`)
+        .doc<Cliente>(`Usuarios/${u.uid}`)
         .valueChanges()
         .pipe(map(this.parseMesa))
         .subscribe(async (data) => {
@@ -182,10 +246,10 @@ export class UsuarioService {
   }
 
   private async parseMesa(user: any) {
-    if (user.mesa === undefined) return user as User;
+    if (user.mesa === undefined) return user as Cliente;
 
     user.mesa = (await user.mesa.get()).data();
 
-    return user as User;
+    return user as Cliente;
   }
 }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -28,6 +29,7 @@ import { AltasModule } from './altas/altas.module';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Storage,
+    FirebaseX,
   ],
   bootstrap: [AppComponent],
 })

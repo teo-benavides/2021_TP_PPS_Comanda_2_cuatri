@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { User } from 'src/app/models/interfaces/user.model';
 import { NavController } from '@ionic/angular';
 import { estadoIngreso } from '../../models/interfaces/user.model';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-main',
@@ -10,11 +11,16 @@ import { estadoIngreso } from '../../models/interfaces/user.model';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-  constructor(private storage: Storage, private nav: NavController) {}
+  constructor(
+    private storage: Storage,
+    private nav: NavController,
+    private notificationService: NotificationService
+  ) {}
 
   async ngOnInit() {
     await this.storage.create();
     const user: User = await this.storage.get('user');
+    await this.notificationService.init();
 
     switch (user.perfil) {
       case 'dueño':

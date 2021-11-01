@@ -12,6 +12,19 @@ export interface User {
   estado: estado;
   estadoIngreso?: estadoIngreso;
   mesa?: Mesa;
+  token?: string;
+}
+
+export interface Anonimo {
+  uid?: string;
+  nombre: string;
+  correo: string;
+  perfil: perfil;
+  foto: string | '';
+  estado: 'confirmado';
+  estadoIngreso: estadoIngreso;
+  mesa?: Mesa;
+  token?: string;
 }
 
 export type perfil =
@@ -26,3 +39,5 @@ export type perfil =
 
 export type estado = 'pendiente' | 'confirmado' | 'rechazado';
 export type estadoIngreso = 'no ingreso' | 'espera' | 'buscando' | 'mesa';
+
+export type Cliente = Anonimo | User;

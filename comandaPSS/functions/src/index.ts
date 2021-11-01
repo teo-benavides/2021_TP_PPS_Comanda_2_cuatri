@@ -53,3 +53,42 @@ exports.sendMail = functions.https.onRequest((req, res) => {
     });
   });
 });
+
+exports.registroCliente = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const db = admin.firestore();
+
+    const usersRef = db
+      .collection('Usuarios')
+      .where('perfil', 'in', ['dueño', 'supervisor']);
+
+    const users = await usersRef.get();
+
+    const tokens: string[] = [];
+
+    users.forEach((d) => {
+      const token = d.data().token;
+
+      if (token) {
+        tokens.push(token);
+      }
+    });
+
+    const payload = {
+      notification: {
+        title: 'Nuevo usuario',
+        body: 'Se a registrado un cliente',
+      },
+    };
+
+    admin
+      .messaging()
+      .sendToDevice(tokens, payload)
+      .then(() => {
+        return res.send(true);
+      })
+      .catch(() => {
+        return res.send(false);
+      });
+  });
+});

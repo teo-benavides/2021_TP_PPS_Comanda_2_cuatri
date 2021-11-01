@@ -62,10 +62,10 @@ export class SystemService {
     await this.audio.play(name);
   }
 
-  async presentToast(message: string) {
+  async presentToast(message: string, duration: number = 2000) {
     const toast = await this.toastController.create({
       message,
-      duration: 2000,
+      duration,
     });
     toast.present();
   }
