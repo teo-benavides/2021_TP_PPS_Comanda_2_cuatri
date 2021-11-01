@@ -36,6 +36,7 @@ ion-content {
 }
 
 #inputs {
-  height: 270px;
+  min-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
 }

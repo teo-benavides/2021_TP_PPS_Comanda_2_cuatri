@@ -24,7 +24,7 @@ export class AppComponent {
   async ngOnInit(): Promise<void> {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-
+    await this.storage.create();
     await this.platform.ready();
     this.splashScreen.hide();
     await this.system.loadAudioAssets();

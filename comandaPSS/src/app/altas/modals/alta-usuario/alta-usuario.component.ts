@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { SystemService } from '../../../utility/services/system.service';
 import { dniQR } from '../../../utility/config/QR.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { perfil, User, estado } from 'src/app/models/interfaces/user.model';
 import { UsuarioService } from '../../../services/usuario.service';
+import { Anonimo } from '../../../models/interfaces/user.model';
 
 @Component({
   selector: 'app-alta-usuario',
@@ -20,7 +21,8 @@ export class AltaUsuarioComponent implements OnInit {
     private modalController: ModalController,
     private system: SystemService,
     private alta: UsuarioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private nav: NavController
   ) {}
 
   ngOnInit() {
@@ -130,6 +132,7 @@ export class AltaUsuarioComponent implements OnInit {
         this.formUsuario = this.fb.group({
           nombre: ['', [Validators.required]],
           perfil: [perfil, [Validators.required]],
+          correo: ['', [Validators.required, Validators.email]],
           foto: [''],
         });
         break;
@@ -147,11 +150,36 @@ export class AltaUsuarioComponent implements OnInit {
    */
 
   async onSubmit() {
-    if (this.formUsuario.value['perfil'] === 'anonimo')
-      return this.alta.loginAnonimo(
-        this.formUsuario.value['nombre'],
-        this.foto
-      );
+    if (this.formUsuario.value['perfil'] === 'anonimo') {
+      var loading = await this.system.presentLoading('Ingresando como anonimo');
+      loading.present();
+      const { nombre, correo, perfil, foto } = this.formUsuario.value;
+
+      let anonimo: Anonimo = {
+        nombre,
+        correo,
+        perfil,
+        foto,
+        estadoIngreso: 'no ingreso',
+        estado: 'confirmado',
+      };
+
+      this.alta
+        .loginAnonimo(anonimo)
+        .then(() => {
+          this.nav.navigateRoot('/');
+        })
+        .catch((error) => {
+          console.log(error);
+          this.system.presentToastError(error);
+        })
+        .finally(() => {
+          loading.dismiss();
+          this.cancelar();
+        });
+
+      return;
+    }
     let newUser: User = null;
     if (this.formUsuario.value['perfil'] === 'cliente') {
       const { nombre, apellido, correo, dni, perfil, foto } =
@@ -187,5 +215,7 @@ export class AltaUsuarioComponent implements OnInit {
 
     const complete = await this.alta.createUser(newUser, clave);
     if (complete) this.cancelar();
+
+    loading.dismiss();
   }
 }

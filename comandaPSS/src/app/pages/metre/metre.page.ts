@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AltaUsuarioComponent } from 'src/app/altas/modals/alta-usuario/alta-usuario.component';
-import { User } from 'src/app/models/interfaces/user.model';
+import { Cliente, User } from 'src/app/models/interfaces/user.model';
 import { UsuarioService } from '../../services/usuario.service';
 import { AsignarMesaComponent } from './modals/asignar-mesa/asignar-mesa.component';
+import { Anonimo } from '../../models/interfaces/user.model';
 
 @Component({
   selector: 'app-metre',
@@ -11,7 +12,7 @@ import { AsignarMesaComponent } from './modals/asignar-mesa/asignar-mesa.compone
   styleUrls: ['./metre.page.scss'],
 })
 export class MetrePage implements OnInit {
-  usuarios: User[] = [];
+  usuarios: Cliente[] = [];
 
   constructor(
     public usuarioService: UsuarioService,

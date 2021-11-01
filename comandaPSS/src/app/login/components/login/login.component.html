@@ -20,9 +20,12 @@
       >
         <ion-icon name="log-in-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="presentModal()">
+      <ion-fab-button (click)="presentModalRegistro('cliente')">
         <ion-icon name="person-add-outline"></ion-icon>
       </ion-fab-button>
     </div>
   </form>
+  <ion-text>
+    <p (click)="presentModalRegistro('anonimo')">Ingresar como anonimo</p>
+  </ion-text>
 </div>

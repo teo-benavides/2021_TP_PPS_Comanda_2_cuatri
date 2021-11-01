@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { User } from 'src/app/models/interfaces/user.model';
+import { Cliente } from 'src/app/models/interfaces/user.model';
 
 @Component({
   selector: 'app-buscar',
@@ -8,7 +8,7 @@ import { User } from 'src/app/models/interfaces/user.model';
   styleUrls: ['./buscar.page.scss'],
 })
 export class BuscarPage implements OnInit {
-  cliente: User = null;
+  cliente: Cliente = null;
 
   constructor(private localStorage: Storage) {}
 

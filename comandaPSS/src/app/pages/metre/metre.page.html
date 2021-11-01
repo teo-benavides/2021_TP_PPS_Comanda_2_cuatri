@@ -14,10 +14,13 @@
     <div class="list" *ngIf="usuarios.length > 0">
       <ion-item *ngFor="let item of usuarios" (click)="asignar(item.uid)">
         <ion-avatar slot="start">
-          <img [src]="item.foto" />
+          <img [src]="item.foto !== '' ? item.foto : 'assets/user.png'" />
         </ion-avatar>
         <ion-label>
-          <h2>{{ item.nombre }} {{ item.apellido }}</h2>
+          <h2>
+            {{ item.nombre }} {{ item.perfil === 'cliente'? item['apellido']: ''
+            }}
+          </h2>
           <h3>{{ item.correo }}</h3>
         </ion-label>
       </ion-item>

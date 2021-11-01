@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ModalController, NavController } from '@ionic/angular';
 import { AltaUsuarioComponent } from '../../../altas/modals/alta-usuario/alta-usuario.component';
+import { perfil } from 'src/app/models/interfaces/user.model';
 
 @Component({
   selector: 'app-login',
@@ -38,14 +39,14 @@ export class LoginComponent implements OnInit {
     this.formLogin.setValue({ correo, clave });
   }
 
-  async presentModal() {
+  async presentModalRegistro(type: perfil) {
     const modal = await this.modalController.create({
       component: AltaUsuarioComponent,
       swipeToClose: true,
       presentingElement: await this.modalController.getTop(),
       backdropDismiss: false,
       componentProps: {
-        type: 'cliente',
+        type,
       },
     });
     return await modal.present();
