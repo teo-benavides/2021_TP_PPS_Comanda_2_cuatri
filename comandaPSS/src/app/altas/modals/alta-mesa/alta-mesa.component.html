@@ -16,7 +16,7 @@
           <img [src]="fotoUrl !== '' ? fotoUrl : 'assets/missing.png'" />
         </ion-avatar>
 
-        <ion-item>
+        <ion-item color="input">
           <ion-label position="floating">Numero de mesa</ion-label>
           <ion-input
             required
@@ -24,7 +24,7 @@
             type="number"
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item color="input">
           <ion-label position="floating">Cantidad de comensales</ion-label>
           <ion-input
             required
@@ -32,7 +32,7 @@
             type="number"
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item color="input">
           <ion-label position="floating">Perfil</ion-label>
           <ion-select formControlName="tipo" placeholder="Seleccione tipo">
             <ion-select-option value="estandar">Estandar</ion-select-option>

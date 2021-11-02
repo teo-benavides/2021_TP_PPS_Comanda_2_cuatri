@@ -1,8 +1,12 @@
-<utility-header title="Buscar mesa" type="menu"></utility-header>
-<ion-content class="ion-padding">
-  <div *ngIf="cliente !== null">
+<utility-header
+  title="Buscar mesa"
+  type="menu"
+  color="secondary"
+></utility-header>
+<ion-content class="ion-padding" color="fondo">
+  <div *ngIf="cliente !== null" id="content">
     <h4>Mesa asignada: N° {{cliente.mesa.numeroMesa}}</h4>
-    <ion-fab-button>
+    <ion-fab-button color="secondary">
       <ion-icon name="qr-code-outline"></ion-icon>
     </ion-fab-button>
   </div>

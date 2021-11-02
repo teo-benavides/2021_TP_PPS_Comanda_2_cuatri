@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   @Input() route: string = '';
   @Input() title: string = '';
   @Input() cssClass: string = '';
+  @Input() color: string = 'primary';
 
   constructor(private nav: NavController) {}
 

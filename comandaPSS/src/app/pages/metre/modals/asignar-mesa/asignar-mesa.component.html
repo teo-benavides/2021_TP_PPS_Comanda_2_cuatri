@@ -2,7 +2,7 @@
   <div class="centerFlex">
     <div class="container">
       <ion-header>
-        <ion-toolbar color="primary">
+        <ion-toolbar color="tertiary">
           <ion-title>Mesas disponibles</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="cancelar()">
@@ -17,7 +17,11 @@
             <h5>No hay mesas disponibles</h5>
           </div>
           <div class="list" *ngIf="mesas.length > 0">
-            <ion-item *ngFor="let item of mesas" (click)="asignar(item.mesaId)">
+            <ion-item
+              *ngFor="let item of mesas"
+              (click)="asignar(item.mesaId)"
+              color="input"
+            >
               <ion-avatar slot="start">
                 <img [src]="item.foto" />
               </ion-avatar>

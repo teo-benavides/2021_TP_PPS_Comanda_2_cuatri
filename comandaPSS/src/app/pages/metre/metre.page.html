@@ -1,6 +1,10 @@
-<utility-header title="Lista de espera" type="menu"></utility-header>
+<utility-header
+  title="Lista de espera"
+  type="menu"
+  color="tertiary"
+></utility-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" color="fondo">
   <ion-list>
     <ion-list-header>
       <ion-label>Seleccione cliente</ion-label>
@@ -12,7 +16,11 @@
       <h5>No hay clientes en espera</h5>
     </div>
     <div class="list" *ngIf="usuarios.length > 0">
-      <ion-item *ngFor="let item of usuarios" (click)="asignar(item.uid)">
+      <ion-item
+        *ngFor="let item of usuarios"
+        (click)="asignar(item.uid)"
+        color="input"
+      >
         <ion-avatar slot="start">
           <img [src]="item.foto !== '' ? item.foto : 'assets/user.png'" />
         </ion-avatar>

@@ -1,13 +1,17 @@
-<utility-header title="Bienvenido" type="menu"></utility-header>
+<utility-header
+  title="Bienvenido"
+  type="menu"
+  color="secondary"
+></utility-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" color="fondo">
   <div *ngIf="cliente !== null">
     <h3>
       Hola {{cliente.nombre}}, para ingresar a la lista de espera tiene que
       presionar el boton de abajo y <strong>escanear el code qr</strong> para
       ingresar en la lista de espera
     </h3>
-    <ion-fab-button (click)="scanQr()">
+    <ion-fab-button (click)="scanQr()" color="secondary">
       <ion-icon name="qr-code-outline"></ion-icon>
     </ion-fab-button>
   </div>

@@ -1,26 +1,29 @@
 <div id="login">
-  <ion-img src="../../../../assets/login .png"></ion-img>
+  <ion-img src="assets/splash.png"></ion-img>
   <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
     <h3>Ingreso</h3>
-    <ion-item>
+    <ion-item color="input">
       <ion-label position="floating">Correo</ion-label>
       <ion-input required formControlName="correo" type="text"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item color="input" color="input">
       <ion-label position="floating">Clave </ion-label>
       <ion-input required formControlName="clave" type="password"></ion-input>
     </ion-item>
 
     <div class="btnConteiner">
       <ion-fab-button
-        color="primary"
+        color="secondary"
         type="submit"
         [disabled]="formLogin.invalid || loading"
         (click)="onSubmit()"
       >
         <ion-icon name="log-in-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="presentModalRegistro('cliente')">
+      <ion-fab-button
+        (click)="presentModalRegistro('cliente')"
+        color="secondary"
+      >
         <ion-icon name="person-add-outline"></ion-icon>
       </ion-fab-button>
     </div>

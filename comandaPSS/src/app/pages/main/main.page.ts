@@ -11,6 +11,8 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
+  color: string = 'primary';
+
   constructor(
     private storage: Storage,
     private nav: NavController,
@@ -26,19 +28,28 @@ export class MainPage implements OnInit {
       case 'dueño':
       case 'supervisor':
         this.nav.navigateForward('/admin');
+        this.color = 'primary';
         break;
       case 'metre':
         this.nav.navigateForward('/metre');
+        this.color = 'tertiary';
+
         break;
       case 'cocinero':
         this.nav.navigateForward('/cocinero');
+        this.color = 'tertiary';
+
         break;
       case 'bartender':
         this.nav.navigateForward('/bartender');
+        this.color = 'tertiary';
+
         break;
       case 'cliente':
       case 'anonimo':
         this.checkRouteCliente(user.estadoIngreso);
+        this.color = 'secondary';
+
       default:
         break;
     }
