@@ -2,7 +2,7 @@
   <div class="centerFlex">
     <div class="container">
       <ion-header>
-        <ion-toolbar color="primary">
+        <ion-toolbar [color]="color">
           <ion-title>Crear nuevo {{ formUsuario.value["perfil"] }}</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="cancelar()">
@@ -16,7 +16,7 @@
           <img [src]="foto !== '' ? foto : 'assets/user.png'" />
         </ion-avatar>
 
-        <ion-item *ngIf="estado === 'confirmado'">
+        <ion-item *ngIf="estado === 'confirmado'" color="input">
           <ion-label position="floating">Perfil</ion-label>
           <ion-select
             formControlName="perfil"
@@ -33,7 +33,7 @@
         </ion-item>
 
         <div id="inputs">
-          <ion-item>
+          <ion-item color="input">
             <ion-label position="floating">Nombre</ion-label>
             <ion-input
               required
@@ -42,7 +42,10 @@
             ></ion-input>
           </ion-item>
 
-          <ion-item *ngIf="formUsuario.value['apellido'] !== undefined">
+          <ion-item
+            *ngIf="formUsuario.value['apellido'] !== undefined"
+            color="input"
+          >
             <ion-label position="floating">Apellido</ion-label>
             <ion-input
               required
@@ -51,7 +54,10 @@
             ></ion-input>
           </ion-item>
 
-          <ion-item *ngIf="formUsuario.value['dni'] !== undefined">
+          <ion-item
+            *ngIf="formUsuario.value['dni'] !== undefined"
+            color="input"
+          >
             <ion-label position="floating">DNI</ion-label>
             <ion-input required formControlName="dni" type="number"></ion-input>
             <ion-icon
@@ -62,7 +68,10 @@
             ></ion-icon>
           </ion-item>
 
-          <ion-item *ngIf="formUsuario.value['cuil'] !== undefined">
+          <ion-item
+            *ngIf="formUsuario.value['cuil'] !== undefined"
+            color="input"
+          >
             <ion-label position="floating">CUIL</ion-label>
             <ion-input
               required
@@ -71,7 +80,10 @@
             ></ion-input>
           </ion-item>
 
-          <ion-item *ngIf="formUsuario.value['correo'] !== undefined">
+          <ion-item
+            *ngIf="formUsuario.value['correo'] !== undefined"
+            color="input"
+          >
             <ion-label position="floating">Correo</ion-label>
             <ion-input
               required
@@ -80,7 +92,10 @@
             ></ion-input>
           </ion-item>
 
-          <ion-item *ngIf="formUsuario.value['clave'] !== undefined">
+          <ion-item
+            *ngIf="formUsuario.value['clave'] !== undefined"
+            color="input"
+          >
             <ion-label position="floating">Clave </ion-label>
             <ion-input
               required
@@ -91,7 +106,7 @@
         </div>
 
         <ion-button
-          color="primary"
+          [color]="color"
           type="submit"
           expand="block"
           fill="clear"

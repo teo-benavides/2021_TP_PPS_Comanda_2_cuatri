@@ -9,6 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class SideMenuComponent implements OnInit {
   @Input() routes: any[] = [];
+  @Input() color: string = '';
   constructor(public auth: AuthService, private nav: NavController) {}
 
   ngOnInit() {}

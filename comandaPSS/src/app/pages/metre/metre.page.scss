@@ -7,8 +7,11 @@
 }
 ion-list {
   height: 95%;
-  background: var(--ion-color-primary);
   border-radius: 5px;
+  background-color: var(--ion-color-tertiary);
+  ion-label {
+    color: white;
+  }
 }
 
 #empty {
@@ -21,7 +24,7 @@ ion-list {
 #add {
   background-color: transparent;
   ion-icon {
-    color: black;
+    color: white;
   }
 }
 

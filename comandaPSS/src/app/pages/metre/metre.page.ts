@@ -34,6 +34,7 @@ export class MetrePage implements OnInit {
       backdropDismiss: false,
       componentProps: {
         type: 'cliente',
+        color: 'tertiary',
       },
     });
     return await modal.present();

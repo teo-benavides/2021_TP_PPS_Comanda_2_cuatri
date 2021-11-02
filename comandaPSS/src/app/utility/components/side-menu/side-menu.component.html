@@ -1,20 +1,20 @@
 <ion-menu contentId="main" menuId="first" side="start">
   <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar [color]="color">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content color="light">
+  <ion-content color="fondo">
     <ion-menu-toggle>
       <ion-button
-        color="light"
+        [color]="color"
         (click)="goto(r.route)"
         expand="full"
         *ngFor="let r of routes"
       >
         {{ r.name }}
       </ion-button>
-      <ion-button color="light" (click)="auth.logout()" expand="full">
+      <ion-button [color]="color" (click)="auth.logout()" expand="full">
         Desconectar
       </ion-button>
     </ion-menu-toggle>

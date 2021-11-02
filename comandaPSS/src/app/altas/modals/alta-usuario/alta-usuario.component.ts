@@ -14,6 +14,7 @@ import { Anonimo } from '../../../models/interfaces/user.model';
 })
 export class AltaUsuarioComponent implements OnInit {
   @Input() type: perfil = 'cliente';
+  @Input() color: string = 'secondary';
   formUsuario: FormGroup;
   estado: estado = 'pendiente';
   foto: string = '';

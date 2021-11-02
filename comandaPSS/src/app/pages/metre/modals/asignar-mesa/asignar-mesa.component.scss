@@ -13,7 +13,7 @@ ion-content {
 .container {
   width: 100%;
   height: 75%;
-  background-color: var(--ion-color-light);
+  background-color: var(--ion-color-fondo);
   border-radius: 10px;
   ion-toolbar {
     border-radius: 10px 10px 0px 0px;
@@ -33,7 +33,8 @@ ion-content {
     }
     ion-list {
       height: 95%;
-      background: var(--ion-color-primary);
+      background: var(--ion-color-tertiary);
+      color: white;
       border-radius: 5px;
     }
   }
