@@ -6,6 +6,7 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { NavController } from '@ionic/angular';
 import { SystemService } from '../../../utility/services/system.service';
 import { Anonimo } from '../../../models/interfaces/user.model';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-ingreso',
@@ -20,7 +21,8 @@ export class IngresoPage implements OnInit {
     private qr: QrService,
     private UsuarioService: UsuarioService,
     private nav: NavController,
-    private system: SystemService
+    private system: SystemService,
+    private notificationService: NotificationService
   ) {}
 
   async ngOnInit() {
@@ -38,6 +40,7 @@ export class IngresoPage implements OnInit {
           this.cliente.uid,
           'espera'
         );
+        await this.notificationService.ingresoCliente();
         this.cliente.estadoIngreso = 'espera';
         this.storage.set('user', this.cliente);
         this.nav.navigateBack('/cliente/espera');

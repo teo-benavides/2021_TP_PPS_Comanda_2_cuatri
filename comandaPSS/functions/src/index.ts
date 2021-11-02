@@ -92,3 +92,40 @@ exports.registroCliente = functions.https.onRequest(async (req, res) => {
       });
   });
 });
+
+exports.ingresoCliente = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const db = admin.firestore();
+
+    const usersRef = db.collection('Usuarios').where('perfil', '==', 'metre');
+
+    const users = await usersRef.get();
+
+    const tokens: string[] = [];
+
+    users.forEach((d) => {
+      const token = d.data().token;
+
+      if (token) {
+        tokens.push(token);
+      }
+    });
+
+    const payload = {
+      notification: {
+        title: 'Ingreso cliente',
+        body: 'Un cliente a entrado a la lista de espera',
+      },
+    };
+
+    admin
+      .messaging()
+      .sendToDevice(tokens, payload)
+      .then(() => {
+        return res.send(true);
+      })
+      .catch(() => {
+        return res.send(false);
+      });
+  });
+});

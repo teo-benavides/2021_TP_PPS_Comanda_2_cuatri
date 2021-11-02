@@ -27,6 +27,7 @@ export class NotificationService {
     await this.angularFirestore.doc(`Usuarios/${uid}`).update({ token });
 
     this.listener = this.firebaseX.onMessageReceived().subscribe((msg) => {
+      console.log(msg);
       this.system.presentToast(msg.body, 3000);
     });
   }
@@ -37,5 +38,9 @@ export class NotificationService {
 
   async registroCliente() {
     await this.http.get(`${environment.backendUrl}registroCliente`).toPromise();
+  }
+
+  async ingresoCliente() {
+    await this.http.get(`${environment.backendUrl}ingresoCliente`).toPromise();
   }
 }
