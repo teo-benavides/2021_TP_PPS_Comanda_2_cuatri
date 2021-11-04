@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-espera',
@@ -7,9 +8,16 @@ import { UsuarioService } from '../../../services/usuario.service';
   styleUrls: ['./espera.page.scss'],
 })
 export class EsperaPage implements OnInit {
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(
+    private usuarioService: UsuarioService,
+    private navController: NavController
+  ) {}
 
   ngOnInit() {
     this.usuarioService.esperandoMesaUsuario();
+  }
+
+  encuesta() {
+    this.navController.navigateBack('/cliente/encuesta');
   }
 }

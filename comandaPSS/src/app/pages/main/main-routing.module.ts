@@ -21,12 +21,16 @@ const routes: Routes = [
       {
         path: 'cocinero',
         loadChildren: () =>
-          import('src/app/pages/cocinero/cocinero.module').then((m) => m.CocineroPageModule),
+          import('src/app/pages/cocinero/cocinero.module').then(
+            (m) => m.CocineroPageModule
+          ),
       },
       {
         path: 'bartender',
         loadChildren: () =>
-          import('src/app/pages/bartender/bartender.module').then((m) => m.BartenderPageModule),
+          import('src/app/pages/bartender/bartender.module').then(
+            (m) => m.BartenderPageModule
+          ),
       },
       {
         path: 'cliente',
@@ -57,6 +61,13 @@ const routes: Routes = [
             loadChildren: () =>
               import('../clientes/buscar/buscar.module').then(
                 (m) => m.BuscarPageModule
+              ),
+          },
+          {
+            path: 'encuesta',
+            loadChildren: () =>
+              import('../clientes/encuesta/encuesta.module').then(
+                (m) => m.EncuestaPageModule
               ),
           },
           {
