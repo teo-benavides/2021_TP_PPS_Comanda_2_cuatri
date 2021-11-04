@@ -46,15 +46,15 @@ export class Estadisticas {
   public get statsEntrega(): EstadisticaInfo {
     return {
       nombre: 'Pedidos entregados con exito',
-      tipo: Object.keys(this.mozo),
-      data: Object.values(this.mozo),
+      tipo: Object.keys(this.entrega),
+      data: Object.values(this.entrega),
     };
   }
   public get statsExperiencia(): EstadisticaInfo {
     return {
       nombre: 'Calificacion del restaurante',
-      tipo: Object.keys(this.mozo),
-      data: Object.values(this.mozo),
+      tipo: Object.keys(this.experiencia),
+      data: Object.values(this.experiencia),
     };
   }
 }

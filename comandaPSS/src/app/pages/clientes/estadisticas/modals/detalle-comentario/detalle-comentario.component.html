@@ -1,0 +1,26 @@
+<ion-content class="ion-padding">
+  <div class="centerFlex">
+    <div class="container">
+      <ion-header>
+        <ion-toolbar color="secondary">
+          <ion-title>Detalle</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelar()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <div id="fotoContainer">
+        <swiper #swiper [config]="config" effect="fade">
+          <ng-template
+            swiperSlide
+            class="swiper-slide"
+            *ngFor="let foto of fotos"
+            ><img [src]="foto" alt="Cargando" class="foto"
+          /></ng-template>
+        </swiper>
+      </div>
+    </div>
+  </div>
+</ion-content>
