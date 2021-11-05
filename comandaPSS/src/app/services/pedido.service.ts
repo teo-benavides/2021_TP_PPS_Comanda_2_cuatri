@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 
 import { SystemService } from 'src/app/utility/services/system.service';
-import { Pedido } from 'src/app/models/interfaces/pedido.model';
+import { Pedido, PedidoEstado } from 'src/app/models/interfaces/pedido.model';
 import { ErrorStrings } from 'src/app/models/enums/errorStrings';
 import { Preparacion } from '../models/interfaces/preparacion.model';
 import { filter, map, reduce } from 'rxjs/operators';
@@ -36,8 +36,31 @@ export class PedidoService {
     }
   }
 
-  async updatePreparacion(preparacion: Preparacion): Promise<void> {
-    //this.db.collection<Pedido>('Pedidos').doc(preparacion.pedidoId).
+  async updatePedido(pedido: Pedido): Promise<void> {
+    try {
+      await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
+    } catch (error) {
+      console.log(error);
+      throw Error(ErrorStrings.BadPedido);
+    }
+  }
+
+  async deletePedido(pedido: Pedido): Promise<void> {
+    try {
+      await this.db.collection('Pedidos').doc(pedido.pedidoId).delete();
+    } catch (error) {
+      console.log(error);
+      throw Error(ErrorStrings.BadPedido);
+    }
+  }
+
+  async getPedidos(state: PedidoEstado): Promise<Observable<Pedido[]>> {
+    return this.db
+      .collection<Pedido>('Pedidos', (ref) =>
+        ref
+          .where('estado', '==', state)
+      )
+      .valueChanges();
   }
 
   async getPedidosPendientes(): Promise<Observable<Pedido[]>> {

@@ -33,6 +33,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'mozo',
+        loadChildren: () =>
+          import('src/app/pages/mozo/mozo.module').then((m) => m.MozoPageModule),
+      },
+      {
         path: 'cliente',
         children: [
           {

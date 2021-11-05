@@ -1,0 +1,30 @@
+<ion-content class="ion-padding">
+  <div class="centerFlex">
+    <div class="container">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Detalles de pedido</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelar()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-spinner name="circular" *ngIf="!preparaciones"></ion-spinner>
+      
+      <div *ngIf="preparaciones">
+        <ion-list *ngFor="let preparacion of preparaciones">
+          <ion-item> 
+            <ion-label class="ion-text-left">{{preparacion.producto.nombre}}</ion-label>
+            <ion-label class="ion-text-right">{{preparacion.estado}}</ion-label>         
+          </ion-item>
+        </ion-list>  
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+
+

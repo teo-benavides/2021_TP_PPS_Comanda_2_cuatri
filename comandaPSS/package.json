@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/architect": "^0.1202.12",
     "@angular/common": "~12.1.1",
     "@angular/core": "~12.1.1",
     "@angular/fire": "^7.1.0",
@@ -23,6 +24,7 @@
     "@ionic-native/barcode-scanner": "^5.36.0",
     "@ionic-native/base64": "^5.36.0",
     "@ionic-native/camera": "^5.36.0",
+    "@ionic-native/core": "^5.36.0",
     "@ionic-native/firebase-x": "^5.36.0",
     "@ionic-native/native-audio": "^5.36.0",
     "@ionic-native/network": "^5.36.0",
