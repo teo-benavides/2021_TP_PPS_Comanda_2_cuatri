@@ -45,6 +45,11 @@ export class MainPage implements OnInit {
         this.color = 'tertiary';
 
         break;
+      case 'mozo':
+        this.nav.navigateForward('/mozo');
+        this.color = 'tertiary';
+
+        break;
       case 'cliente':
       case 'anonimo':
         this.checkRouteCliente(user.estadoIngreso);

@@ -29,6 +29,11 @@ const routes: Routes = [
           import('src/app/pages/bartender/bartender.module').then((m) => m.BartenderPageModule),
       },
       {
+        path: 'mozo',
+        loadChildren: () =>
+          import('src/app/pages/mozo/mozo.module').then((m) => m.MozoPageModule),
+      },
+      {
         path: 'cliente',
         children: [
           {

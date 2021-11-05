@@ -48,4 +48,13 @@ export class PreparacionService {
       )
       .valueChanges();
   }
+
+  async getPreparacionesByPedidoId(pedidoId: string): Promise<Observable<Preparacion[]>> {
+    return this.db
+      .collection<Preparacion>('Preparaciones', (ref) =>
+        ref
+          .where('pedidoId', '==', pedidoId)
+      )
+      .valueChanges();
+  }
 }
