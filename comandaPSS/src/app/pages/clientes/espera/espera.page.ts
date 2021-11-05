@@ -20,4 +20,8 @@ export class EsperaPage implements OnInit {
   encuesta() {
     this.navController.navigateBack('/cliente/encuesta');
   }
+
+  estadistica() {
+    this.navController.navigateBack('/cliente/estadisticas');
+  }
 }

@@ -1,0 +1,18 @@
+<utility-header
+  color="secondary"
+  title="Estadisticas"
+  type="back"
+  [route]="route"
+></utility-header>
+<ion-content class="ion-padding" color="fondo">
+  <ion-spinner name="circular" *ngIf="!estadisticas"></ion-spinner>
+  <div *ngIf="estadisticas">
+    <app-bar-chart [datos]="estadisticas.statsPlato"></app-bar-chart>
+    <app-donut-chart [datos]="estadisticas.statsEntrega"></app-donut-chart>
+    <app-pie-chart [datos]="estadisticas.statsMozo"></app-pie-chart>
+    <app-bar-chart
+      [datos]="estadisticas.statsExperiencia"
+      [horizontal]="true"
+    ></app-bar-chart>
+  </div>
+</ion-content>

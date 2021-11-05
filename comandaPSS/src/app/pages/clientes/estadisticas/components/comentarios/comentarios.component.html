@@ -1,0 +1,39 @@
+<utility-header
+  color="secondary"
+  title="Comentarios"
+  type="back"
+  [route]="route"
+></utility-header>
+<ion-content class="ion-padding" color="fondo">
+  <ion-spinner name="circular" *ngIf="!comentarios"></ion-spinner>
+
+  <div *ngIf="comentarios">
+    <ion-card
+      *ngFor="let comentario of comentarios; let i = index"
+      color="input"
+    >
+      <ion-card-header color="secondary">
+        <ion-card-subtitle>Por: {{ comentario.correo }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{ comentario.text }}
+      </ion-card-content>
+
+      <ion-item
+        color="secondary"
+        *ngIf="comentario.fotos.length > 0"
+        (click)="detalleFoto(comentario.fotos)"
+      >
+        <ion-label>
+          <p>Contiene {{ comentario.fotos.length }} fotos</p>
+        </ion-label>
+        <ion-icon name="images-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <div id="empty" *ngIf="comentarios.length == 0">
+      <h5>No hay comentarios</h5>
+    </div>
+  </div>
+</ion-content>

@@ -71,6 +71,13 @@ const routes: Routes = [
               ),
           },
           {
+            path: 'estadisticas',
+            loadChildren: () =>
+              import('../clientes/estadisticas/estadisticas.module').then(
+                (m) => m.EstadisticasPageModule
+              ),
+          },
+          {
             path: '',
             redirectTo: 'ingreso',
           },

@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { SwiperModule } from 'swiper/angular';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -25,6 +26,7 @@ import { AltasModule } from './altas/altas.module';
     LoginModule,
     AltasModule,
     HttpClientModule,
+    SwiperModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

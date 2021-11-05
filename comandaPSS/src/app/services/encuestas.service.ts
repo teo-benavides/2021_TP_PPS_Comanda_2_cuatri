@@ -3,8 +3,10 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Storage } from '@ionic/storage-angular';
 import { SystemService } from '../utility/services/system.service';
-import { Comentario } from '../models/interfaces/encuestas.model';
+import { Comentario, Estadisticas } from '../models/interfaces/encuestas.model';
 import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +63,25 @@ export class EncuestasService {
     });
 
     await comentariosDoc.update({ Clientes });
+  }
+
+  public get getComentarios(): Observable<Comentario[]> {
+    return this.angularFirestore
+      .doc('Encuestas/Comentarios')
+      .valueChanges()
+      .pipe(
+        map((data: any) => {
+          return data.Clientes as Comentario[];
+        })
+      );
+  }
+
+  async getEstadisticas(): Promise<Estadisticas> {
+    const estadisticaDoc = this.angularFirestore.doc('Encuestas/Estadisticas');
+    const { mozo, entrega, experiencia, plato } = (
+      await estadisticaDoc.ref.get()
+    ).data() as any;
+
+    return new Estadisticas(mozo, plato, entrega, experiencia);
   }
 }
