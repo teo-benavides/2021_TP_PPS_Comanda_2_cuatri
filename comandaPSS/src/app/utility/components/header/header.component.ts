@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {}
 
   goto() {
-    if (this.route !== '') return this.nav.navigateRoot(this.route);
+    if (this.route !== '') return this.nav.navigateBack(this.route);
     this.nav.back();
   }
 }
