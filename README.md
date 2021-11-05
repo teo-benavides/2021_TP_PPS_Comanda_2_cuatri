@@ -15,15 +15,15 @@
 | :heavy_check_mark: |                            Alta de bebida |
 |                    |                                QR de mesa |
 |                    |                          Realizar pedidos |
-|                    |                    Confirmación de pedido |
+| :heavy_check_mark: |                    Confirmación de pedido |
 | :heavy_check_mark: |                    Preparacion de comidas |
 | :heavy_check_mark: |                    Preparacion de bebidas |
-|                    |               Lista de pedidos pendientes |
-|                    |                         Entrega de pedido |
+| :heavy_check_mark: |               Lista de pedidos pendientes |
+| :heavy_check_mark: |                         Entrega de pedido |
 |                    |               Pedir cuenta/confirmar pago |
 |                    | Push notification comida/bebida pendiente |
 |                    | Push notification comida/bebida terminada |
-|                    |                              Ícono/splash |
+| :heavy_check_mark: |                              Ícono/splash |
 
 ### Beta:
 
@@ -39,8 +39,8 @@
 | :heavy_check_mark: |                                   Alta mesas |
 | :heavy_check_mark: |                                Alta clientes |
 |                    |                            Consultas al mozo |
-|                    |                            Realizar encuesta |
-|                    |                  Ver resultados de encuestas |
+| :heavy_check_mark: |                            Realizar encuesta |
+| :heavy_check_mark: |                  Ver resultados de encuestas |
 |                    |                        Ver estado del pedido |
 |                    |           Push notification consulta al mozo |
 |                    |          Push notification cliente a aprobar |
