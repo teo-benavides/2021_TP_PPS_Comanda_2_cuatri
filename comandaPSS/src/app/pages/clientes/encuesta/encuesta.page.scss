@@ -1,0 +1,21 @@
+ion-row {
+  margin: 20px;
+
+  ion-thumbnail {
+    --border-radius: 5px;
+  }
+
+  .add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+ion-button {
+  margin-top: 15 px;
+}
+
+ion-list {
+  background-color: var(--ion-color-input);
+  color: white;
+}

@@ -1,0 +1,104 @@
+<utility-header
+  title="Encuesta"
+  [route]="route"
+  color="secondary"
+  type="back"
+></utility-header>
+<ion-content class="ion-padding" color="fondo">
+  <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()" color="input">
+    <ion-list>
+      <ion-radio-group formControlName="mozo" color="input">
+        <ion-list-header>
+          <ion-label><h5>¿El mozo fue amable al atenderte?</h5></ion-label>
+        </ion-list-header>
+        <ion-item color="input">
+          <ion-label>Si</ion-label>
+          <ion-radio value="Si"></ion-radio>
+        </ion-item>
+        <ion-item color="input">
+          <ion-label>No</ion-label>
+          <ion-radio value="No"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item color="input">
+      <ion-label position="stacked" style="padding: 3px 0px"
+        >¿Cómo calificarías la comida?</ion-label
+      >
+      <ion-range min="1" max="5" color="secondary" formControlName="plato">
+      </ion-range>
+      <p>{{encuestaForm.get('plato').value}}</p>
+    </ion-item>
+    <ion-item color="input">
+      <ion-label>¿Se te entrego lo que pediste?</ion-label>
+      <ion-checkbox slot="end" formControlName="entrega"></ion-checkbox>
+    </ion-item>
+
+    <ion-item color="input">
+      <ion-label position="stacked">¿Como fue tu experiencia?</ion-label>
+      <ion-select placeholder="Calificacion" formControlName="experiencia">
+        <ion-select-option value="Muy mala">Muy mala</ion-select-option>
+        <ion-select-option value="Mala">Mala</ion-select-option>
+        <ion-select-option value="Neutral">Neutral</ion-select-option>
+        <ion-select-option value="Buena">Buena</ion-select-option>
+        <ion-select-option value="Muy buena">Muy buena</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item color="input">
+      <ion-label position="stacked">Comentario</ion-label>
+
+      <ion-textarea
+        formControlName="comentario"
+        placeholder="¿Cómo podemos mejorar nuestro servicio?"
+      ></ion-textarea>
+    </ion-item>
+    <ion-item color="input">
+      <ion-label position="stacked"
+        >Adjuntá fotos
+        <p *ngIf="fotoUrl.length > 0">
+          (Toca un imagen para eliminar )
+        </p></ion-label
+      >
+
+      <ion-row>
+        <ion-col
+          size="4"
+          *ngFor="let item of fotoUrl; let i=index"
+          (click)="deleteFoto(i)"
+        >
+          <ion-img [src]="item"></ion-img>
+        </ion-col>
+
+        <ion-col
+          [size]="fotoUrl.length == 0 ? '12': '4'"
+          *ngIf="fotoUrl.length < 3"
+        >
+          <ion-fab-button (click)="getFoto()" color="secondary">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      fill="clear"
+      shape="round"
+      color="secondary"
+      type="submit"
+      [disabled]="encuestaForm.invalid || loading"
+    >
+      Terminar encuesta
+    </ion-button>
+  </form>
+</ion-content>
+
+<!--
+  mozo - radio - true - false
+  plato - range - 1 - 5
+  entrega - check - true - false
+  experiencia - select - muy mala - mala - neutral - buena - muy buena
+  comentario - textarea
+ -->
