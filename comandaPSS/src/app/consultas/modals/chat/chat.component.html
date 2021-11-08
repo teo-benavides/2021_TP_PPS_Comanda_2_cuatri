@@ -1,0 +1,63 @@
+<ion-content class="ion-padding">
+  <div class="centerFlex">
+    <div class="container">
+      <ion-header>
+        <ion-toolbar [color]="color">
+          <ion-title>Consulta</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelar()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <div id="body">
+        <ion-spinner name="circular" *ngIf="!mensajes"></ion-spinner>
+        <ng-container *ngIf="mensajes">
+          <div #msg class="mensajesList" *ngIf="mensajes.length > 0">
+            <div
+              [class]="
+                mensaje.correo == chatService.correo
+                  ? 'msg emisor'
+                  : 'msg receptor'
+              "
+              *ngFor="let mensaje of mensajes; let i = index"
+            >
+              <h5>
+                {{ mensaje.correo == chatService.correo ? "" : mensaje.correo }}
+              </h5>
+              <h5>{{ mensaje.msg }}</h5>
+              <p>{{ mensaje.date | date }}</p>
+            </div>
+          </div>
+
+          <div id="empty" *ngIf="mensajes.length == 0">
+            <h5>No hay mensajes</h5>
+          </div>
+        </ng-container>
+      </div>
+      <ion-footer *ngIf="mensajes">
+        <ion-toolbar>
+          <form [formGroup]="msgForm">
+            <ion-item color="input">
+              <ion-input
+                type="text"
+                placeholder="Mensaje"
+                formControlName="msg"
+              ></ion-input>
+            </ion-item>
+
+            <ion-fab-button
+              [color]="color"
+              type="submit"
+              [disabled]="msgForm.invalid"
+              (click)="onSubmit()"
+            >
+              <ion-icon name="send-outline"></ion-icon>
+            </ion-fab-button>
+          </form>
+        </ion-toolbar>
+      </ion-footer>
+    </div>
+  </div>
+</ion-content>

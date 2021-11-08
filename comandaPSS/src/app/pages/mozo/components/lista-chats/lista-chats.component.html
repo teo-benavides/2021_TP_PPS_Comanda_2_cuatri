@@ -1,0 +1,25 @@
+<utility-header type="menu" title="Consultas" color="tertiary"></utility-header>
+<ion-content color="fondo" class="ion-padding">
+  <ion-spinner name="circular" *ngIf="!mesas"></ion-spinner>
+  <div *ngIf="mesas">
+    <ion-list>
+      <div class="list" *ngIf="mesas.length > 0">
+        <ion-item
+          *ngFor="let mesa of mesas"
+          (click)="modalConsultas(mesa.numeroMesa)"
+          color="input"
+        >
+          <ion-avatar slot="start">
+            <img [src]="mesa.foto" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Mesa N° {{ mesa.numeroMesa }}</h2>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-list>
+    <div id="empty" *ngIf="mesas.length == 0">
+      <h5>No hay consultas</h5>
+    </div>
+  </div>
+</ion-content>
