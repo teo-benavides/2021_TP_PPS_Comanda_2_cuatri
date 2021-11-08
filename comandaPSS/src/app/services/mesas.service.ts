@@ -87,4 +87,10 @@ export class MesasService {
       )
       .valueChanges();
   }
+
+  getMesasOcupadas(): Observable<Mesa[]> {
+    return this.angularFirestore
+      .collection<Mesa>('Mesas', (ref) => ref.where('estado', '==', 'ocupada'))
+      .valueChanges();
+  }
 }

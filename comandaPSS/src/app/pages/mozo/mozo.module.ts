@@ -10,6 +10,7 @@ import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { ListaChatsComponent } from './components/lista-chats/lista-chats.component';
 import { MozoPageRoutingModule } from './mozo-routing.module';
 import { PedidoDetailsComponent } from './components/pedido-details/pedido-details.component';
+import { ConsultasModule } from '../../consultas/consultas.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,13 @@ import { PedidoDetailsComponent } from './components/pedido-details/pedido-detai
     IonicModule,
     MozoPageRoutingModule,
     UtilityModule,
+    ConsultasModule,
   ],
-  declarations: [MozoPage, PedidosComponent, ListaChatsComponent, PedidoDetailsComponent],
+  declarations: [
+    MozoPage,
+    PedidosComponent,
+    ListaChatsComponent,
+    PedidoDetailsComponent,
+  ],
 })
 export class MozoPageModule {}

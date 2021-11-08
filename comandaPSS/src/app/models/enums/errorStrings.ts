@@ -8,5 +8,6 @@ export enum ErrorStrings {
   ProductoYaExiste = 'Ya existe un producto con ese nombre',
   EscanearIngreso = 'Codigo QR incorrecto',
   BadPedido = 'Error creando pedido.',
-  BadPreparacion = 'Error creando preparacion.'
+  BadPreparacion = 'Error creando preparacion.',
+  BadConsulta = 'No se pudo enviar el mensaje.',
 }
