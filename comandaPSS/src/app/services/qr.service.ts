@@ -30,4 +30,10 @@ export class QrService {
 
     return flag;
   }
+
+  async scanAndCompare(value: string): Promise<boolean> {
+    return this.system.getQr(QR)
+    .then(scan => scan.text === value)
+    .catch(() => false);
+  }
 }

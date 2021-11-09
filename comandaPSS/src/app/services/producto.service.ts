@@ -35,6 +35,12 @@ export class ProductoService {
       .then(val => val.data());
   }
 
+  async getProductos() {
+    return this.db
+      .collection<Producto>("Productos")
+      .valueChanges();
+  }
+
   async crearProducto(producto: Producto, qr: string): Promise<void> {
     let productoExiste: boolean = await this.productoExiste(producto);
     

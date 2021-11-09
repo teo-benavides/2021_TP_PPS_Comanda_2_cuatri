@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mesa',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MesaPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalController: ModalController,
+    private nav: NavController,
+  ) { }
 
   ngOnInit() {
   }
 
+  navigateToCarta() {
+    // no funciona el path local (o sea "carta")
+    this.nav.navigateForward('cliente/mesa/carta');
+  }
 }
