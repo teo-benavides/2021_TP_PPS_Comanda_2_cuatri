@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MesaPageRoutingModule } from './mesa-routing.module';
+import { CartaPageRoutingModule } from './carta-routing.module';
 
-import { MesaPage } from './mesa.page';
+import { CartaPage } from './carta.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MesaPageRoutingModule,
+    CartaPageRoutingModule
   ],
-  declarations: [MesaPage]
+  declarations: [CartaPage]
 })
-export class MesaPageModule {}
+export class CartaPageModule {}

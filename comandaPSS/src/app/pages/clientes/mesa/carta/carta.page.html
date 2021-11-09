@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>carta</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list-header>
+        <ion-label>COMIDAS</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
+
+    <div *ngIf="productos">
+        <ion-list *ngFor="let producto of getComidas()">
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
+                <ion-label class="ion-text-right">${{ producto.precio }}</ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <ion-list-header>
+        <ion-label>BEBIDAS</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
+
+    <div *ngIf="productos">
+        <ion-list *ngFor="let producto of getBebidas()">
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
+                <ion-label class="ion-text-right">${{ producto.precio }}</ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>
