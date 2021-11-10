@@ -17,11 +17,10 @@ export class BuscarPage implements OnInit {
 
   constructor(
     private localStorage: Storage,
-    private modalController: ModalController,
     private qrService: QrService,
     private usuarioService: UsuarioService,
     private system: SystemService,
-    private nav: NavController,
+    private nav: NavController
   ) {}
 
   ngOnInit() {
@@ -37,7 +36,7 @@ export class BuscarPage implements OnInit {
       if (await this.qrService.scanAndCompare(this.cliente.mesa?.mesaId)) {
         await this.usuarioService.cambiarEstadoIngresoUsuario(
           this.cliente.uid,
-          "mesa"
+          'mesa'
         );
         //await this.notificationService.ingresoCliente();
         this.cliente.estadoIngreso = 'mesa';
@@ -49,19 +48,5 @@ export class BuscarPage implements OnInit {
     } finally {
       loading.dismiss();
     }
-  }
-
-  async modalConsultas() {
-    const modal = await this.modalController.create({
-      component: ChatComponent,
-      swipeToClose: true,
-      presentingElement: await this.modalController.getTop(),
-      backdropDismiss: false,
-      componentProps: {
-        path: this.cliente.mesa.numeroMesa,
-        color: 'secondary',
-      },
-    });
-    return await modal.present();
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { User } from 'src/app/models/interfaces/user.model';
 import { NavController } from '@ionic/angular';
-import { estadoIngreso } from '../../models/interfaces/user.model';
+import { estadoIngreso, Cliente } from '../../models/interfaces/user.model';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class MainPage implements OnInit {
 
   async ngOnInit() {
     await this.storage.create();
-    const user: User = await this.storage.get('user');
+    const user: Cliente = await this.storage.get('user');
     await this.notificationService.init();
 
     switch (user.perfil) {
