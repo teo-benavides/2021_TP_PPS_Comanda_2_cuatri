@@ -5,21 +5,26 @@ import { map } from 'rxjs/operators';
 import { Storage } from '@ionic/storage-angular';
 import { SystemService } from '../utility/services/system.service';
 import { ErrorStrings } from '../models/enums/errorStrings';
+import { perfil } from '../models/interfaces/user.model';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
   public correo: string;
-
+  private perfil: perfil;
   constructor(
     private angularFirestore: AngularFirestore,
     private storage: Storage,
-    private system: SystemService
+    private system: SystemService,
+    private notificationService: NotificationService
   ) {}
 
   async init() {
-    this.correo = (await this.storage.get('user')).correo;
+    const { correo, perfil } = await this.storage.get('user');
+    this.correo = correo;
+    this.perfil = perfil;
   }
 
   getConsultas(path: string) {
@@ -52,6 +57,11 @@ export class ChatService {
     this.angularFirestore
       .collection(`Consultas/${path}/chat`)
       .add(payload)
+      .then(() => {
+        if (this.perfil === 'cliente' || this.perfil === 'anonimo') {
+          this.notificationService.consultaCliente(path);
+        }
+      })
       .catch((error) => {
         console.log(error);
         this.system.presentToastError(ErrorStrings.BadConsulta);
