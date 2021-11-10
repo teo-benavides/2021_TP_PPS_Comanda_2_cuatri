@@ -4,18 +4,11 @@
   color="secondary"
 ></utility-header>
 <ion-content class="ion-padding" color="fondo">
+  <ion-spinner name="circular" *ngIf="cliente === null"></ion-spinner>
   <div *ngIf="cliente !== null" id="content">
     <h4>Mesa asignada: N° {{cliente.mesa.numeroMesa}}</h4>
     <ion-fab-button (click)="scanQr()" color="secondary">
       <ion-icon name="qr-code-outline"></ion-icon>
     </ion-fab-button>
   </div>
-  <ion-button
-    (click)="modalConsultas()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Click me
-  </ion-button>
 </ion-content>

@@ -1,85 +1,101 @@
-<utility-header type="menu" title="Pedidos"></utility-header>
-<ion-content>
+<utility-header type="menu" title="Pedidos" color="tertiary"></utility-header>
+<ion-content color="fondo" class="ion-padding">
   <!-- Lista de pedidos a confirmar -->
-  <ion-list-header>
-    <ion-label>PEDIDOS A CONFIRMAR</ion-label>
-  </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!pedidosConfirmar"></ion-spinner>
 
-  <div *ngIf="pedidosConfirmar">
-    <ion-list *ngFor="let pedido of pedidosConfirmar">
-        <ion-item-sliding>
-            <ion-item (click)="presentModal(pedido)">
-                <ion-label>Mesa {{pedido.numeroMesa}}</ion-label>
-            </ion-item>
-
-            <ion-item-options side="end">
-                <ion-item-option color="primary" (click)="confirmarPedido(pedido)">
-                    <ion-icon name="checkmark-outline"></ion-icon>
-                </ion-item-option>
-                <ion-item-option color="danger" (click)="rechazarPedido(pedido)">
-                    <ion-icon name="close-outline"></ion-icon>
-                </ion-item-option>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
-  </div>
-
-  <!-- Lista de pedidos a entregar -->
-  <ion-list-header>
-    <ion-label>PEDIDOS A ENTREGAR</ion-label>
-  </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!pedidosEntregar"></ion-spinner>
-
-  <div *ngIf="pedidosEntregar">
-    <ion-list *ngFor="let pedido of pedidosEntregar">
-      <ion-item-sliding>
-        <ion-item (click)="presentModal(pedido)">
-            <ion-label>Mesa {{pedido.numeroMesa}}</ion-label>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>PEDIDOS A CONFIRMAR</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!pedidosConfirmar"></ion-spinner>
+    <div *ngIf="pedidosConfirmar">
+      <ion-item-sliding *ngFor="let pedido of pedidosConfirmar">
+        <ion-item (click)="presentModal(pedido)" color="input">
+          <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
         </ion-item>
+
         <ion-item-options side="end">
-            <ion-item-option color="primary" (click)="entregarPedido(pedido)">
-                Entregado
-            </ion-item-option>
+          <ion-item-option color="primary" (click)="confirmarPedido(pedido)">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="rechazarPedido(pedido)">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-    </ion-list>
-  </div>
+      <ion-text *ngIf="pedidosConfirmar.length == 0">
+        <h5>No hay pedidos a confirmar</h5>
+      </ion-text>
+    </div>
+  </ion-list>
+
+  <!-- Lista de pedidos a entregar -->
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>PEDIDOS A ENTREGAR</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!pedidosEntregar"></ion-spinner>
+    <div *ngIf="pedidosEntregar">
+      <ion-item-sliding *ngFor="let pedido of pedidosEntregar">
+        <ion-item (click)="presentModal(pedido)" color="input">
+          <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="entregarPedido(pedido)">
+            Entregado
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-text *ngIf="pedidosEntregar.length == 0">
+        <h5>No hay pedidos a entregar</h5>
+      </ion-text>
+    </div>
+  </ion-list>
 
   <!-- Lista de pedidos a cobrar -->
-  <ion-list-header>
-    <ion-label>PEDIDOS A COBRAR</ion-label>
-  </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!pedidosCobrar"></ion-spinner>
 
-  <div *ngIf="pedidosCobrar">
-    <ion-list *ngFor="let pedido of pedidosCobrar">
-        <ion-item-sliding>
-            <ion-item (click)="presentModal(pedido)">
-                <ion-label>Mesa {{pedido.numeroMesa}}</ion-label>
-            </ion-item>
-            <ion-item-options side="end">
-                <ion-item-option color="primary" (click)="cobrarPedido(pedido)">
-                    Pagado
-                </ion-item-option>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
-  </div>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>PEDIDOS A COBRAR</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!pedidosCobrar"></ion-spinner>
+    <div *ngIf="pedidosCobrar">
+      <ion-item-sliding *ngFor="let pedido of pedidosCobrar">
+        <ion-item (click)="presentModal(pedido)" color="input">
+          <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="cobrarPedido(pedido)">
+            Pagado
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-text *ngIf="pedidosCobrar.length == 0">
+        <h5>No hay pedidos a cobrar</h5>
+      </ion-text>
+    </div>
+  </ion-list>
 
   <!-- Lista de pedidos en preparación -->
-  <ion-list-header>
-    <ion-label>PEDIDOS EN PREPARACIÓN</ion-label>
-  </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!pedidosPreparando"></ion-spinner>
 
-  <div *ngIf="pedidosPreparando">
-    <ion-list *ngFor="let pedido of pedidosPreparando">
-        <ion-item (click)="presentModal(pedido)">
-            <ion-label>Mesa {{pedido.numeroMesa}}</ion-label>
-        </ion-item>
-    </ion-list>
-  </div>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>PEDIDOS EN PREPARACIÓN</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!pedidosPreparando"></ion-spinner>
+    <div *ngIf="pedidosPreparando">
+      <ion-item
+        color="input"
+        *ngFor="let pedido of pedidosPreparando"
+        (click)="presentModal(pedido)"
+      >
+        <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
+      </ion-item>
+      <ion-text *ngIf="pedidosPreparando.length == 0">
+        <h5>No hay pedidos en preparacion</h5>
+      </ion-text>
+    </div>
+  </ion-list>
 
   <!-- <ion-button (click)="debugCrearPedido()" expand="block" fill="clear" shape="round">
     Click me

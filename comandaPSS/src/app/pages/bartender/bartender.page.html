@@ -1,14 +1,17 @@
-<utility-header type="menu" title="Bebidas a preparar"></utility-header>
-<ion-content>
-  <ion-list-header>
-    <ion-label>BEBIDAS A PREPARAR</ion-label>
-  </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!bebidasPendientes"></ion-spinner>
-
-  <div *ngIf="bebidasPendientes">
-    <ion-list *ngFor="let preparacion of bebidasPendientes">
-      <ion-item-sliding>
-        <ion-item>
+<utility-header
+  type="menu"
+  title="Bebidas a preparar"
+  color="tertiary"
+></utility-header>
+<ion-content color="fondo" class="ion-padding">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>BEBIDAS A PREPARAR</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!bebidasPendientes"></ion-spinner>
+    <div *ngIf="bebidasPendientes">
+      <ion-item-sliding *ngFor="let preparacion of bebidasPendientes">
+        <ion-item color="input">
           <ion-avatar slot="start">
             <img [src]="preparacion.producto.foto1" />
           </ion-avatar>
@@ -24,18 +27,20 @@
           ></ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-    </ion-list>
-  </div>
+      <ion-text *ngIf="bebidasPendientes.length == 0">
+        <h5>No hay bebidas a preparar</h5>
+      </ion-text>
+    </div>
+  </ion-list>
 
-  <ion-list-header>
-    <ion-label>BEBIDAS PREPARANDOSE</ion-label>
-  </ion-list-header>
-  <ion-spinner name="circular" *ngIf="!bebidasPreparando"></ion-spinner>
-
-  <div *ngIf="bebidasPreparando">
-    <ion-list *ngFor="let preparacion of bebidasPreparando">
-      <ion-item-sliding>
-        <ion-item>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>BEBIDAS PREPARANDOSE</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!bebidasPreparando"></ion-spinner>
+    <div *ngIf="bebidasPreparando">
+      <ion-item-sliding *ngFor="let preparacion of bebidasPreparando">
+        <ion-item color="input">
           <ion-avatar slot="start">
             <img [src]="preparacion.producto.foto1" />
           </ion-avatar>
@@ -51,15 +56,18 @@
           ></ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-    </ion-list>
-  </div>
+      <ion-text *ngIf="bebidasPreparando.length == 0">
+        <h5>No hay bebidas en preparacion</h5>
+      </ion-text>
+    </div>
+  </ion-list>
   <!-- <ion-button (click)="debugCrearPedido()" expand="block" fill="clear" shape="round">
     Click me
   </ion-button> -->
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="presentModal()">
+  <ion-fab-button (click)="presentModal()" color="tertiary">
     <ion-icon name="add-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>

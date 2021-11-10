@@ -2,7 +2,7 @@
   <div class="centerFlex">
     <div class="container">
       <ion-header>
-        <ion-toolbar color="primary">
+        <ion-toolbar color="tertiary">
           <ion-title>Crear nuevo producto</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="cancelar()">
@@ -14,19 +14,19 @@
       <form [formGroup]="formProducto" (ngSubmit)="onSubmit()">
         <ion-row>
           <ion-col size="4">
-            <ion-avatar (click)="setFoto(1)">
+            <ion-thumbnail (click)="setFoto(1)">
               <img [src]="foto1 !== '' ? foto1 : 'assets/missing.png'" />
-            </ion-avatar>
+            </ion-thumbnail>
           </ion-col>
           <ion-col size="4">
-            <ion-avatar (click)="setFoto(2)">
+            <ion-thumbnail (click)="setFoto(2)">
               <img [src]="foto2 !== '' ? foto2 : 'assets/missing.png'" />
-            </ion-avatar>
+            </ion-thumbnail>
           </ion-col>
           <ion-col size="4">
-            <ion-avatar (click)="setFoto(3)">
+            <ion-thumbnail (click)="setFoto(3)">
               <img [src]="foto3 !== '' ? foto3 : 'assets/missing.png'" />
-            </ion-avatar>
+            </ion-thumbnail>
           </ion-col>
         </ion-row>
         <ion-item color="input">
@@ -65,7 +65,7 @@
           </ion-select>
         </ion-item>
         <ion-button
-          color="primary"
+          color="tertiary"
           type="submit"
           expand="block"
           fill="clear"

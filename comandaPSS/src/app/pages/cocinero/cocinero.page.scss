@@ -1,0 +1,16 @@
+ion-list {
+  margin: 20px 0px;
+  border-radius: 5px;
+  background-color: var(--ion-color-tertiary);
+  ion-item {
+    margin: 5px;
+  }
+}
+ion-spinner {
+  width: 100%;
+  margin: auto;
+}
+
+ion-text {
+  text-align: center;
+}

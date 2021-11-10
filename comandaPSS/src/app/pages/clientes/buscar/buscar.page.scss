@@ -6,3 +6,12 @@ ion-fab-button {
     zoom: 2;
   }
 }
+
+ion-spinner {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
