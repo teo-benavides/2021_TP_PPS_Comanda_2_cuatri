@@ -43,4 +43,10 @@ export class NotificationService {
   async ingresoCliente() {
     await this.http.get(`${environment.backendUrl}ingresoCliente`).toPromise();
   }
+
+  async consultaCliente(numeroMesa: string) {
+    await this.http
+      .get(`${environment.backendUrl}consultaCliente?mesa=${numeroMesa}`)
+      .toPromise();
+  }
 }

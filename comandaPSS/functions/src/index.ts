@@ -129,3 +129,42 @@ exports.ingresoCliente = functions.https.onRequest(async (req, res) => {
       });
   });
 });
+
+exports.consultaCliente = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const db = admin.firestore();
+
+    const usersRef = db.collection('Usuarios').where('perfil', '==', 'mozo');
+
+    const users = await usersRef.get();
+
+    const tokens: string[] = [];
+
+    users.forEach((d) => {
+      const token = d.data().token;
+
+      if (token) {
+        tokens.push(token);
+      }
+    });
+
+    const mesa = req.query.mesa as string;
+
+    const payload = {
+      notification: {
+        title: 'Consulta',
+        body: `La mesa N°${mesa} tiene una consulta`,
+      },
+    };
+
+    admin
+      .messaging()
+      .sendToDevice(tokens, payload)
+      .then(() => {
+        return res.send(true);
+      })
+      .catch(() => {
+        return res.send(false);
+      });
+  });
+});
