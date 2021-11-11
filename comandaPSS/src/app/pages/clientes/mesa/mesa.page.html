@@ -1,26 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Inicio</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Inicio</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button
-    (click)="navigateToCarta()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Carta
-  </ion-button>
+    <ion-button (click)="navigateToCarta()" expand="block" fill="clear" shape="round">
+        Carta
+    </ion-button>
+    <ion-button *ngIf="!pedido" (click)="navigateToRealizarPedido()" expand="block" fill="clear" shape="round">
+        Hacer pedido
+    </ion-button>
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button
-    (click)="modalConsultas()"
-    color="secondary"
-    (disabled)="cliente === null"
-  >
-    <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-  </ion-fab-button>
+    <ion-fab-button (click)="modalConsultas()" color="secondary" (disabled)="cliente === null">
+        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+    </ion-fab-button>
 </ion-fab>

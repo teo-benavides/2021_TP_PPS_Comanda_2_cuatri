@@ -6,13 +6,18 @@ import { MesaPage } from './mesa.page';
 const routes: Routes = [
   {
     path: '',
-    component: MesaPage,
+    component: MesaPage
   },
   {
     path: 'carta',
-    loadChildren: () =>
-      import('./carta/carta.module').then((m) => m.CartaPageModule),
+    loadChildren: () => import('./carta/carta.module').then( m => m.CartaPageModule)
   },
+  {
+    path: 'realizar-pedido',
+    loadChildren: () => import('./realizar-pedido/realizar-pedido.module').then( m => m.RealizarPedidoPageModule)
+  }
+
+
 ];
 
 @NgModule({

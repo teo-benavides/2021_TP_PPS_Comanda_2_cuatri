@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Realizar pedido</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
+
+    <div *ngIf="productos">
+        <ion-list-header>
+            <ion-label>COMIDAS</ion-label>
+        </ion-list-header>
+
+        <ion-list>
+            <ion-item *ngFor="let producto of getComidas()">
+                <ion-thumbnail slot="start">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
+
+                <div class="item-end" slot="end">
+                    <ion-note>${{ producto.precio }}</ion-note>
+
+                    <ion-button (click)="removeProducto(producto.productoId)" expand="block" fill="clear" shape="round">
+                        <ion-icon name="remove-outline"></ion-icon>
+                    </ion-button>
+                    <ion-note>{{ getProductoCount(producto.productoId) }}</ion-note>
+                    <ion-button (click)="addProducto(producto)" expand="block" fill="clear" shape="round">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </ion-button>
+                </div>
+            </ion-item>
+        </ion-list>
+
+
+        <ion-list-header>
+            <ion-label>BEBIDAS</ion-label>
+        </ion-list-header>
+
+        <ion-list>
+            <ion-item *ngFor="let producto of getBebidas()">
+                <ion-thumbnail slot="start">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
+
+                <div class="item-end">
+                    <ion-note>${{ producto.precio }}</ion-note>
+
+                    <ion-button (click)="removeProducto(producto.productoId)" expand="block" fill="clear" shape="round">
+                        <ion-icon name="remove-outline"></ion-icon>
+                    </ion-button>
+                    <ion-note>{{ getProductoCount(producto.productoId) }}</ion-note>
+                    <ion-button (click)="addProducto(producto)" expand="block" fill="clear" shape="round">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </ion-button>
+                </div>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-label slot="start">{{ getProductoTotalCount() }} ítems</ion-label>
+        <div class="item-end" slot="end">
+            <ion-label>
+                <h2>${{ getPrecioTotal() }}</h2>
+                <h3>~{{ getTiempoEstimado() }} min.</h3>
+            </ion-label>
+            <ion-button (click)="realizarPedido()" expand="block" fill="clear" shape="round" color="tertiary">
+                Pedir
+            </ion-button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

@@ -54,6 +54,15 @@ export class PedidoService {
     }
   }
 
+  async getPedidoByMesaId(mesaId: string) {
+    return this.db
+      .collection<Pedido>('Pedidos', (ref) =>
+        ref
+          .where('mesaId', '==', mesaId)
+      )
+      .valueChanges();
+  }
+
   async getPedidos(state: PedidoEstado): Promise<Observable<Pedido[]>> {
     return this.db
       .collection<Pedido>('Pedidos', (ref) =>

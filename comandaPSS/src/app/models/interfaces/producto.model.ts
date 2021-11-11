@@ -8,6 +8,7 @@ export interface Producto {
     foto3: string;
     precio: number; // int
     tipo: TipoProducto;
+    tiempoEstimado?: number;
   }
   
 export type TipoProducto = 'comida' | 'bebida';
