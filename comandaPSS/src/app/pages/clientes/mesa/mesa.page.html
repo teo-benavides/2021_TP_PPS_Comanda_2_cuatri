@@ -1,20 +1,44 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>Inicio</ion-title>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content>
-    <ion-button (click)="navigateToCarta()" expand="block" fill="clear" shape="round">
-        Carta
-    </ion-button>
-    <ion-button *ngIf="!pedido" (click)="navigateToRealizarPedido()" expand="block" fill="clear" shape="round">
-        Hacer pedido
-    </ion-button>
+<utility-header type="menu" title="inicio" color="secondary"></utility-header>
+<ion-content class="ion-padding" color="fondo">
+  <ion-card id="visor">
+    <ion-card-header color="secondary">
+      <ion-card-title>Estado de tu pedido</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="spinner" *ngIf="pedido === null">
+        <ion-spinner name="circular"></ion-spinner>
+      </div>
+      <div id="pedido" *ngIf="pedido !== null">
+        <h3>{{getTiempoEstimado()}}</h3>
+        <p>Estado: {{getEstadoPedido()}}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-button
+    (click)="navigateToCarta()"
+    expand="block"
+    fill="clear"
+    shape="round"
+  >
+    Carta
+  </ion-button>
+  <ion-button
+    *ngIf="!pedido"
+    (click)="navigateToRealizarPedido()"
+    expand="block"
+    fill="clear"
+    shape="round"
+  >
+    Hacer pedido
+  </ion-button>
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="modalConsultas()" color="secondary" (disabled)="cliente === null">
-        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-    </ion-fab-button>
+  <ion-fab-button
+    (click)="modalConsultas()"
+    color="secondary"
+    (disabled)="cliente === null"
+  >
+    <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+  </ion-fab-button>
 </ion-fab>
