@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./comentarios.component.scss'],
 })
 export class ComentariosComponent implements OnInit {
-  route: string = '/cliente/espera';
+  route: string = '/cliente/mesa';
 
   comentarios: Comentario[];
 

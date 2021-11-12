@@ -8,7 +8,7 @@ import { Estadisticas } from '../../../../../models/interfaces/encuestas.model';
   styleUrls: ['./graficos.component.scss'],
 })
 export class GraficosComponent implements OnInit {
-  route: string = '/cliente/espera';
+  route: string = '/cliente/mesa';
   estadisticas: Estadisticas;
 
   constructor(private encuestasService: EncuestasService) {}
