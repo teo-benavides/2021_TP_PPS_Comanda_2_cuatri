@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import {
+  ActionSheetController,
+  ModalController,
+  NavController,
+} from '@ionic/angular';
 import { ChatComponent } from 'src/app/consultas/modals/chat/chat.component';
 import { Cliente } from 'src/app/models/interfaces/user.model';
 import { Storage } from '@ionic/storage-angular';
 import { Pedido, PedidoEstado } from 'src/app/models/interfaces/pedido.model';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { SystemService } from '../../../utility/services/system.service';
 
 @Component({
   selector: 'app-mesa',
@@ -19,7 +24,9 @@ export class MesaPage implements OnInit {
     private modalController: ModalController,
     private nav: NavController,
     private localStorage: Storage,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    public actionSheetController: ActionSheetController,
+    private system: SystemService
   ) {}
 
   ngOnInit() {
@@ -42,6 +49,19 @@ export class MesaPage implements OnInit {
 
   navigateToRealizarPedido() {
     this.nav.navigateForward('cliente/mesa/realizar-pedido');
+  }
+
+  async encuesta() {
+    if ((await this.localStorage.get('user')).encuestaHecha) {
+      return this.system.presentToastError(
+        'Solo se permite una encuesta por cliente'
+      );
+    }
+    this.nav.navigateForward('/cliente/mesa/encuesta');
+  }
+
+  estadistica() {
+    this.nav.navigateForward('cliente/mesa/estadisticas');
   }
 
   async modalConsultas() {
@@ -96,5 +116,9 @@ export class MesaPage implements OnInit {
       default:
         return 'No se a realizado pedido';
     }
+  }
+
+  async encuestaDone() {
+    return;
   }
 }

@@ -209,7 +209,7 @@ export class UsuarioService {
       await this.angularFirestore
         .collection('Mesas')
         .doc(mesaId)
-        .update({ estado: 'ocupada' });
+        .update({ estado: 'ocupada', encuestaHecha: false });
 
       this.system.presentToast('La cuenta se a creado con éxito!');
     } catch (error) {
