@@ -9,8 +9,8 @@
         <ion-spinner name="circular"></ion-spinner>
       </div>
       <div id="pedido" *ngIf="pedido !== null">
-        <h3>{{getTiempoEstimado()}}</h3>
-        <p>Estado: {{getEstadoPedido()}}</p>
+        <h3>{{getTiempoEstimado(pedido?.tiempoEstimado)}}</h3>
+        <p>Estado: {{getEstadoPedido(pedido?.estado)}}</p>
       </div>
     </ion-card-content>
   </ion-card>

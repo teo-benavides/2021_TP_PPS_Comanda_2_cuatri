@@ -47,10 +47,10 @@ export class MesaPage implements OnInit {
         p.subscribe((data) => {
           this.pedido = data[0];
           console.log(data[0]);
-          if (this.pedido.estado === "pagado") {
+          if (this.pedido?.estado === 'pagado') {
             this.usuarioService.desasignarMesa(this.cliente);
             this.pedidoService.deletePedido(this.pedido);
-            this.nav.navigateBack("cliente/ingreso");
+            this.nav.navigateBack('cliente/ingreso');
           }
         })
       );
@@ -93,8 +93,8 @@ export class MesaPage implements OnInit {
     return await modal.present();
   }
 
-  getEstadoPedido() {
-    const estado = this.pedido?.estado || '';
+  getEstadoPedido(estadoPedido: string) {
+    const estado = estadoPedido || '';
     switch (estado) {
       case 'pendiente':
         return 'Confirmando pedido';
@@ -113,7 +113,7 @@ export class MesaPage implements OnInit {
     }
   }
 
-  getTiempoEstimado() {
+  getTiempoEstimado(pedido: number) {
     if (!this.pedido) {
       return '-- MIN';
     }
@@ -143,13 +143,13 @@ export class MesaPage implements OnInit {
         backdropDismiss: false,
         componentProps: {
           pedido: this.pedido,
-          propina: propina
+          propina: propina,
         },
       });
       return await modal.present();
     }
   }
-  
+
   async encuestaDone() {
     return;
   }
