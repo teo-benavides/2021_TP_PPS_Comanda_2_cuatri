@@ -16,4 +16,8 @@ export class EsperaPage implements OnInit {
   ngOnInit() {
     this.usuarioService.esperandoMesaUsuario();
   }
+
+  estadistica() {
+    this.navController.navigateBack('/cliente/estadisticas');
+  }
 }
