@@ -93,4 +93,11 @@ export class MesasService {
       .collection<Mesa>('Mesas', (ref) => ref.where('estado', '==', 'ocupada'))
       .valueChanges();
   }
+
+  updateEstado(mesaId: string, estado: estadoMesa) {
+    return this.angularFirestore
+      .collection<Mesa>('Mesas')
+      .doc(mesaId)
+      .update({estado: estado});
+  }
 }

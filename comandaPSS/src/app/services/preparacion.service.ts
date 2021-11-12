@@ -57,4 +57,25 @@ export class PreparacionService {
       )
       .valueChanges();
   }
+
+  async deletePreparacion(preparacionId: string) {
+    this.db
+      .collection<Preparacion>('Preparaciones')
+      .doc(preparacionId)
+      .delete();
+  }
+
+  async deletePreparacionesByPedidoId(pedidoId: string) {
+    this.db
+    .collection<Preparacion>('Preparaciones', (ref) =>
+      ref
+        .where('pedidoId', '==', pedidoId)
+    )
+    .get()
+    .subscribe(
+      (val) => val.docs.forEach(
+        (doc) => doc.ref.delete()
+      )
+    );
+  }
 }
