@@ -42,7 +42,7 @@ export class UsuarioService {
     private localStorage: Storage,
     private nav: NavController,
     private notificationService: NotificationService,
-    private mesasService: MesasService,
+    private mesasService: MesasService
   ) {}
 
   async existeEmail(correo: string) {
@@ -203,6 +203,7 @@ export class UsuarioService {
     const user = {
       mesa: this.angularFirestore.doc(`Mesas/${mesaId}`).ref,
       estadoIngreso: 'buscando',
+      encuestaHecha: false,
     };
 
     try {
@@ -210,7 +211,7 @@ export class UsuarioService {
       await this.angularFirestore
         .collection('Mesas')
         .doc(mesaId)
-        .update({ estado: 'ocupada', encuestaHecha: false });
+        .update({ estado: 'ocupada' });
 
       this.system.presentToast('La cuenta se a creado con éxito!');
     } catch (error) {
@@ -221,13 +222,14 @@ export class UsuarioService {
 
   async desasignarMesa(cliente: Cliente): Promise<void> {
     try {
-      await this.angularFirestore.collection('Usuarios')
+      await this.angularFirestore
+        .collection('Usuarios')
         .doc(cliente.uid)
         .update({
           mesa: null,
-          estadoIngreso: "no ingreso"
+          estadoIngreso: 'no ingreso',
         });
-      this.mesasService.updateEstado(cliente.mesa.mesaId, "desocupada");
+      this.mesasService.updateEstado(cliente.mesa.mesaId, 'desocupada');
     } catch (error) {
       console.log(error);
     }
