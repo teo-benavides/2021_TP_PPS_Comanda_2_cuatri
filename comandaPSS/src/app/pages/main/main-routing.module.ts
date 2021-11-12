@@ -35,7 +35,9 @@ const routes: Routes = [
       {
         path: 'mozo',
         loadChildren: () =>
-          import('src/app/pages/mozo/mozo.module').then((m) => m.MozoPageModule),
+          import('src/app/pages/mozo/mozo.module').then(
+            (m) => m.MozoPageModule
+          ),
       },
       {
         path: 'cliente',
@@ -66,13 +68,6 @@ const routes: Routes = [
             loadChildren: () =>
               import('../clientes/buscar/buscar.module').then(
                 (m) => m.BuscarPageModule
-              ),
-          },
-          {
-            path: 'encuesta',
-            loadChildren: () =>
-              import('../clientes/encuesta/encuesta.module').then(
-                (m) => m.EncuestaPageModule
               ),
           },
           {

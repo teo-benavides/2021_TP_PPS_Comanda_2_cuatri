@@ -13,7 +13,7 @@ export class EncuestaPage implements OnInit {
   fotoPath: string[] = [];
   fotoUrl: string[] = [];
   encuestaForm: FormGroup;
-  route: string = '/cliente/espera';
+  route: string = '/cliente/mesa';
   loading: boolean = false;
 
   constructor(

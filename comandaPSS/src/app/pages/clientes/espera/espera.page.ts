@@ -17,10 +17,6 @@ export class EsperaPage implements OnInit {
     this.usuarioService.esperandoMesaUsuario();
   }
 
-  encuesta() {
-    this.navController.navigateBack('/cliente/encuesta');
-  }
-
   estadistica() {
     this.navController.navigateBack('/cliente/estadisticas');
   }

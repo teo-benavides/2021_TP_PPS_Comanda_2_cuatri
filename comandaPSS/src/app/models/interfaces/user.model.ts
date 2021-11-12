@@ -13,6 +13,7 @@ export interface User {
   estadoIngreso?: estadoIngreso;
   mesa?: Mesa;
   token?: string;
+  encuestaHecha?: boolean;
 }
 
 export interface Anonimo {
@@ -25,6 +26,7 @@ export interface Anonimo {
   estadoIngreso: estadoIngreso;
   mesa?: Mesa;
   token?: string;
+  encuestaHecha?: boolean;
 }
 
 export type perfil =

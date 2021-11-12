@@ -63,6 +63,12 @@ export class EncuestasService {
     });
 
     await comentariosDoc.update({ Clientes });
+    const user = await this.localStorage.get('user');
+    user.encuestaHecha = true;
+    await this.localStorage.set('user', user);
+    this.angularFirestore
+      .doc(`Usuarios/${user.uid}`)
+      .update({ encuestaHecha: true });
   }
 
   public get getComentarios(): Observable<Comentario[]> {
