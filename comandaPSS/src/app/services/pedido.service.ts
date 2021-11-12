@@ -47,6 +47,7 @@ export class PedidoService {
 
   async deletePedido(pedido: Pedido): Promise<void> {
     try {
+      await this.preparacionService.deletePreparacionesByPedidoId(pedido.pedidoId);
       await this.db.collection('Pedidos').doc(pedido.pedidoId).delete();
     } catch (error) {
       console.log(error);

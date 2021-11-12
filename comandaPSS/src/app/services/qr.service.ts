@@ -36,4 +36,29 @@ export class QrService {
     .then(scan => scan.text === value)
     .catch(() => false);
   }
+
+  /**
+   * 
+   * @returns Porcentaje en float correspondiente al QR de propina escaneado, o -1 si el QR es inválido.
+   */
+  async scanPropina(): Promise<number> {
+    return this.system.getQr(QR)
+    .then(scan => {
+      switch (scan.text) {
+        case "propina-excelente":
+          return 0.2;
+        case "propina-muybueno":
+          return 0.15;
+        case "propina-bueno":
+          return 0.1;
+        case "propina-regular":
+          return 0.05;
+        case "propina-malo":
+          return 0;
+        default:
+          return -1;
+      }
+    })
+    .catch(() => -1);
+  }
 }

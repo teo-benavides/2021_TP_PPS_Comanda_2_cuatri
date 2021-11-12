@@ -8,6 +8,7 @@ import { MesaPageRoutingModule } from './mesa-routing.module';
 
 import { MesaPage } from './mesa.page';
 import { UtilityModule } from '../../../utility/utility.module';
+import { DetalleCuentaComponent } from './modals/detalle-cuenta/detalle-cuenta.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { UtilityModule } from '../../../utility/utility.module';
     MesaPageRoutingModule,
     UtilityModule,
   ],
-  declarations: [MesaPage],
+  declarations: [MesaPage, DetalleCuentaComponent],
 })
 export class MesaPageModule {}

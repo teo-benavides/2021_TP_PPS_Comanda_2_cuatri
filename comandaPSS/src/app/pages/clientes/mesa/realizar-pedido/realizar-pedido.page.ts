@@ -40,10 +40,10 @@ export class RealizarPedidoPage implements OnInit {
 
     this.pedido = {
       pedidoId: this.system.createId(),
-      mesaId: '', // get mesa from mesa page as input idk
-      numeroMesa: 0, //same
-      tiempoEstimado: 0, // update later
-      precioTotal: 0, // same
+      mesaId: '',
+      numeroMesa: 0,
+      tiempoEstimado: 0,
+      precioTotal: 0,
       estado: 'pendiente',
       preparaciones: [],
     };
@@ -106,6 +106,8 @@ export class RealizarPedidoPage implements OnInit {
   realizarPedido() {
     this.pedido.mesaId = this.cliente.mesa.mesaId;
     this.pedido.numeroMesa = this.cliente.mesa.numeroMesa;
+    this.pedido.precioTotal = this.getPrecioTotal();
+    this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);
     this.nav.navigateBack('cliente/mesa');
   }

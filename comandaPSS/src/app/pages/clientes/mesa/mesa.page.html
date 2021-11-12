@@ -31,6 +31,15 @@
   >
     Hacer pedido
   </ion-button>
+  <ion-button
+    *ngIf="pedido?.estado === 'entregado'"
+    (click)="pedirCuenta()"
+    expand="block"
+    fill="clear"
+    shape="round"
+  >
+    Pedir cuenta
+  </ion-button>
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">

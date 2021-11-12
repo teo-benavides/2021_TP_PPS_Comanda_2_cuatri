@@ -5,6 +5,12 @@ import { Cliente } from 'src/app/models/interfaces/user.model';
 import { Storage } from '@ionic/storage-angular';
 import { Pedido, PedidoEstado } from 'src/app/models/interfaces/pedido.model';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { QrService } from 'src/app/services/qr.service';
+import { DetalleCuentaComponent } from './modals/detalle-cuenta/detalle-cuenta.component';
+import { PreparacionService } from 'src/app/services/preparacion.service';
+import { Preparacion } from 'src/app/models/interfaces/preparacion.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { MesasService } from 'src/app/services/mesas.service';
 
 @Component({
   selector: 'app-mesa',
@@ -19,7 +25,11 @@ export class MesaPage implements OnInit {
     private modalController: ModalController,
     private nav: NavController,
     private localStorage: Storage,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private preparacionService: PreparacionService,
+    private usuarioService: UsuarioService,
+    private mesasService: MesasService,
+    private qrService: QrService,
   ) {}
 
   ngOnInit() {
@@ -30,6 +40,11 @@ export class MesaPage implements OnInit {
         p.subscribe((data) => {
           this.pedido = data[0];
           console.log(data[0]);
+          if (this.pedido.estado === "pagado") {
+            this.usuarioService.desasignarMesa(this.cliente);
+            this.pedidoService.deletePedido(this.pedido);
+            this.nav.navigateBack("cliente/ingreso");
+          }
         })
       );
     });
@@ -95,6 +110,23 @@ export class MesaPage implements OnInit {
         return `Precio: $ ${this.pedido.precioTotal} `;
       default:
         return 'No se a realizado pedido';
+    }
+  }
+
+  async pedirCuenta() {
+    const propina = await this.qrService.scanPropina();
+    if (propina > -1) {
+      const modal = await this.modalController.create({
+        component: DetalleCuentaComponent,
+        swipeToClose: true,
+        presentingElement: await this.modalController.getTop(),
+        backdropDismiss: false,
+        componentProps: {
+          pedido: this.pedido,
+          propina: propina
+        },
+      });
+      return await modal.present();
     }
   }
 }

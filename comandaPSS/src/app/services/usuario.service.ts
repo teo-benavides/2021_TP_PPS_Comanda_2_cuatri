@@ -41,7 +41,8 @@ export class UsuarioService {
     private angularFireStorage: AngularFireStorage,
     private localStorage: Storage,
     private nav: NavController,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private mesasService: MesasService,
   ) {}
 
   async existeEmail(correo: string) {
@@ -215,6 +216,20 @@ export class UsuarioService {
     } catch (error) {
       console.log(error);
       this.system.presentToastError(ErrorStrings.AsignarMesa);
+    }
+  }
+
+  async desasignarMesa(cliente: Cliente): Promise<void> {
+    try {
+      await this.angularFirestore.collection('Usuarios')
+        .doc(cliente.uid)
+        .update({
+          mesa: null,
+          estadoIngreso: "no ingreso"
+        });
+      this.mesasService.updateEstado(cliente.mesa.mesaId, "desocupada");
+    } catch (error) {
+      console.log(error);
     }
   }
 
