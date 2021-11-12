@@ -168,3 +168,35 @@ exports.consultaCliente = functions.https.onRequest(async (req, res) => {
       });
   });
 });
+
+exports.chequearPedido = functions.firestore
+  .document('Preparaciones/{preparacionId}')
+  .onUpdate(async (event) => {
+    const data = event.after.data();
+
+    if (data.estado !== 'terminado') {
+      return false;
+    }
+
+    const db = admin.firestore();
+
+    const preparacionRef = db
+      .collection('Preparaciones')
+      .where('pedidoId', '==', data.pedidoId)
+      .where('estado', 'in', ['pendiente', 'preparando']);
+
+    const preparacion = await preparacionRef.get();
+
+    if (preparacion.empty) {
+      db.doc(`Pedidos/${data.pedidoId}`)
+        .update({ estado: 'terminado' })
+        .then((d) => {
+          return d;
+        })
+        .catch((err) => {
+          return err;
+        });
+    }
+
+    return false;
+  });
