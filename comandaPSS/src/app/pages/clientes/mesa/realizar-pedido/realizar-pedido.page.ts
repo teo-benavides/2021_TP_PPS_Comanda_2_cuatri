@@ -18,7 +18,7 @@ export class RealizarPedidoPage implements OnInit {
   productos: Producto[];
   pedido: Pedido;
   cliente: Cliente = null;
-  
+
   constructor(
     private productoService: ProductoService,
     private pedidoService: PedidoService,
@@ -26,7 +26,7 @@ export class RealizarPedidoPage implements OnInit {
     private nav: NavController,
     private system: SystemService,
     private localStorage: Storage
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.localStorage.get('user').then((data) => {
@@ -34,28 +34,27 @@ export class RealizarPedidoPage implements OnInit {
       this.cliente = data;
     });
 
-    this.productoService.getProductos()
-      .then(
-        p => p.subscribe(data => this.productos = data)
-      );
+    this.productoService
+      .getProductos()
+      .then((p) => p.subscribe((data) => (this.productos = data)));
 
     this.pedido = {
       pedidoId: this.system.createId(),
-      mesaId: "",// get mesa from mesa page as input idk
-      numeroMesa: 0,//same
+      mesaId: '', // get mesa from mesa page as input idk
+      numeroMesa: 0, //same
       tiempoEstimado: 0, // update later
       precioTotal: 0, // same
-      estado: "pendiente",
-      preparaciones: []
+      estado: 'pendiente',
+      preparaciones: [],
     };
   }
 
   getComidas(): Producto[] {
-    return this.productos.filter((p) => p.tipo === "comida");
+    return this.productos.filter((p) => p.tipo === 'comida');
   }
 
   getBebidas(): Producto[] {
-    return this.productos.filter((p) => p.tipo === "bebida");
+    return this.productos.filter((p) => p.tipo === 'bebida');
   }
 
   getProductoTotalCount(): number {
@@ -63,10 +62,9 @@ export class RealizarPedidoPage implements OnInit {
   }
 
   getProductoCount(productoId: string): number {
-    return this.pedido.preparaciones
-      .filter(
-        (prep) => prep.producto.productoId === productoId
-      ).length;
+    return this.pedido.preparaciones.filter(
+      (prep) => prep.producto.productoId === productoId
+    ).length;
   }
 
   getPrecioTotal(): number {
@@ -88,26 +86,21 @@ export class RealizarPedidoPage implements OnInit {
   }
 
   removeProducto(productoId: string) {
-    const index = this.pedido.preparaciones
-      .findIndex((prep) => prep.producto.productoId === productoId);
+    const index = this.pedido.preparaciones.findIndex(
+      (prep) => prep.producto.productoId === productoId
+    );
     if (index > -1) {
-      this.pedido.preparaciones
-      .splice(
-        index,
-        1
-      );
+      this.pedido.preparaciones.splice(index, 1);
     }
   }
 
   addProducto(producto: Producto) {
-    this.pedido.preparaciones.push(
-      {
-        preparacionId: this.system.createId(),
-        producto: producto,
-        estado: "pendiente",
-        pedidoId: this.pedido.pedidoId
-      }
-    )
+    this.pedido.preparaciones.push({
+      preparacionId: this.system.createId(),
+      producto: producto,
+      estado: 'pendiente',
+      pedidoId: this.pedido.pedidoId,
+    });
   }
 
   realizarPedido() {
