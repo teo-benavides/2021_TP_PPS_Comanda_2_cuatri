@@ -74,7 +74,7 @@ export class MesaPage implements OnInit {
       case 'pagado':
         return 'Pedido pagado';
       default:
-        return 'No se a realizado pedido';
+        return 'No se ha realizado pedido';
     }
   }
 
