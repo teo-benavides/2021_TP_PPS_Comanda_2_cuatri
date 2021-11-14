@@ -4,8 +4,13 @@
   padding: 20px;
   border-radius: 5px;
 
+  ion-img {
+    width: 75%;
+    margin: auto;
+  }
+
   form {
-    margin-top: 50px;
+    margin-top: 60px;
     margin-bottom: 25px;
     h3 {
       color: white;
@@ -31,5 +36,17 @@ ion-fab-list {
 
 ion-text {
   text-align: center;
-  color: gray;
+  color: var(--ion-color-input);
+  p {
+    font-size: 15px;
+    margin: 0;
+  }
+  hr {
+    border-top: 2px solid var(--ion-color-input);
+  }
+}
+
+::ng-deep .acceso {
+  --background: var(--ion-color-input);
+  --button-color: white;
 }

@@ -28,7 +28,13 @@
       </ion-fab-button>
     </div>
   </form>
-  <ion-text>
-    <p (click)="presentModalRegistro('anonimo')">Ingresar como anonimo</p>
-  </ion-text>
+  <ion-row class="ion-padding-top ion-text-center">
+    <ion-col size="12">
+      <ion-text>
+        <p (click)="presentActionSheet()">Acceso rapido</p>
+        <hr />
+        <p (click)="presentModalRegistro('anonimo')">Ingresar como anonimo</p>
+      </ion-text>
+    </ion-col>
+  </ion-row>
 </div>
