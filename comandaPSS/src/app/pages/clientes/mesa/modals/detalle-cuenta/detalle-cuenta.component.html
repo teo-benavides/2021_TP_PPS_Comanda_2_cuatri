@@ -1,44 +1,66 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
-        <ion-title>Detalle de cuenta</ion-title>
-        <ion-buttons slot="end">
-            <ion-button (click)="cancelar()">
-                <ion-icon name="close-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
+  <ion-toolbar color="secondary">
+    <ion-title>Detalle de cuenta</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-    <div class="centerFlex">
-        <div class="container">
-            <div id="body">
-                <ion-list>
-                    <ion-item *ngFor="let preparacion of preparaciones">
-                        <ion-label class="ion-text-left">{{preparacion.producto.nombre}}</ion-label>
-                        <ion-label class="ion-text-right">${{preparacion.producto.precio}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="ion-text-left">Propina</ion-label>
-                        <ion-label class="ion-text-right">${{pedido.precioTotal * propina}}</ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="ion-text-left">Total</ion-label>
-                        <ion-label class="ion-text-right">${{pedido.precioTotal * (1 + propina)}}</ion-label>
-                    </ion-item>
-                </ion-list>
-            </div>
-        </div>
+<ion-content class="ion-padding" color="fondo">
+  <div class="centerFlex">
+    <div class="container">
+      <div id="body">
+        <ion-list>
+          <ion-item *ngFor="let preparacion of preparaciones">
+            <ion-label class="ion-text-left">{{
+              preparacion.producto.nombre
+            }}</ion-label>
+            <ion-label class="ion-text-right"
+              >${{ preparacion.producto.precio }}</ion-label
+            >
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-left">Propina</ion-label>
+            <ion-label class="ion-text-right"
+              >${{ pedido.precioTotal * propina }}</ion-label
+            >
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-left">Total</ion-label>
+            <ion-label class="ion-text-right"
+              >${{ pedido.precioTotal * (1 + propina) }}</ion-label
+            >
+          </ion-item>
+        </ion-list>
+      </div>
     </div>
+  </div>
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar>
-        <ion-button (click)="cerrarModal()" color="tertiary" type="submit" expand="block" fill="clear" shape="round">
-            Cancelar
-        </ion-button>
-        <ion-button (click)="confirmar()" color="tertiary" type="submit" expand="block" fill="clear" shape="round">
-            Confirmar
-        </ion-button>
-    </ion-toolbar>
+  <ion-toolbar color="fondo">
+    <ion-button
+      (click)="cerrarModal()"
+      color="secondary"
+      type="submit"
+      expand="block"
+      fill="outline"
+      shape="round"
+    >
+      Cancelar
+    </ion-button>
+    <ion-button
+      (click)="confirmar()"
+      color="secondary"
+      type="submit"
+      expand="block"
+      fill="outline"
+      shape="round"
+    >
+      Confirmar
+    </ion-button>
+  </ion-toolbar>
 </ion-footer>

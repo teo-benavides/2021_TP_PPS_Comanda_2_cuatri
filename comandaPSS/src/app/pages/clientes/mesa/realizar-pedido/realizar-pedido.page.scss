@@ -1,7 +1,24 @@
 .item-end {
-    display: flex;
-    justify-content: space-between;
-    ion-note {
-        margin: auto;
-    }
+  display: flex;
+  justify-content: space-between;
+  ion-note {
+    color: white;
+    margin: auto;
+  }
+}
+
+ion-list {
+  background-color: var(--ion-color-secondary);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  ion-item {
+    margin: 0px 5px;
+    border-bottom: 1px solid black;
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    padding-left: 15px;
+  }
 }
