@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { RealizarPedidoPageRoutingModule } from './realizar-pedido-routing.module';
 
 import { RealizarPedidoPage } from './realizar-pedido.page';
+import { UtilityModule } from '../../../../utility/utility.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RealizarPedidoPageRoutingModule
+    RealizarPedidoPageRoutingModule,
+    UtilityModule,
   ],
-  declarations: [RealizarPedidoPage]
+  declarations: [RealizarPedidoPage],
 })
 export class RealizarPedidoPageModule {}
