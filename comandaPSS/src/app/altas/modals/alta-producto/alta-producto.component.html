@@ -42,11 +42,8 @@
           ></ion-input>
         </ion-item>
         <ion-item color="input">
-          <ion-label position="floating">Fecha de elaboración</ion-label>
-          <ion-datetime
-            [max]="today"
-            formControlName="fechaElaboracion"
-          ></ion-datetime>
+          <ion-label position="floating">Tiempo de elaboracion</ion-label>
+          <ion-input type="number" formControlName="tiempoEstimado"></ion-input>
         </ion-item>
         <ion-item color="input">
           <ion-label position="floating">Precio</ion-label>
@@ -55,14 +52,6 @@
             formControlName="precio"
             type="number"
           ></ion-input>
-        </ion-item>
-        <ion-item color="input">
-          <ion-label position="floating">Tipo</ion-label>
-          <ion-select formControlName="tipo" placeholder="Seleccione un tipo">
-            <!-- TODO: el tipo es comida si el usuario es cocinero, y bebida si es bartender, no se puede elegir -->
-            <ion-select-option value="comida">Comida</ion-select-option>
-            <ion-select-option value="bebida">Bebida</ion-select-option>
-          </ion-select>
         </ion-item>
         <ion-button
           color="tertiary"
