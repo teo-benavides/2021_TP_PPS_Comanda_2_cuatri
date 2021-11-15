@@ -1,114 +1,80 @@
-<utility-header
-  title="Realizar pedido"
-  type="back"
-  color="secondary"
-></utility-header>
+<utility-header title="Realizar pedido" type="back" color="secondary"></utility-header>
 
 <ion-content class="ion-padding" color="fondo">
-  <ion-list>
-    <ion-list-header>
-      <ion-label>COMIDAS</ion-label>
-    </ion-list-header>
-    <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>COMIDAS</ion-label>
+        </ion-list-header>
+        <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
 
-    <div *ngIf="productos">
-      <ion-item *ngFor="let producto of getComidas()" color="input">
-        <ion-thumbnail slot="start">
-          <ion-img [src]="producto.foto1"></ion-img>
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{ producto.nombre }}</h2>
-          <h3>{{ producto.descripcion }}</h3>
-        </ion-label>
+        <div *ngIf="productos">
+            <ion-item *ngFor="let producto of getComidas()" color="input">
+                <ion-thumbnail slot="start" (click)="detalleFoto(producto)">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
 
-        <div class="item-end" slot="end">
-          <ion-note>${{ producto.precio }}</ion-note>
+                <div class="item-end" slot="end">
+                    <ion-note>${{ producto.precio }}</ion-note>
 
-          <ion-button
-            (click)="removeProducto(producto.productoId)"
-            color="danger"
-            expand="block"
-            fill="clear"
-            shape="round"
-          >
-            <ion-icon name="remove-outline"></ion-icon>
-          </ion-button>
-          <ion-note>{{ getProductoCount(producto.productoId) }}</ion-note>
-          <ion-button
-            (click)="addProducto(producto)"
-            color="success"
-            expand="block"
-            fill="clear"
-            shape="round"
-          >
-            <ion-icon name="add-outline"></ion-icon>
-          </ion-button>
+                    <ion-button (click)="removeProducto(producto.productoId)" color="danger" expand="block" fill="clear" shape="round">
+                        <ion-icon name="remove-outline"></ion-icon>
+                    </ion-button>
+                    <ion-note>{{ getProductoCount(producto.productoId) }}</ion-note>
+                    <ion-button (click)="addProducto(producto)" color="success" expand="block" fill="clear" shape="round">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </ion-button>
+                </div>
+            </ion-item>
         </div>
-      </ion-item>
-    </div>
-  </ion-list>
+    </ion-list>
 
-  <ion-list>
-    <ion-list-header>
-      <ion-label>BEBIDAS</ion-label>
-    </ion-list-header>
-    <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>BEBIDAS</ion-label>
+        </ion-list-header>
+        <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
 
-    <div *ngIf="productos">
-      <ion-item *ngFor="let producto of getBebidas()" color="input">
-        <ion-thumbnail slot="start">
-          <ion-img [src]="producto.foto1"></ion-img>
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{ producto.nombre }}</h2>
-          <h3>{{ producto.descripcion }}</h3>
-        </ion-label>
+        <div *ngIf="productos">
+            <ion-item *ngFor="let producto of getBebidas()" color="input">
+                <ion-thumbnail slot="start" (click)="detalleFoto(producto)">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
 
-        <div class="item-end">
-          <ion-note>${{ producto.precio }}</ion-note>
+                <div class="item-end">
+                    <ion-note>${{ producto.precio }}</ion-note>
 
-          <ion-button
-            (click)="removeProducto(producto.productoId)"
-            color="danger"
-            expand="block"
-            fill="clear"
-            shape="round"
-          >
-            <ion-icon name="remove-outline"></ion-icon>
-          </ion-button>
-          <ion-note>{{ getProductoCount(producto.productoId) }}</ion-note>
-          <ion-button
-            (click)="addProducto(producto)"
-            color="success"
-            expand="block"
-            fill="clear"
-            shape="round"
-          >
-            <ion-icon name="add-outline"></ion-icon>
-          </ion-button>
+                    <ion-button (click)="removeProducto(producto.productoId)" color="danger" expand="block" fill="clear" shape="round">
+                        <ion-icon name="remove-outline"></ion-icon>
+                    </ion-button>
+                    <ion-note>{{ getProductoCount(producto.productoId) }}</ion-note>
+                    <ion-button (click)="addProducto(producto)" color="success" expand="block" fill="clear" shape="round">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </ion-button>
+                </div>
+            </ion-item>
         </div>
-      </ion-item>
-    </div>
-  </ion-list>
+    </ion-list>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="input">
-    <ion-label slot="start">{{ getProductoTotalCount() }} ítems</ion-label>
-    <div class="item-end" slot="end">
-      <ion-label>
-        <h2>${{ getPrecioTotal() }}</h2>
-        <h3>~{{ getTiempoEstimado() }} min.</h3>
-      </ion-label>
-      <ion-button
-        (click)="realizarPedido()"
-        expand="block"
-        fill="clear"
-        shape="round"
-        color="tertiary"
-      >
-        Pedir
-      </ion-button>
-    </div>
-  </ion-toolbar>
+    <ion-toolbar color="input">
+        <ion-label slot="start">{{ getProductoTotalCount() }} ítems</ion-label>
+        <div class="item-end" slot="end">
+            <ion-label>
+                <h2>${{ getPrecioTotal() }}</h2>
+                <h3>~{{ getTiempoEstimado() }} min.</h3>
+            </ion-label>
+            <ion-button (click)="realizarPedido()" expand="block" fill="clear" shape="round" color="tertiary">
+                Pedir
+            </ion-button>
+        </div>
+    </ion-toolbar>
 </ion-footer>

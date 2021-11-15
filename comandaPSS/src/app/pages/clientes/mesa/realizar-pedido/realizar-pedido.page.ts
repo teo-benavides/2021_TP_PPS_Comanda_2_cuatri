@@ -8,6 +8,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SystemService } from 'src/app/utility/services/system.service';
 import { Storage } from '@ionic/storage-angular';
+import { DetalleCartaComponent } from '../modals/detalle-carta/detalle-carta.component';
 
 @Component({
   selector: 'app-realizar-pedido',
@@ -110,5 +111,19 @@ export class RealizarPedidoPage implements OnInit {
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);
     this.nav.navigateBack('cliente/mesa');
+  }
+
+  async detalleFoto(producto: Producto) {
+    const fotos = [producto.foto1, producto.foto2, producto.foto3];
+    const modal = await this.modalController.create({
+      component: DetalleCartaComponent,
+      swipeToClose: true,
+      presentingElement: await this.modalController.getTop(),
+      backdropDismiss: true,
+      componentProps: {
+        fotos,
+      },
+    });
+    return await modal.present();
   }
 }
