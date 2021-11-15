@@ -64,6 +64,12 @@ export class PedidoService {
       .valueChanges();
   }
 
+  async getPedidoById(pedidoId: string) {
+    return this.db
+      .collection<Pedido>('Pedidos').doc(pedidoId)
+      .valueChanges();
+  }
+
   async getPedidos(state: PedidoEstado): Promise<Observable<Pedido[]>> {
     return this.db
       .collection<Pedido>('Pedidos', (ref) =>
