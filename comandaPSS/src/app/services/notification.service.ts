@@ -49,4 +49,12 @@ export class NotificationService {
       .get(`${environment.backendUrl}consultaCliente?mesa=${numeroMesa}`)
       .toPromise();
   }
+
+  async nuevasComidas() {
+    await this.http.get(`${environment.backendUrl}nuevasComidas`).toPromise();
+  }
+  
+  async nuevasBebidas() {
+    await this.http.get(`${environment.backendUrl}nuevasBebidas`).toPromise();
+  }
 }

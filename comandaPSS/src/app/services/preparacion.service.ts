@@ -28,8 +28,40 @@ export class PreparacionService {
     }
   }
 
-  async updatePreparacion(preparacion: Preparacion): Promise<void> {
-    //this.db.collection<Preparacion>('Preparaciones').doc(preparacion.preparacionId).
+  /**
+   * Indica si existen comidas para el pedido indicado.
+   * Usada para decidir si mandar push notification a cocineros cuando se confirma un pedido.
+   * @param pedidoId 
+   * @returns 
+   */
+  async hasComidasForPedido(pedidoId: string): Promise<boolean> {
+    return this.db
+      .collection<Preparacion>('Preparaciones', (ref) =>
+        ref
+          .where('pedidoId', '==', pedidoId)
+          .where('producto.tipo', '==', "comida")
+      )
+      .get()
+      .toPromise()
+      .then((data) => !data.empty);
+  }
+
+  /**
+   * Indica si existen bebidas para el pedido indicado.
+   * Usada para decidir si mandar push notification a bartenders cuando se confirma un pedido.
+   * @param pedidoId 
+   * @returns 
+   */
+  async hasBebidasForPedido(pedidoId: string): Promise<boolean> {
+    return this.db
+      .collection<Preparacion>('Preparaciones', (ref) =>
+        ref
+          .where('pedidoId', '==', pedidoId)
+          .where('producto.tipo', '==', "bebida")
+      )
+      .get()
+      .toPromise()
+      .then((data) => !data.empty);
   }
 
   async updatePreparacionState(preparacionId: string, state: PreparacionEstado) {

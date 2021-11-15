@@ -200,3 +200,81 @@ exports.chequearPedido = functions.firestore
 
     return false;
   });
+
+exports.nuevasComidas = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const db = admin.firestore();
+
+    const usersRef = db
+      .collection('Usuarios')
+      .where('perfil', '==', 'cocinero');
+
+    const users = await usersRef.get();
+
+    const tokens: string[] = [];
+
+    users.forEach((d) => {
+      const token = d.data().token;
+
+      if (token) {
+        tokens.push(token);
+      }
+    });
+
+    const payload = {
+      notification: {
+        title: 'Nueva comida a preparar',
+        body: 'Hay una nueva comida pendiente de preparación.',
+      },
+    };
+
+    admin
+      .messaging()
+      .sendToDevice(tokens, payload)
+      .then(() => {
+        return res.send(true);
+      })
+      .catch(() => {
+        return res.send(false);
+      });
+  });
+});
+
+exports.nuevasBebidas = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const db = admin.firestore();
+
+    const usersRef = db
+      .collection('Usuarios')
+      .where('perfil', '==', 'bartender');
+
+    const users = await usersRef.get();
+
+    const tokens: string[] = [];
+
+    users.forEach((d) => {
+      const token = d.data().token;
+
+      if (token) {
+        tokens.push(token);
+      }
+    });
+
+    const payload = {
+      notification: {
+        title: 'Nueva bebida a preparar',
+        body: 'Hay una nueva bebida pendiente de preparación.',
+      },
+    };
+
+    admin
+      .messaging()
+      .sendToDevice(tokens, payload)
+      .then(() => {
+        return res.send(true);
+      })
+      .catch(() => {
+        return res.send(false);
+      });
+  });
+});

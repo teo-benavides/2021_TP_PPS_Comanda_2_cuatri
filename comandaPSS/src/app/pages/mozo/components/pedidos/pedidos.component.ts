@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Pedido } from 'src/app/models/interfaces/pedido.model';
 import { Preparacion } from 'src/app/models/interfaces/preparacion.model';
+import { NotificationService } from 'src/app/services/notification.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { PreparacionService } from 'src/app/services/preparacion.service';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -18,7 +19,13 @@ export class PedidosComponent implements OnInit {
   pedidosCobrar: Pedido[];
   pedidosPreparando: Pedido[];
 
-  constructor(public pedidoService: PedidoService, private productoService: ProductoService, private preparacionService: PreparacionService, private modalController: ModalController) {}
+  constructor(
+    public pedidoService: PedidoService,
+    private productoService: ProductoService,
+    private preparacionService: PreparacionService,
+    private modalController: ModalController,
+    private notificationService: NotificationService,
+    ) {}
 
   ngOnInit() {
     this.pedidoService.getPedidos("pendiente")
@@ -39,9 +46,15 @@ export class PedidosComponent implements OnInit {
     );
   }
 
-  public confirmarPedido(pedido: Pedido) {
+  public async confirmarPedido(pedido: Pedido) {
     pedido.estado = "preparando";
     this.pedidoService.updatePedido(pedido);
+    if (await this.preparacionService.hasComidasForPedido(pedido.pedidoId)) {
+      this.notificationService.nuevasComidas();
+    }
+    if (await this.preparacionService.hasBebidasForPedido(pedido.pedidoId)) {
+      this.notificationService.nuevasBebidas();
+    }
   }
 
   public rechazarPedido(pedido: Pedido) {
