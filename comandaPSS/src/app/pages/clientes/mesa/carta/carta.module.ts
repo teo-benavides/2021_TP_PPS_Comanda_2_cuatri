@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { SwiperModule } from 'swiper/angular';
 import { CartaPageRoutingModule } from './carta-routing.module';
 
 import { CartaPage } from './carta.page';
 import { UtilityModule } from '../../../../utility/utility.module';
+import { DetalleCartaComponent } from '../modals/detalle-carta/detalle-carta.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { UtilityModule } from '../../../../utility/utility.module';
     IonicModule,
     CartaPageRoutingModule,
     UtilityModule,
+    SwiperModule
   ],
-  declarations: [CartaPage],
+  declarations: [CartaPage, DetalleCartaComponent],
 })
 export class CartaPageModule {}

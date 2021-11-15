@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Producto } from 'src/app/models/interfaces/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
+import { DetalleCartaComponent } from '../modals/detalle-carta/detalle-carta.component';
 
 @Component({
   selector: 'app-carta',
@@ -29,5 +30,19 @@ export class CartaPage implements OnInit {
 
   getBebidas(): Producto[] {
     return this.productos.filter((p) => p.tipo === "bebida");
+  }
+
+  async detalleFoto(producto: Producto) {
+    const fotos = [producto.foto1, producto.foto2, producto.foto3];
+    const modal = await this.modalController.create({
+      component: DetalleCartaComponent,
+      swipeToClose: true,
+      presentingElement: await this.modalController.getTop(),
+      backdropDismiss: true,
+      componentProps: {
+        fotos,
+      },
+    });
+    return await modal.present();
   }
 }

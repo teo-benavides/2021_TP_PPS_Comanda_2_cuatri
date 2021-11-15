@@ -1,0 +1,56 @@
+ion-content {
+  --background: rgb(0 0 0 / 21%);
+}
+
+.centerFlex {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  background-color: var(--ion-color-fondo);
+  border-radius: 10px;
+  ion-toolbar {
+    border-radius: 10px 10px 0px 0px;
+  }
+}
+
+#fotoContainer {
+  background-color: var(--ion-color-fondo);
+  min-height: 350px;
+}
+
+.foto {
+  width: 100%;
+  height: auto;
+}
+
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  position: inherit !important;
+  width: 100% !important;
+
+  .swiper-pagination-bullet {
+    width: 20px !important;
+    height: 20px !important;
+    text-align: center;
+    line-height: 20px !important;
+    font-size: 12px;
+    opacity: 1;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 3px;
+    cursor: pointer;
+  }
+  .swiper-pagination-bullet-active {
+    color: white;
+    background: var(--ion-color-secondary);
+    transform: scale(1);
+  }
+}

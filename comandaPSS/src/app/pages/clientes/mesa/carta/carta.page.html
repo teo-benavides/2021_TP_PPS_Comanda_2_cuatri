@@ -1,41 +1,41 @@
 <utility-header title="Carta" type="back" color="secondary"></utility-header>
 
 <ion-content color="fondo" class="ion-padding">
-  <ion-list>
-    <ion-list-header>
-      <ion-label>COMIDAS</ion-label>
-    </ion-list-header>
-    <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
-    <div *ngIf="productos">
-      <ion-item *ngFor="let producto of getComidas()" color="input">
-        <ion-thumbnail slot="start">
-          <ion-img [src]="producto.foto1"></ion-img>
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{ producto.nombre }}</h2>
-          <h3>{{ producto.descripcion }}</h3>
-        </ion-label>
-        <ion-label class="ion-text-right">${{ producto.precio }}</ion-label>
-      </ion-item>
-    </div>
-  </ion-list>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>COMIDAS</ion-label>
+        </ion-list-header>
+        <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
+        <div *ngIf="productos">
+            <ion-item *ngFor="let producto of getComidas()" color="input">
+                <ion-thumbnail slot="start" (click)="detalleFoto(producto)">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
+                <ion-label class="ion-text-right">${{ producto.precio }}</ion-label>
+            </ion-item>
+        </div>
+    </ion-list>
 
-  <ion-list>
-    <ion-list-header>
-      <ion-label>BEBIDAS</ion-label>
-    </ion-list-header>
-    <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
-    <div *ngIf="productos">
-      <ion-item *ngFor="let producto of getBebidas()" color="input">
-        <ion-thumbnail slot="start">
-          <ion-img [src]="producto.foto1"></ion-img>
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{ producto.nombre }}</h2>
-          <h3>{{ producto.descripcion }}</h3>
-        </ion-label>
-        <ion-label class="ion-text-right">${{ producto.precio }}</ion-label>
-      </ion-item>
-    </div>
-  </ion-list>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>BEBIDAS</ion-label>
+        </ion-list-header>
+        <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
+        <div *ngIf="productos">
+            <ion-item *ngFor="let producto of getBebidas()" color="input">
+                <ion-thumbnail slot="start" (click)="detalleFoto(producto)">
+                    <ion-img [src]="producto.foto1"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{ producto.nombre }}</h2>
+                    <h3>{{ producto.descripcion }}</h3>
+                </ion-label>
+                <ion-label class="ion-text-right">${{ producto.precio }}</ion-label>
+            </ion-item>
+        </div>
+    </ion-list>
 </ion-content>
