@@ -45,6 +45,22 @@ export class PedidoService {
     }
   }
 
+  /**
+   * codigo de ultimo momento para actualizar preparaciones cuando el pedido pasa a estado preparando.
+   * para evitar que aparezcan preparaciones de un pedido no confirmado en las pantallas de cocinero/bartender.
+   * @param pedido 
+   */
+  async confirmarPedido(pedido: Pedido): Promise<void> {
+    try {
+      pedido.estado = "preparando";
+      await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
+      await this.preparacionService.updatePreparacionesStateInPedido(pedido.pedidoId, "pendiente");
+    } catch (error) {
+      console.log(error);
+      throw Error(ErrorStrings.BadPedido);
+    }
+  }
+
   async deletePedido(pedido: Pedido): Promise<void> {
     try {
       await this.preparacionService.deletePreparacionesByPedidoId(pedido.pedidoId);

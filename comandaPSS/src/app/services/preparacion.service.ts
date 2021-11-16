@@ -71,6 +71,25 @@ export class PreparacionService {
     .update({"estado": state});
   }
 
+  /**
+   * Actualiza el estado de todas las preparaciones con el pedidoId dado.
+   * @param pedidoId 
+   * @param state 
+   */
+  async updatePreparacionesStateInPedido(pedidoId: string, state: PreparacionEstado) {
+    this.db
+      .collection<Preparacion>('Preparaciones', (ref) =>
+        ref
+          .where('pedidoId', '==', pedidoId)
+      )
+      .get()
+      .subscribe(
+        (data) => data.docs.forEach(
+          (prep) => prep.ref.update({"estado": state})
+        )
+      )
+  }
+
   async getPreparaciones(estado: PreparacionEstado, tipo: TipoProducto): Promise<Observable<Preparacion[]>> {
     return this.db
       .collection<Preparacion>('Preparaciones', (ref) =>

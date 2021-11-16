@@ -8,4 +8,4 @@ export interface Preparacion {
     pedidoId: string;
 }
 
-export type PreparacionEstado = "pendiente" | "preparando" | "terminado";
+export type PreparacionEstado = "confirmandoPedido" | "pendiente" | "preparando" | "terminado";
