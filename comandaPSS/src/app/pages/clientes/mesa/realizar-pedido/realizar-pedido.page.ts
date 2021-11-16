@@ -99,7 +99,7 @@ export class RealizarPedidoPage implements OnInit {
     this.pedido.preparaciones.push({
       preparacionId: this.system.createId(),
       producto: producto,
-      estado: 'pendiente',
+      estado: 'confirmandoPedido',
       pedidoId: this.pedido.pedidoId,
     });
   }
