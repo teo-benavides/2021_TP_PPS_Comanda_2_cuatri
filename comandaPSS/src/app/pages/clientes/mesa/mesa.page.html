@@ -14,47 +14,71 @@
       </div>
     </ion-card-content>
   </ion-card>
-  <ion-button
-    (click)="navigateToCarta()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Carta
-  </ion-button>
-  <ion-button
-    *ngIf="!pedido"
-    (click)="navigateToRealizarPedido()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Hacer pedido
-  </ion-button>
-  <ion-button
-    *ngIf="pedido?.estado === 'confirmarEntrega'"
-    (click)="confirmarEntrega()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Confirmar entrega
-  </ion-button>
-  <ion-button
-    *ngIf="pedido?.estado === 'entregado'"
-    (click)="pedirCuenta()"
-    expand="block"
-    fill="clear"
-    shape="round"
-  >
-    Pedir cuenta
-  </ion-button>
-  <ion-button (click)="encuesta()" expand="block" fill="clear" shape="round">
-    Encuesta
-  </ion-button>
-  <ion-button (click)="estadistica()" expand="block" fill="clear" shape="round">
-    Estadisticas
-  </ion-button>
+  <div class="container">
+    <ion-row>
+      <ion-col size="12">
+        <ion-button
+          (click)="navigateToCarta()"
+          expand="block"
+          color="secondary"
+          class="pedidos"
+        >
+          Carta
+        </ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button
+          *ngIf="!pedido"
+          (click)="navigateToRealizarPedido()"
+          expand="block"
+          color="secondary"
+          class="pedidos"
+        >
+          Hacer pedido
+        </ion-button>
+        <ion-button
+          *ngIf="pedido?.estado === 'confirmarEntrega'"
+          (click)="confirmarEntrega()"
+          expand="block"
+          color="secondary"
+          class="pedidos"
+        >
+          Confirmar entrega
+        </ion-button>
+        <ion-button
+          *ngIf="pedido?.estado === 'entregado'"
+          (click)="pedirCuenta()"
+          expand="block"
+          color="secondary"
+          class="pedidos"
+        >
+          Pedir cuenta
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button
+          [hidden]="desactivarEncuesta(pedido?.estado)"
+          (click)="encuesta()"
+          expand="block"
+          color="secondary"
+          class="encuesta"
+        >
+          Realizar encuesta
+        </ion-button></ion-col
+      >
+      <ion-col [size]="desactivarEncuesta(pedido?.estado)?'12':'6'"
+        ><ion-button
+          [hidden]="!pedido"
+          (click)="estadistica()"
+          expand="block"
+          color="secondary"
+          [class]="desactivarEncuesta(pedido?.estado)?'pedidos':'encuesta'"
+        >
+          Ver encuestas
+        </ion-button></ion-col
+      >
+    </ion-row>
+  </div>
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">

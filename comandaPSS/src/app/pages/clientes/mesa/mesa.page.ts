@@ -48,9 +48,11 @@ export class MesaPage implements OnInit {
           this.pedido = data[0];
           console.log(data[0]);
           if (this.pedido?.estado === 'pagado') {
-            this.usuarioService.desasignarMesa(this.cliente);
+            this.usuarioService
+              .desasignarMesa(this.cliente)
+              .then(() => this.nav.navigateRoot('/cliente/ingreso'))
+              .catch(console.log);
             this.pedidoService.deletePedido(this.pedido);
-            this.nav.navigateBack('cliente/ingreso');
           }
         })
       );
@@ -102,6 +104,8 @@ export class MesaPage implements OnInit {
         return 'Preparando pedido';
       case 'terminado':
         return 'Entregando pedido';
+      case 'confirmarEntrega':
+        return 'Esperando confirmacion del cliente';
       case 'entregado':
         return 'Pedido entregado';
       case 'aPagar':
@@ -110,6 +114,23 @@ export class MesaPage implements OnInit {
         return 'Pedido pagado';
       default:
         return 'No se ha realizado pedido';
+    }
+  }
+
+  desactivarEncuesta(estadoPedido: string) {
+    const estado = estadoPedido || '';
+    switch (estado) {
+      case 'pendiente':
+      case 'preparando':
+      case 'terminado':
+      case 'confirmarEntrega':
+        return true;
+      case 'entregado':
+      case 'aPagar':
+      case 'pagado':
+        return false;
+      default:
+        return true;
     }
   }
 
@@ -123,6 +144,7 @@ export class MesaPage implements OnInit {
         return '-- MIN';
       case 'preparando':
       case 'terminado':
+      case 'confirmarEntrega':
         return `${this.pedido.tiempoEstimado} MIN`;
       case 'entregado':
       case 'aPagar':
@@ -134,7 +156,7 @@ export class MesaPage implements OnInit {
   }
 
   confirmarEntrega() {
-    this.pedido.estado = "entregado";
+    this.pedido.estado = 'entregado';
     this.pedidoService.updatePedido(this.pedido);
   }
 

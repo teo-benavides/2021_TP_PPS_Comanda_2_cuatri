@@ -84,6 +84,8 @@ export class AuthService {
     this.notificationService.endProcess();
     await this.auth.signOut();
     await this.storage.remove('user');
+    await this.storage.remove('dobleIngreso');
+
     this.nav.navigateRoot('/sesion');
   }
 
@@ -138,7 +140,7 @@ export class AuthService {
   }
 
   private async getMesa(user: any) {
-    if (user.mesa === undefined) return user as User;
+    if (!user.mesa) return user as User;
 
     user.mesa = (await user.mesa.get()).data();
 

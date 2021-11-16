@@ -1,8 +1,17 @@
 <utility-header title="Esperando mesa" color="secondary"></utility-header>
 
 <ion-content class="ion-padding" color="fondo">
-  <h3>Espere hasta que el metre le consiga una mesa</h3>
-  <ion-button (click)="estadistica()" expand="block" fill="clear" shape="round">
-    Estadisticas
-  </ion-button>
+  <div class="center">
+    <ion-card color="input">
+      <ion-card-content>
+        <h2>
+          Espere hasta que el metre le consiga una mesa, mientras puedes ver las
+          encuestas que dejaron otros clientes sobre el establecimiento.
+        </h2>
+        <ion-button (click)="estadistica()" expand="block" color="secondary">
+          Ver encuestas
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
