@@ -183,7 +183,7 @@ exports.chequearPedido = functions.firestore
     const preparacionRef = db
       .collection('Preparaciones')
       .where('pedidoId', '==', data.pedidoId)
-      .where('estado', 'in', ['pendiente', 'preparando']);
+      .where('estado', 'in', ['pendiente', 'preparando', 'confirmandoPedido']);
 
     const preparacion = await preparacionRef.get();
 

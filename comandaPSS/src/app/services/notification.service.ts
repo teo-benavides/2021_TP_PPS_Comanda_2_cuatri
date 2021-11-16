@@ -5,12 +5,13 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SystemService } from '../utility/services/system.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
-  listener: any;
+  listener: Subscription;
 
   constructor(
     private firebaseX: FirebaseX,
@@ -30,6 +31,8 @@ export class NotificationService {
       console.log(msg);
       this.system.presentToast(msg.body, 3000);
     });
+
+    console.log('Notification service: OK!', this.listener);
   }
 
   endProcess() {
@@ -53,7 +56,7 @@ export class NotificationService {
   async nuevasComidas() {
     await this.http.get(`${environment.backendUrl}nuevasComidas`).toPromise();
   }
-  
+
   async nuevasBebidas() {
     await this.http.get(`${environment.backendUrl}nuevasBebidas`).toPromise();
   }

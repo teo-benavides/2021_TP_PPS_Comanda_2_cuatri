@@ -15,20 +15,21 @@ import { NotificationService } from '../../../services/notification.service';
 })
 export class IngresoPage implements OnInit {
   cliente: Cliente = null;
-
+  flag: boolean = false;
   constructor(
     private storage: Storage,
     private qr: QrService,
     private UsuarioService: UsuarioService,
     private nav: NavController,
     private system: SystemService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private navController: NavController
   ) {}
 
   async ngOnInit() {
     this.cliente = (await this.storage.get('user')) as User;
-
-    console.log(this.cliente);
+    this.flag = ((await this.storage.get('dobleIngreso')) as boolean) || false;
+    console.log(this.cliente, this.flag);
   }
 
   async scanQr() {
@@ -50,5 +51,9 @@ export class IngresoPage implements OnInit {
     } finally {
       loading.dismiss();
     }
+  }
+
+  estadistica() {
+    this.navController.navigateBack('/cliente/estadisticas');
   }
 }

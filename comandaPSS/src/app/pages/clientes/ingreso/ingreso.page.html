@@ -16,3 +16,10 @@
     </ion-fab-button>
   </div>
 </ion-content>
+<ion-footer *ngIf="flag">
+  <ion-toolbar color="fondo">
+    <ion-button (click)="estadistica()" expand="block" color="secondary">
+      Ver encuestas
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

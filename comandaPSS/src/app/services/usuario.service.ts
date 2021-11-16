@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  DocumentReference,
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SystemService } from '../utility/services/system.service';
 import {
   User,
@@ -222,14 +219,17 @@ export class UsuarioService {
 
   async desasignarMesa(cliente: Cliente): Promise<void> {
     try {
+      const mesaId = cliente.mesa.mesaId;
+      delete cliente.mesa;
+      cliente.estadoIngreso = 'no ingreso';
       await this.angularFirestore
         .collection('Usuarios')
         .doc(cliente.uid)
-        .update({
-          mesa: null,
-          estadoIngreso: 'no ingreso',
-        });
-      this.mesasService.updateEstado(cliente.mesa.mesaId, 'desocupada');
+        .set(cliente);
+
+      await this.localStorage.set('user', cliente);
+      await this.localStorage.set('dobleIngreso', true);
+      this.mesasService.updateEstado(mesaId, 'desocupada');
     } catch (error) {
       console.log(error);
     }
@@ -263,7 +263,7 @@ export class UsuarioService {
   }
 
   private async parseMesa(user: any) {
-    if (user.mesa === undefined) return user as Cliente;
+    if (!user.mesa) return user as Cliente;
 
     user.mesa = (await user.mesa.get()).data();
 
