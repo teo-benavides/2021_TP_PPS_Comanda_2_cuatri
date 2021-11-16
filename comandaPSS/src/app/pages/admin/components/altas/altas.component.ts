@@ -21,6 +21,7 @@ export class AltasComponent implements OnInit {
       backdropDismiss: false,
       componentProps: {
         type: 'dueño',
+        color: 'primary',
       },
     });
     return await modal.present();
