@@ -12,5 +12,5 @@ export interface Pedido {
     preparaciones: Array<Preparacion>;
 }
 
-export type PedidoEstado = "pendiente" | "preparando" | "terminado" | "entregado" | "aPagar" | "pagado";
+export type PedidoEstado = "pendiente" | "preparando" | "terminado" | "confirmarEntrega" | "entregado" | "aPagar" | "pagado";
 

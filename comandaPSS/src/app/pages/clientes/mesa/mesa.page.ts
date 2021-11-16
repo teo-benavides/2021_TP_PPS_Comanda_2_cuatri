@@ -133,6 +133,11 @@ export class MesaPage implements OnInit {
     }
   }
 
+  confirmarEntrega() {
+    this.pedido.estado = "entregado";
+    this.pedidoService.updatePedido(this.pedido);
+  }
+
   async pedirCuenta() {
     const propina = await this.qrService.scanPropina();
     if (propina > -1) {

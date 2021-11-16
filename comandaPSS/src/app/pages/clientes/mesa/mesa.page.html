@@ -32,6 +32,15 @@
     Hacer pedido
   </ion-button>
   <ion-button
+    *ngIf="pedido?.estado === 'confirmarEntrega'"
+    (click)="confirmarEntrega()"
+    expand="block"
+    fill="clear"
+    shape="round"
+  >
+    Confirmar entrega
+  </ion-button>
+  <ion-button
     *ngIf="pedido?.estado === 'entregado'"
     (click)="pedirCuenta()"
     expand="block"
