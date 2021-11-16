@@ -64,7 +64,7 @@ export class PedidosComponent implements OnInit {
   }
 
   public entregarPedido(pedido: Pedido) {
-    pedido.estado = "entregado";
+    pedido.estado = "confirmarEntrega";
     this.pedidoService.updatePedido(pedido);
   }
 
