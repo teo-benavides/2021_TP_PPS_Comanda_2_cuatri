@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
     });
 
     const actionSheet = await this.actionSheetController.create({
-      header: 'Acceso rapido',
+      header: 'Acceso rápido',
       cssClass: 'acceso',
       buttons,
     });

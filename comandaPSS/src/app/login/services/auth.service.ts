@@ -101,35 +101,35 @@ export class AuthService {
 
     switch (code) {
       case 'auth/email-already-exists':
-        message = 'Ya existe usuario registrado con ese email';
+        message = 'Ya existe un usuario registrado con ese correo';
         break;
       case 'auth/internal-error':
         message = 'Error al conectarse al servidor';
         break;
       case 'auth/user-not-found':
-        message = 'No existe usuario';
+        message = 'No existe el usuario';
         break;
       case 'auth/invalid-email':
-        message = 'El correo son invalidos';
+        message = 'El correo es inválido';
         break;
       case 'auth/invalid-password':
-        message = 'La contraseña son invalidos';
+        message = 'La contraseña es inválida';
         break;
       case 'auth/wrong-password':
         message = 'Contraseña incorrecta';
         break;
       case 'no internet':
-        message = 'El dispositivo no tiene conexion a internet';
+        message = 'El dispositivo no tiene conexión a internet';
         break;
       case 'Camara':
-        message = 'Error camara';
+        message = 'Error de cámara';
         break;
-      case 'Camara - no autorizda':
+      case 'Cámara no autorizda':
         message =
-          'Se requiere autorizacion del usuario para utilizar la camara';
+          'Se requiere autorización del usuario para utilizar la cámara';
         break;
       case 'QR - invalido':
-        message = 'QR invalido';
+        message = 'Código QR inválido';
         break;
       default:
         message = 'Error inesperado';

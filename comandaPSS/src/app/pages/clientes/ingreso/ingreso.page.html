@@ -7,9 +7,8 @@
 <ion-content class="ion-padding" color="fondo">
   <div *ngIf="cliente !== null">
     <h3>
-      Hola {{cliente.nombre}}, para ingresar a la lista de espera tiene que
-      presionar el boton de abajo y <strong>escanear el code qr</strong> para
-      ingresar en la lista de espera
+      Hola {{cliente.nombre}}, presione el botón de abajo y luego escaneé
+      el código QR en la entrada del local para entrar a la lista de espera.
     </h3>
     <ion-fab-button (click)="scanQr()" color="secondary">
       <ion-icon name="qr-code-outline"></ion-icon>
