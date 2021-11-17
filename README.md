@@ -56,18 +56,18 @@
 ## Capturas de pantalla:
 
 ### Inicio de sesión
-![Inicio de sesión](https://i.imgur.com/jP779cY.png)  
+![Inicio de sesión](https://i.imgur.com/WA2SQ6T.png)  
 
 ### Mozo
-![Pedidos](https://i.imgur.com/KWjWy3D.png)  
-![Consultas](https://i.imgur.com/ve4c1EA.png)  
-![Consulta](https://i.imgur.com/A4s6wCf.png)  
+![Pedidos](https://i.imgur.com/APVOANt.png)  
+![Consultas](https://i.imgur.com/vrOX5GT.png)  
+![Consulta](https://i.imgur.com/ThTQAOC.png)  
 
 ### Dueño
-![Clientes a confirmar](https://i.imgur.com/3Lz4rcR.png) 
-![Altas](https://i.imgur.com/ZoixpHd.png) 
-![Alta usuario](https://i.imgur.com/s0hMpqQ.png) 
-![Alta mesa](https://i.imgur.com/0hT3jTs.png) 
+![Clientes a confirmar](https://i.imgur.com/A0CvL81.png) 
+![Altas](https://i.imgur.com/mDZvUcZ.png) 
+![Alta usuario](https://i.imgur.com/KPay2C2.png) 
+![Alta mesa](https://i.imgur.com/CLEzLFv.png) 
 
 ### Cliente
-![Ingreso a lista de espera](https://i.imgur.com/Dx4F01k.png) 
+![Ingreso a lista de espera](https://i.imgur.com/vSK0aoK.png) 
