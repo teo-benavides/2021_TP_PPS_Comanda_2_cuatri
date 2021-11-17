@@ -44,7 +44,7 @@ export class PedidosComponent implements OnInit {
 
   public async confirmarPedido(pedido: Pedido) {
     pedido.estado = 'preparando';
-    this.pedidoService.updatePedido(pedido);
+    this.pedidoService.confirmarPedido(pedido);
     this.preparacionService
       .hasComidasForPedido(pedido.pedidoId)
       .then((val) => (val ? this.notificationService.nuevasComidas() : null));
