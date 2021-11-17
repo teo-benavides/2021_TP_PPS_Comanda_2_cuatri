@@ -36,7 +36,7 @@ export class EncuestaPage implements OnInit {
   async getFoto() {
     if (this.fotoPath.length >= 3) {
       return this.system.presentToastError(
-        'Solo se puede subir 3 fotos como maximo'
+        'Solo se pueden subir 3 fotos como máximo'
       );
     }
 

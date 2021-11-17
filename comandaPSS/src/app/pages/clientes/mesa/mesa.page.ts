@@ -71,7 +71,7 @@ export class MesaPage implements OnInit {
   async encuesta() {
     if ((await this.localStorage.get('user')).encuestaHecha) {
       return this.system.presentToastError(
-        'Solo se permite una encuesta por cliente'
+        'Solo se permite realizar la encuesta una vez por cliente.'
       );
     }
     this.nav.navigateForward('/cliente/mesa/encuesta');
@@ -105,15 +105,15 @@ export class MesaPage implements OnInit {
       case 'terminado':
         return 'Entregando pedido';
       case 'confirmarEntrega':
-        return 'Esperando confirmacion del cliente';
+        return 'Esperando confirmación del cliente';
       case 'entregado':
         return 'Pedido entregado';
       case 'aPagar':
-        return 'Esperando confirmacion de pago';
+        return 'Esperando confirmación de pago';
       case 'pagado':
         return 'Pedido pagado';
       default:
-        return 'No se ha realizado pedido';
+        return 'No se ha realizado un pedido';
     }
   }
 
@@ -151,7 +151,7 @@ export class MesaPage implements OnInit {
       case 'pagado':
         return `Precio: $ ${this.pedido.precioTotal} `;
       default:
-        return 'No se a realizado pedido';
+        return 'No se ha realizado un pedido';
     }
   }
 
