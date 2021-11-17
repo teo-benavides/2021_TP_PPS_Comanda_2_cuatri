@@ -35,7 +35,10 @@ export class NotificationService {
     console.log('Notification service: OK!', this.listener);
   }
 
-  endProcess() {
+  async endProcess() {
+    const { uid } = await this.localStorage.get('user');
+    await this.angularFirestore.doc(`Usuarios/${uid}`).update({ token: null });
+
     this.listener.unsubscribe();
   }
 
