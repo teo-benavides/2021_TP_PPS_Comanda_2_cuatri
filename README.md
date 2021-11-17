@@ -26,8 +26,8 @@
 | :heavy_check_mark: |               Lista de pedidos pendientes |    02/11/2021 |          05/11/2021 |
 | :heavy_check_mark: |                         Entrega de pedido |    02/11/2021 |          05/11/2021 |
 | :heavy_check_mark: |               Pedir cuenta/confirmar pago |    12/11/2021 |          12/11/2021 |
-|                    | Push notification comida/bebida pendiente |               |                     |
-|                    | Push notification comida/bebida terminada |               |                     |
+| :heavy_check_mark: | Push notification comida/bebida pendiente |    15/11/2021 |          15/11/2021 |
+| :heavy_check_mark: | Push notification comida/bebida terminada |    15/11/2021 |          15/11/2021 |
 | :heavy_check_mark: |                              Ícono/splash |    05/11/2021 |          05/11/2021 |
 
 ### Beta:
@@ -51,7 +51,7 @@
 | :heavy_check_mark: |          Push notification cliente a aprobar |    01/11/2021 |          01/11/2021 |
 | :heavy_check_mark: | Push notification cliente en lista de espera |    02/11/2021 |          02/11/2021 |
 | :heavy_check_mark: |                   Envío de e-mail automático |    25/10/2021 |          25/10/2021 |
-|                    |                              Accesos rápidos |               |                     |
+| :heavy_check_mark: |                              Accesos rápidos |    14/11/2021 |          14/11/2021 |
 
 ## Capturas de pantalla:
 
