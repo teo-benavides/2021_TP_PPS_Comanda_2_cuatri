@@ -26,8 +26,8 @@
 | :heavy_check_mark: |               Lista de pedidos pendientes |    02/11/2021 |          05/11/2021 |
 | :heavy_check_mark: |                         Entrega de pedido |    02/11/2021 |          05/11/2021 |
 | :heavy_check_mark: |               Pedir cuenta/confirmar pago |    12/11/2021 |          12/11/2021 |
-|                    | Push notification comida/bebida pendiente |               |                     |
-|                    | Push notification comida/bebida terminada |               |                     |
+| :heavy_check_mark: | Push notification comida/bebida pendiente |    15/11/2021 |          15/11/2021 |
+| :heavy_check_mark: | Push notification comida/bebida terminada |    15/11/2021 |          15/11/2021 |
 | :heavy_check_mark: |                              Ícono/splash |    05/11/2021 |          05/11/2021 |
 
 ### Beta:
@@ -51,23 +51,23 @@
 | :heavy_check_mark: |          Push notification cliente a aprobar |    01/11/2021 |          01/11/2021 |
 | :heavy_check_mark: | Push notification cliente en lista de espera |    02/11/2021 |          02/11/2021 |
 | :heavy_check_mark: |                   Envío de e-mail automático |    25/10/2021 |          25/10/2021 |
-|                    |                              Accesos rápidos |               |                     |
+| :heavy_check_mark: |                              Accesos rápidos |    14/11/2021 |          14/11/2021 |
 
 ## Capturas de pantalla:
 
 ### Inicio de sesión
-![Inicio de sesión](https://i.imgur.com/jP779cY.png)  
+![Inicio de sesión](https://i.imgur.com/WA2SQ6T.png)  
 
 ### Mozo
-![Pedidos](https://i.imgur.com/KWjWy3D.png)  
-![Consultas](https://i.imgur.com/ve4c1EA.png)  
-![Consulta](https://i.imgur.com/A4s6wCf.png)  
+![Pedidos](https://i.imgur.com/APVOANt.png)  
+![Consultas](https://i.imgur.com/vrOX5GT.png)  
+![Consulta](https://i.imgur.com/ThTQAOC.png)  
 
 ### Dueño
-![Clientes a confirmar](https://i.imgur.com/3Lz4rcR.png) 
-![Altas](https://i.imgur.com/ZoixpHd.png) 
-![Alta usuario](https://i.imgur.com/s0hMpqQ.png) 
-![Alta mesa](https://i.imgur.com/0hT3jTs.png) 
+![Clientes a confirmar](https://i.imgur.com/A0CvL81.png) 
+![Altas](https://i.imgur.com/mDZvUcZ.png) 
+![Alta usuario](https://i.imgur.com/KPay2C2.png) 
+![Alta mesa](https://i.imgur.com/CLEzLFv.png) 
 
 ### Cliente
-![Ingreso a lista de espera](https://i.imgur.com/Dx4F01k.png) 
+![Ingreso a lista de espera](https://i.imgur.com/vSK0aoK.png) 
